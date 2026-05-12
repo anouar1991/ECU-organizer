@@ -1,0 +1,197 @@
+{
+  "source": "https://en.wikipedia.org/wiki/Bosch_Motronic and https://en.wikipedia.org/wiki/Electronic_Diesel_Control plus Bosch automotive aftermarket numbering scheme. Bosch 10-digit part numbers (e.g. 0 281 010 123) use the first 4 digits to encode the product family. Numbers are typically written as 0 XXX XXX XXX.",
+  "format": "Bosch part number example: 0 281 010 123 → first 4 digits '0281' = EDC diesel engine control. The 4-digit prefix identifies the product family; the remaining 6 digits identify the specific assembly and revision.",
+  "notes": "Some prefixes are shared across multiple product lines (e.g. injectors and pumps both appear under 0445). Prefixes here cover the most common automotive control modules, sensors, fuel system parts, and ignition components found in EU/US/JP vehicles. ECU 'examples' list common Bosch ECU naming series associated with that prefix.",
+  "prefixes": {
+    "0123": { "family": "Generator / Alternator", "type": "Charging system — alternator assembly" },
+    "0124": { "family": "Generator / Alternator", "type": "Modern compact alternator assembly" },
+    "0125": { "family": "Generator components", "type": "Alternator regulator / brush assembly" },
+    "0190": { "family": "Voltage regulator", "type": "Alternator voltage regulator" },
+    "0192": {
+      "family": "Voltage regulator",
+      "type": "Alternator voltage regulator (later versions)"
+    },
+    "0204": {
+      "family": "Brake booster",
+      "type": "Vacuum brake booster / master cylinder assembly"
+    },
+    "0221": { "family": "Ignition coil", "type": "Ignition coil / coil-on-plug assembly" },
+    "0227": {
+      "family": "Ignition module",
+      "type": "Ignition control module (transistorized / TZ-H)"
+    },
+    "0232": {
+      "family": "Camshaft / crankshaft sensor",
+      "type": "Inductive / Hall-effect position sensor"
+    },
+    "0242": {
+      "family": "Spark plugs",
+      "type": "Bosch spark plugs (Super / Platinum / Iridium / Double Platinum)"
+    },
+    "0250": { "family": "Glow plugs", "type": "Diesel glow plugs / pre-heating elements" },
+    "0258": {
+      "family": "Lambda sensor / O2 sensor",
+      "type": "Wideband and narrowband lambda probes (LSU / LSF / LSH)"
+    },
+    "0260": {
+      "family": "Transmission control",
+      "type": "TCU / automatic transmission control module"
+    },
+    "0261": {
+      "family": "Motronic gasoline ECU",
+      "type": "Gasoline engine control unit (port and direct injection)",
+      "examples": ["M1.5", "M3", "M5", "ME7", "ME9", "MED9", "MED17", "MEDC17", "MEV17", "MG1"]
+    },
+    "0263": {
+      "family": "Instrument cluster / display",
+      "type": "Combined instrument / head-up display module"
+    },
+    "0265": {
+      "family": "ABS / ESP / ESC",
+      "type": "Brake control module — ABS, traction control, stability control",
+      "examples": ["ABS 2", "ABS 5.3", "ABS 5.7", "ABS 8", "ESP 9", "MK60", "MK61", "MK100"]
+    },
+    "0273": {
+      "family": "ABS / EHB hydraulic unit",
+      "type": "ABS hydraulic modulator assembly (legacy)"
+    },
+    "0275": {
+      "family": "Hybrid / EV inverter",
+      "type": "Power electronics for hybrid and electric vehicles"
+    },
+    "0276": {
+      "family": "Idle air control / throttle actuator",
+      "type": "Stepper motor or DC actuator for idle and throttle"
+    },
+    "0277": { "family": "Speedometer drive", "type": "Speedometer transducer / drive (legacy)" },
+    "0278": {
+      "family": "Cruise control",
+      "type": "Cruise control servo / actuator (legacy mechanical)"
+    },
+    "0280": {
+      "family": "Motronic engine components",
+      "type": "Mass airflow sensors, throttle bodies, fuel rails, injectors (gasoline)",
+      "examples": ["HFM-5", "HFM-6", "HFM-7", "DV-E5 throttle body"]
+    },
+    "0281": {
+      "family": "EDC diesel ECU",
+      "type": "Diesel engine control unit (Electronic Diesel Control)",
+      "examples": [
+        "EDC15C",
+        "EDC15P",
+        "EDC15VM",
+        "EDC16C",
+        "EDC16U",
+        "EDC16CP",
+        "EDC17C",
+        "EDC17CP",
+        "EDC17U",
+        "MD1CS"
+      ]
+    },
+    "0285": { "family": "Airbag / SRS", "type": "Supplemental restraint system control module" },
+    "0286": {
+      "family": "Door / window control",
+      "type": "Power window / sunroof / convenience control module"
+    },
+    "0291": { "family": "Tachograph", "type": "Digital tachograph (commercial vehicles)" },
+    "0301": { "family": "Headlamp / lighting", "type": "Headlamp assembly / lighting control" },
+    "0319": { "family": "Wiper system", "type": "Wiper motor and washer control" },
+    "0331": { "family": "Starter relay / solenoid", "type": "Starter solenoid / power relay" },
+    "0332": { "family": "Relay", "type": "Automotive relays — fuel pump, blower, lighting" },
+    "0335": {
+      "family": "Sensors — temperature / pressure",
+      "type": "Coolant, oil, fuel rail pressure and temperature sensors"
+    },
+    "0341": { "family": "Switches", "type": "Brake light switch, clutch switch, stop-lamp switch" },
+    "0342": {
+      "family": "Combination switch",
+      "type": "Steering column switches (turn / wiper / lighting stalks)"
+    },
+    "0344": {
+      "family": "Pressure / temperature sensor",
+      "type": "Charge air pressure sensor, intake temp combo sensor"
+    },
+    "0352": { "family": "Window lift motor", "type": "Power window lift motors and regulators" },
+    "0353": { "family": "Headlamp leveling", "type": "Headlight range / leveling control motor" },
+    "0356": { "family": "Wiper motor", "type": "Front and rear wiper motor assemblies" },
+    "0390": { "family": "Cooling fan motor", "type": "Radiator cooling fan motor / blower motor" },
+    "0392": {
+      "family": "Auxiliary water pump",
+      "type": "Electric coolant pump / heater circulation pump"
+    },
+    "0414": {
+      "family": "Diesel injector (unit injector)",
+      "type": "Pumpe-Düse / UI / EUI unit injectors (PD VAG, EUI HD)"
+    },
+    "0432": {
+      "family": "Diesel injector nozzles",
+      "type": "Mechanical / hydraulic nozzle assemblies (legacy IDI/DI)"
+    },
+    "0433": { "family": "Diesel injector tips", "type": "Replacement nozzle tips for injectors" },
+    "0438": {
+      "family": "K-Jetronic / KE-Jetronic",
+      "type": "Continuous mechanical fuel injection components (legacy)"
+    },
+    "0440": { "family": "Fuel filter", "type": "Inline fuel filters (gasoline and diesel)" },
+    "0444": {
+      "family": "AdBlue / SCR system",
+      "type": "Urea injector, DEF pump, AdBlue dosing module"
+    },
+    "0445": {
+      "family": "Common rail diesel",
+      "type": "Common rail high-pressure pump (CP1/CP2/CP3/CP4/CP5) and CR injectors (CRI/CRIN piezo and solenoid)",
+      "examples": ["CP1", "CP1H", "CP3", "CP4.1", "CP4.2", "CRI1", "CRI2", "CRI3 piezo", "CRIN3"]
+    },
+    "0450": {
+      "family": "Fuel filter / module",
+      "type": "Fuel filter housings and integrated modules"
+    },
+    "0455": { "family": "Cabin filter", "type": "Cabin air / pollen filters" },
+    "0460": {
+      "family": "Diesel injection pump (rotary VE)",
+      "type": "Mechanical rotary diesel injection pumps (VE/VP)"
+    },
+    "0470": {
+      "family": "VP44 diesel pump",
+      "type": "Bosch VP44 radial-piston distributor pump (e.g. BMW M57, Opel 2.5DTI)"
+    },
+    "0580": { "family": "Fuel pump (in-tank)", "type": "Electric in-tank fuel pump assemblies" },
+    "0928": {
+      "family": "Common rail fuel quantity valve",
+      "type": "ZME / MPROP fuel quantity solenoid (mounted on CP pump)"
+    },
+    "0986": {
+      "family": "Aftermarket — Service Parts",
+      "type": "Bosch service line — brake pads/discs, wipers, sensors, batteries (catalog reference prefix)"
+    },
+    "1457": {
+      "family": "Filter / spare parts catalog",
+      "type": "Bosch service parts — fuel filters, oil filters, air filters (aftermarket catalog)"
+    },
+    "1987": {
+      "family": "Aftermarket — Service Parts",
+      "type": "Bosch aftermarket catalog — wipers, sensors, brake parts, lambda probes"
+    },
+    "F00R": {
+      "family": "Common rail repair / valve parts",
+      "type": "Service parts for CRI injectors — control valves (F00RJ0xxxx for valve, F00VC01xxx for nozzles)"
+    },
+    "F00V": {
+      "family": "CRI nozzle / piezo actuator",
+      "type": "Common rail injector nozzle / piezo stack service parts"
+    },
+    "F01R": {
+      "family": "ECU repair parts / cores",
+      "type": "Bosch ECU cores and exchange units (remanufactured)"
+    },
+    "F026": {
+      "family": "Aftermarket service parts",
+      "type": "Bosch aftermarket service line (alternative encoding to 0986)"
+    },
+    "0273004": {
+      "family": "ABS Generation 2 hydraulic unit",
+      "type": "Early ABS 2 hydraulic modulator (BMW E30/E34, Mercedes W124)"
+    }
+  }
+}

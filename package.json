@@ -1,0 +1,89 @@
+{
+  "name": "ecu-file-skinner-pro",
+  "version": "1.0.0",
+  "description": "Automated organization and archiving of raw ECU dump files",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "postinstall": "electron-rebuild",
+    "rebuild": "electron-rebuild",
+    "build": "electron-builder",
+    "build:linux": "electron-builder --linux",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "PWDEBUG=1 playwright test",
+    "typecheck": "tsc -p jsconfig.json",
+    "lint": "eslint src/ --max-warnings 0",
+    "format": "prettier --write src/",
+    "i18n:check": "node tools/i18n-check.js"
+  },
+  "keywords": [
+    "ecu",
+    "tuning",
+    "bosch",
+    "continental",
+    "binary",
+    "electron"
+  ],
+  "author": "ECU File Skinner Pro",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.4",
+    "@playwright/test": "^1.59.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.6.2",
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "playwright": "^1.59.1",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.5.0",
+    "electron-updater": "^6.8.3",
+    "magic-bytes.js": "^1.13.0",
+    "tlsh": "^1.0.8"
+  },
+  "build": {
+    "appId": "com.ecufileskinner.pro",
+    "productName": "ECU File Skinner Pro",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "anouar1991",
+        "repo": "ECU-organizer",
+        "private": false
+      }
+    ]
+  }
+}

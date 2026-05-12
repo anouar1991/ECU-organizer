@@ -1,0 +1,60 @@
+{
+  "source": "nyetwurk/ME7Sum",
+  "source_urls": [
+    "https://raw.githubusercontent.com/nyetwurk/ME7Sum/master/sample.ini",
+    "https://raw.githubusercontent.com/nyetwurk/ME7Sum/master/me7sum.c"
+  ],
+  "source_license": "BSD",
+  "description": "Region defaults for Bosch ME7.x firmware checksum/CRC layout. Values are CONFIG defaults from me7sum.c (lines 162-181); per-variant addresses are mostly resolved at runtime by ME7Sum's scanners (multipoint table walk + needle search). Variant-specific defaults below are anchored from the 512KB fallback in me7sum.c (line 2168-2173) and the multipoint-table scan window (line 2623).",
+  "magic_markers": {
+    "epk_secondary_signature": {
+      "bytes": "c3 3c 5a 5a ff ff",
+      "file_offset": "0xFFFE",
+      "note": "Fallback EPK marker when needle-based scan fails (me7sum.c FindEPK, line 1091-1101). 6 bytes; EPK string starts at FFFE+6 = 0x10004."
+    }
+  },
+  "common_defaults": {
+    "rom_firmware_start": "0x800000",
+    "rom_checksum_block_start0": "0x0",
+    "rom_checksum_block_start": "0x0",
+    "rom_checksum_block_len": "0x10",
+    "rom_checksum_offset": "0x0",
+    "rom_checksum_final": "0x0",
+    "multipoint_desc_len": "0x10",
+    "multipoint_scan_start": "0x10000",
+    "program_page_lo_range": { "start": "0x00000", "end": "0x0FFFF" },
+    "program_page_hi_range_start": "0x20000"
+  },
+  "variants": {
+    "ME7.1": {
+      "rom_size": "0x80000",
+      "base_address": "0x800000",
+      "multipoint_block_start": "0x0",
+      "multipoint_desc_len": "0x10",
+      "multipoint_scan_start": "0x10000",
+      "main_checksum_offset": "0x0",
+      "main_checksum_final": "0x0",
+      "crc_blocks_fallback": {
+        "crc1": { "start": "0x10000" },
+        "crc2": { "start": "0x14300" },
+        "crc3": { "start": "0x18191" }
+      },
+      "epk_secondary_signature_offset": "0xFFFE",
+      "notes": "Default ME7.1 512KB layout. Per sample.ini and me7sum.c lines 162-181 + 2168-2173."
+    },
+    "ME7.1.1": {
+      "rom_size": "0x80000",
+      "base_address": "0x800000",
+      "multipoint_desc_len": "0x10",
+      "epk_secondary_signature_offset": "0xFFFE",
+      "notes": "Same family as ME7.1; multipoint table located by scanner at runtime."
+    },
+    "ME7.5": {
+      "rom_size": "0x80000",
+      "base_address": "0x800000",
+      "multipoint_desc_len": "0x10",
+      "epk_secondary_signature_offset": "0xFFFE",
+      "notes": "ME7.5 variant; same scanner-driven discovery as ME7.1."
+    }
+  }
+}

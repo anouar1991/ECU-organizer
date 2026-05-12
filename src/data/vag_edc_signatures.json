@@ -1,0 +1,423 @@
+{
+  "source": "Blackfrosch/VAGEDCSuite",
+  "source_url": "https://github.com/Blackfrosch/VAGEDCSuite",
+  "license_note": "No explicit license declared in upstream repo. Patterns extracted from C# source for interoperability with the ECU-organizer parser; refer to the original repo for terms before redistribution.",
+  "extraction_notes": [
+    "The VAGEDCSuite C# code identifies VAG-flashed EDC15/EDC16/EDC17 firmware images by scanning the bin for ASCII/byte markers and then verifying the surrounding partnumber bytes (Bosch 10-digit '0281xxxxxx' and VAG 11-char e.g. '038906018A').",
+    "The dominant marker across every EDC15/EDC16/EDC17 parser is the ASCII literal 'EDC  ' (0x45 0x44 0x43 0x20 0x20) which precedes the Bosch and VAG partnumber blocks.",
+    "EDC17 firmwares are additionally identified by 'EDC17_', 'EDC17_CPx4' (Audi), 'EDC17_CPx2' (BMW), 'EDC17_C06' (BMW), 'ME(D)/EDC17', or by the literal 'EDC17  ' (with two trailing spaces) in 512 KiB Audi Q7 3.0 TDI images.",
+    "AT/MT codeblock detection inside an EDC15 image uses the ASCII suffixes 'EDC  AG' (automatic) and 'EDC  SG' (manual transmission).",
+    "Non-ASCII byte runs (SVBL/codeblock signatures, MAP/MAF switch) are EDC15-family specific and are how the tool locates the start of mapping tables — they are useful as secondary VAG-EDC15 confirmation when the ASCII partnumber block is encrypted or scrambled.",
+    "File-size heuristics: 2 MiB (2*1024*1024) implies EDC17, 512 KiB (0x80000) implies EDC15V/P, 1 MiB (0x100000) is also accepted for EDC15. The MSA15/MSA6 checksum search hard-requires 0x80000.",
+    "Rules below are byte-for-byte transcriptions of the C# `findSequence` calls; the 'mask' field mirrors the C# wildcard-mask array (1=match, 0=wildcard).",
+    "EDC17 parser applies `reverseEndian` BEFORE pattern search (LL LL AXIS AXIS MAPDATA is big-endian), so signatures listed as 'apply_after_endian_swap: true' must be matched on the byte-swapped buffer."
+  ],
+  "ecu_type_strings_seen_in_partNumberConverter": [
+    "EDC15C",
+    "EDC15M",
+    "EDC15P",
+    "EDC15P-6",
+    "EDC15V-5.1",
+    "EDC15V-5.29",
+    "EDC15V-5.35",
+    "EDC15V-5.36",
+    "EDC16",
+    "EDC17",
+    "MSA6",
+    "MSA11",
+    "MSA12",
+    "MSA15"
+  ],
+  "vag_partnumber_format": {
+    "description": "VAG OEM engine ECU partnumber. 11 chars: DD L DDDDDD LL (digit digit letter digit*6 letter letter). Used by Tools.IsEDC16Partnumber() to confirm an EDC16 firmware when the ASCII 'EDC  ' block is absent.",
+    "regex": "^[0-9]{2}[A-Z][0-9]{6}[A-Z]{2}$",
+    "common_prefixes_observed_in_partNumberConverter": ["038906018", "038906019"],
+    "extracted_from": "Tools.cs:333-349"
+  },
+  "bosch_partnumber_format": {
+    "description": "Bosch 10-digit partnumber, always starts with '0281' for diesel EDC ECUs. Found near the 'EDC  ' marker or scanned independently when the marker is missing.",
+    "regex": "^0281[0-9]{6}$",
+    "ascii_prefix_bytes": "30 32 38 31",
+    "extracted_from": "Tools.cs:73,81"
+  },
+  "rules": [
+    {
+      "id": "edc_ascii_marker",
+      "ecu_family": [
+        "EDC15C",
+        "EDC15M",
+        "EDC15P",
+        "EDC15P6",
+        "EDC15V",
+        "EDC16",
+        "EDC17",
+        "MSA6",
+        "MSA15"
+      ],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [{ "type": "ascii", "value": "EDC  ", "hex": "4544432020", "mask": "11111" }],
+      "anchor_offsets": {
+        "partnumber_VAG_at_marker_minus_20": 12,
+        "info_at_marker_minus_8": 12,
+        "softwarenumber_at_marker_plus_5": 8,
+        "bosch_partnumber_at_marker_plus_23": 10
+      },
+      "notes": "Primary detection marker shared by every VAG EDC/MSA parser. The same 5 bytes precede the VAG partnumber, info string, software number, and Bosch number in a fixed layout.",
+      "extracted_from": [
+        "Tools.cs:51",
+        "EDC15CFileParser.cs:17,35,52,71",
+        "EDC15MFileParser.cs:17,35,52,71",
+        "EDC15P6FileParser.cs:20,38,55,74",
+        "EDC15PFileParser.cs:20,38,55,74",
+        "EDC15VFileParser.cs:17,49,66,85",
+        "EDC16FileParser.cs:108,126,143,162",
+        "EDC17FileParser.cs:159,177,194,213",
+        "MSA6FileParser.cs:17,35,52,71",
+        "MSA15FileParser.cs:17,35,52,71"
+      ]
+    },
+    {
+      "id": "edc_at_codeblock_marker",
+      "ecu_family": ["EDC15C", "EDC15M", "EDC15P", "EDC15P6", "EDC15V"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        { "type": "ascii", "value": "EDC  AG", "hex": "454443202041 47", "mask": "1111111" }
+      ],
+      "purpose": "Identifies an automatic-transmission (AT) codeblock inside a multi-codeblock EDC15 firmware.",
+      "extracted_from": [
+        "EDC15CFileParser.cs:1148",
+        "EDC15MFileParser.cs:829",
+        "EDC15P6FileParser.cs:1891",
+        "EDC15PFileParser.cs:2436",
+        "EDC15VFileParser.cs:2675"
+      ]
+    },
+    {
+      "id": "edc_mt_codeblock_marker",
+      "ecu_family": ["EDC15C", "EDC15M", "EDC15P", "EDC15P6", "EDC15V"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        { "type": "ascii", "value": "EDC  SG", "hex": "4544432020 5347", "mask": "1111111" }
+      ],
+      "purpose": "Identifies a manual-transmission (MT) codeblock inside a multi-codeblock EDC15 firmware.",
+      "extracted_from": [
+        "EDC15CFileParser.cs:1149",
+        "EDC15MFileParser.cs:830",
+        "EDC15P6FileParser.cs:1892",
+        "EDC15PFileParser.cs:2437",
+        "EDC15VFileParser.cs:2676"
+      ]
+    },
+    {
+      "id": "edc17_512k_marker",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "vendor_hint": "Audi Q7 3.0 TDI 512 KiB images per Tools.cs:89 comment",
+      "confidence": "high",
+      "patterns": [
+        { "type": "ascii", "value": "EDC17  ", "hex": "454443313720 20", "mask": "1111111" }
+      ],
+      "anchor_offsets": { "partnumber_at_marker_minus_68": 10 },
+      "extracted_from": "Tools.cs:90"
+    },
+    {
+      "id": "edc17_ascii_prefix",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "confidence": "medium",
+      "patterns": [
+        { "type": "ascii", "value": "EDC17_", "hex": "454443313 75F", "mask": "111111" }
+      ],
+      "notes": "Generic EDC17 string. Used as fallback when neither the 'EDC  ' nor 'EDC17  ' anchor is found.",
+      "extracted_from": "Tools.cs:99"
+    },
+    {
+      "id": "edc17_cpx4_audi",
+      "ecu_family": ["EDC17"],
+      "vag_specific": true,
+      "vendor_hint": "Audi (m_carMake = CarMakes.Audi)",
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "ascii",
+          "value": "EDC17_CPx4",
+          "hex": "454443313 75F435078 34",
+          "mask": "1111111101"
+        }
+      ],
+      "notes": "Mask wildcards the 9th character. When matched the source flags the car make as Audi.",
+      "extracted_from": "Tools.cs:162"
+    },
+    {
+      "id": "edc17_cpx2_bmw",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "vendor_hint": "BMW (m_carMake = CarMakes.BMW)",
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "ascii",
+          "value": "EDC17_CPx2",
+          "hex": "454443313 75F435078 32",
+          "mask": "1111111101"
+        }
+      ],
+      "extracted_from": "Tools.cs:166"
+    },
+    {
+      "id": "edc17_c06_bmw",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "vendor_hint": "BMW (m_carMake = CarMakes.BMW)",
+      "confidence": "high",
+      "patterns": [
+        { "type": "ascii", "value": "EDC17_C06", "hex": "454443313 75F433036", "mask": "111111111" }
+      ],
+      "extracted_from": "Tools.cs:170"
+    },
+    {
+      "id": "med_edc17_generic",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "confidence": "medium",
+      "patterns": [
+        {
+          "type": "ascii",
+          "value": "ME(D)/EDC17",
+          "hex": "4D 4528 4429 2F45 4443 3137",
+          "mask": "11111111111"
+        }
+      ],
+      "notes": "Matches both gasoline ME17/MED17 and diesel EDC17 family identifiers (Bosch internal description string).",
+      "extracted_from": "Tools.cs:111"
+    },
+    {
+      "id": "bosch_diesel_partnumber_prefix",
+      "ecu_family": ["EDC15", "EDC16", "EDC17"],
+      "vag_specific": false,
+      "confidence": "medium",
+      "patterns": [{ "type": "ascii", "value": "0281", "hex": "30323831", "mask": "1111" }],
+      "notes": "Bosch diesel ECU partnumbers all begin with '0281'. Used as fallback for partnumber extraction. 10 ASCII digits read starting at the match.",
+      "extracted_from": "Tools.cs:73,81"
+    },
+    {
+      "id": "bmw_bosch_partnumber_at_fixed_offsets",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "vendor_hint": "BMW",
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "fixed_offset_digits",
+          "offset_hex": "FD00",
+          "length": 10,
+          "value_must_match": "FE33+10"
+        },
+        { "type": "fixed_offset_digits", "offset_hex": "FE33", "length": 10 },
+        {
+          "type": "fixed_offset_digits",
+          "offset_hex": "4001A",
+          "length": 10,
+          "purpose": "software number fallback"
+        }
+      ],
+      "notes": "BMW EDC17 stores its 10-digit Bosch partnumber at both 0xFD00 and 0xFE33 (must be identical) and a software number at 0x4001A. Distinguishes BMW from VAG when the 'EDC  ' marker is missing.",
+      "extracted_from": "Tools.cs:118-158"
+    },
+    {
+      "id": "edc15_svbl_signature_dfa",
+      "ecu_family": ["EDC15C", "EDC15M", "EDC15P", "EDC15P6", "EDC15V", "MSA6", "MSA15"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "hex",
+          "value": "DF7A2800000000000DF7A",
+          "bytes": "DF 7A 28 00 00 00 00 00 DF 7A",
+          "mask": "1111111111"
+        }
+      ],
+      "notes": "SVBL (StartVerteilerBlockListe) signature shared across all VAG EDC15 dialects and MSA derivatives. Anchors the start of the mapping table region. Very strong VAG-EDC15 confirmation when present.",
+      "extracted_from": [
+        "EDC15CFileParser.cs:236",
+        "EDC15MFileParser.cs:231",
+        "EDC15P6FileParser.cs:248",
+        "EDC15PFileParser.cs:266",
+        "EDC15VFileParser.cs:361",
+        "MSA6FileParser.cs:192",
+        "MSA15FileParser.cs:258"
+      ]
+    },
+    {
+      "id": "edc15_svbl_signature_2b7d",
+      "ecu_family": ["MSA6", "MSA15"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "hex",
+          "value": "2B7D6400000000000 2B7D",
+          "bytes": "2B 7D 64 00 00 00 00 00 2B 7D",
+          "mask": "1111111111"
+        }
+      ],
+      "notes": "Alternate SVBL signature used by MSA6 / MSA15 firmwares.",
+      "extracted_from": ["MSA6FileParser.cs:224", "MSA15FileParser.cs:290"]
+    },
+    {
+      "id": "edc15p_svbl_signature_alt",
+      "ecu_family": ["EDC15P", "EDC15P6"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "hex",
+          "value": "D200FC0300000000040 0FFFFFFC30000",
+          "bytes": "D2 00 FC 03 00 00 00 00 04 00 FF FF FF C3 00 00",
+          "mask": "1111111111000111"
+        }
+      ],
+      "notes": "16-byte SVBL signature for EDC15P/P6 with three wildcard bytes (positions 10-12).",
+      "extracted_from": [
+        "EDC15PFileParser.cs:317",
+        "EDC15P6FileParser.cs:249 (commented-out alternate)"
+      ]
+    },
+    {
+      "id": "edc15p_mapmaf_switch",
+      "ecu_family": ["EDC15P", "EDC15P6"],
+      "vag_specific": true,
+      "confidence": "medium",
+      "patterns": [{ "type": "hex", "bytes": "41 02 FF FF 00 01 01 00", "mask": "11001111" }],
+      "notes": "Used to locate the MAP/MAF airflow sensor selector flag near the SVBL. Two wildcard bytes at positions 2-3.",
+      "extracted_from": ["EDC15PFileParser.cs:285,338", "EDC15P6FileParser.cs:269"]
+    },
+    {
+      "id": "edc15v_svbl_7fc3",
+      "ecu_family": ["EDC15V"],
+      "vag_specific": true,
+      "confidence": "medium",
+      "patterns": [{ "type": "hex", "bytes": "7F C3 10 27 10 27", "mask": "111111" }],
+      "notes": "10000-decimal (0x2710) torque-limiter table sentinel preceded by 0x7F 0xC3 — EDC15V-specific.",
+      "extracted_from": "EDC15VFileParser.cs:297"
+    },
+    {
+      "id": "edc15v_svbl_28042804",
+      "ecu_family": ["EDC15V"],
+      "vag_specific": true,
+      "confidence": "medium",
+      "patterns": [
+        { "type": "hex", "bytes": "28 04 28 04 28 04 28 04 28 04 FF 03", "mask": "111111111111" }
+      ],
+      "notes": "Repeating 0x0428 pattern (1064 decimal) terminated by 0x03FF — EDC15V-specific SVBL variant.",
+      "extracted_from": "EDC15VFileParser.cs:329"
+    },
+    {
+      "id": "edc15_codeblock_c102",
+      "ecu_family": ["EDC15C", "EDC15M", "EDC15P"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        { "type": "hex", "bytes": "C1 02 00 68 00 25 03 00 00 10 27", "mask": "11111111111" }
+      ],
+      "notes": "Codeblock start signature for several EDC15 dialects.",
+      "extracted_from": [
+        "EDC15CFileParser.cs:1124",
+        "EDC15MFileParser.cs:805",
+        "EDC15PFileParser.cs:2412"
+      ]
+    },
+    {
+      "id": "edc15p6_codeblock_143a",
+      "ecu_family": ["EDC15P6"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        { "type": "hex", "bytes": "14 3A 21 3C 23 52 21 5E 21 6A 21", "mask": "11111111111" }
+      ],
+      "extracted_from": "EDC15P6FileParser.cs:1863"
+    },
+    {
+      "id": "edc15v_codeblock_v4_1",
+      "ecu_family": ["EDC15V"],
+      "vag_specific": true,
+      "confidence": "high",
+      "patterns": [
+        {
+          "type": "hex",
+          "bytes": "67 FF FF FF FF FF FF 56 34 2E 31",
+          "ascii_tail": "V4.1",
+          "mask": "11111111111"
+        }
+      ],
+      "notes": "Codeblock signature containing the ASCII version string 'V4.1' (0x56 0x34 0x2E 0x31).",
+      "extracted_from": "EDC15VFileParser.cs:2636"
+    },
+    {
+      "id": "msa_codeblock_0x14_ff_run",
+      "ecu_family": ["MSA6", "MSA15"],
+      "vag_specific": true,
+      "confidence": "medium",
+      "patterns": [
+        {
+          "type": "hex",
+          "bytes": "14 00 FF FF FF FF FF FF FF FF FF FF FF FF FF FF",
+          "mask": "1111111111111111"
+        }
+      ],
+      "notes": "MSA codeblock start: a 0x1400 marker followed by a 14-byte 0xFF run.",
+      "extracted_from": ["MSA6FileParser.cs:1243", "MSA15FileParser.cs:1311"]
+    },
+    {
+      "id": "edc17_map_axis_layout",
+      "ecu_family": ["EDC17"],
+      "vag_specific": false,
+      "confidence": "structural",
+      "patterns": [
+        {
+          "type": "structural",
+          "description": "LL LL AXIS AXIS MAPDATA, big-endian (apply byte-swap before parsing). Axis lengths each <= 64 (BMW uses up to 0x28 = 40), monotonically increasing axis values (b1 < b2 across 16-bit pairs)."
+        }
+      ],
+      "apply_after_endian_swap": true,
+      "extracted_from": "EDC17FileParser.cs:16-122"
+    },
+    {
+      "id": "edc16_map_axis_layout",
+      "ecu_family": ["EDC16"],
+      "vag_specific": false,
+      "confidence": "structural",
+      "patterns": [
+        {
+          "type": "structural",
+          "description": "LL LL AXIS AXIS MAPDATA, little-endian. Axis lengths each < 32 and > 0. Map data length capped at 800 bytes per entry."
+        }
+      ],
+      "apply_after_endian_swap": false,
+      "extracted_from": "EDC16FileParser.cs:16-71"
+    }
+  ],
+  "file_size_heuristics": [
+    {
+      "size_bytes": 524288,
+      "size_hex": "0x80000",
+      "likely_ecu": ["EDC15P", "EDC15V", "MSA15"],
+      "extracted_from": "Tools.cs:695,782; MSA15_checksum gate"
+    },
+    {
+      "size_bytes": 1048576,
+      "size_hex": "0x100000",
+      "likely_ecu": ["EDC15P", "EDC16"],
+      "extracted_from": "Tools.cs:782"
+    },
+    {
+      "size_bytes": 2097152,
+      "size_hex": "0x200000",
+      "likely_ecu": ["EDC17"],
+      "extracted_from": "Tools.cs:310-313"
+    }
+  ]
+}

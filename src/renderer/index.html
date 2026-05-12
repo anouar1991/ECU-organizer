@@ -1,0 +1,2050 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; font-src 'self' data:;"
+    />
+    <title>ECU File Skinner Pro</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true">
+              <rect
+                x="3"
+                y="3"
+                width="26"
+                height="26"
+                rx="4"
+                fill="none"
+                stroke="#5fc8e8"
+                stroke-width="2"
+              />
+              <rect
+                x="9"
+                y="9"
+                width="14"
+                height="14"
+                rx="2"
+                fill="none"
+                stroke="#5fc8e8"
+                stroke-width="1.5"
+              />
+              <line x1="3" y1="11" x2="0" y2="11" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="3" y1="16" x2="0" y2="16" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="3" y1="21" x2="0" y2="21" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="29" y1="11" x2="32" y2="11" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="29" y1="16" x2="32" y2="16" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="29" y1="21" x2="32" y2="21" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="11" y1="3" x2="11" y2="0" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="16" y1="3" x2="16" y2="0" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="21" y1="3" x2="21" y2="0" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="11" y1="29" x2="11" y2="32" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="16" y1="29" x2="16" y2="32" stroke="#5fc8e8" stroke-width="2" />
+              <line x1="21" y1="29" x2="21" y2="32" stroke="#5fc8e8" stroke-width="2" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-name" data-i18n="app.title">ECU File Skinner Pro</div>
+            <div class="brand-version">v1.0.0</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-item" data-view="dashboard">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z" />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.dashboard">Dashboard</span>
+          </button>
+          <button class="nav-item active" data-view="skinner">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path
+                  fill="currentColor"
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 7V3.5L19.5 9z"
+                />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.file_skinner">File Skinner</span>
+          </button>
+          <button class="nav-item" data-view="database">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <ellipse
+                  cx="12"
+                  cy="5"
+                  rx="9"
+                  ry="3"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.database">Database</span>
+          </button>
+          <button class="nav-item" data-view="tag-management">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path
+                  d="M20.6 13.4 12 22l-9-9V3h10z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle cx="7.5" cy="7.5" r="1.5" fill="currentColor" />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.tags">Tags</span>
+          </button>
+          <button class="nav-item" data-view="duplicates">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <rect
+                  x="9"
+                  y="9"
+                  width="11"
+                  height="11"
+                  rx="2"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M5 15V6a2 2 0 0 1 2-2h9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.duplicates">Duplicates</span>
+          </button>
+          <button class="nav-item" data-view="checksum">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                <path
+                  d="m8 12 3 3 5-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.checksum">Checksum Tool</span>
+          </button>
+          <button class="nav-item" data-view="compare">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path
+                  d="M9 3v18M15 3v18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M4 7h5M4 12h5M4 17h5M15 7h5M15 12h5M15 17h5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.compare">Compare</span>
+          </button>
+          <button class="nav-item" data-view="settings">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            <span data-i18n="sidebar.settings">Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-label" data-i18n="sidebar.smart_folders_label">
+            SMART FOLDERS
+          </div>
+          <div id="smart-folders-list" class="smart-folders-list"></div>
+          <button
+            id="smart-folder-add-btn"
+            class="sidebar-action-btn"
+            type="button"
+            data-i18n="sidebar.new_smart_folder"
+          >
+            + New Smart Folder
+          </button>
+        </div>
+
+        <div class="sidebar-footer">
+          <button class="nav-item" data-view="settings">
+            <span class="nav-icon"
+              ><svg viewBox="0 0 24 24" width="18" height="18">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                /></svg
+            ></span>
+            <span data-i18n="sidebar.settings">Settings</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="search-box" id="search-box">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+              <path
+                d="m21 21-4.3-4.3"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div
+              id="search-chips"
+              class="search-chips"
+              data-i18n-aria-label="topbar.search_chips_aria"
+              aria-label="Active filters"
+            ></div>
+            <input
+              id="global-search"
+              type="text"
+              data-i18n-placeholder="topbar.search_placeholder"
+              placeholder="Quick Search &amp; Filter (try brand:audi tag:stage1)"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button
+              id="search-clear"
+              class="search-clear"
+              type="button"
+              data-i18n-title="topbar.search_clear_title"
+              title="Clear search"
+              hidden
+            >
+              ×
+            </button>
+            <div id="search-dropdown" class="search-dropdown" hidden role="listbox"></div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-btn" data-i18n-title="topbar.archive_title" title="Archive">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path
+                  d="M21 8v13H3V8M1 3h22v5H1z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <line x1="10" y1="12" x2="14" y2="12" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </button>
+            <button
+              class="icon-btn"
+              data-i18n-title="topbar.notifications_title"
+              title="Notifications"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path
+                  d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button class="icon-btn" data-i18n-title="topbar.profile_title" title="Profile">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <section class="view view-skinner active" data-view="skinner">
+          <div class="grid">
+            <div class="card card-skinner">
+              <div class="card-header">
+                <span class="card-title">
+                  <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                      fill="currentColor"
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 7V3.5L19.5 9z"
+                    />
+                  </svg>
+                  <span data-i18n="skinner.title">FILE SKINNER</span>
+                </span>
+                <button class="more-btn">⋯</button>
+              </div>
+              <div id="drop-zone" class="drop-zone">
+                <svg class="drop-icon" viewBox="0 0 80 80" width="80" height="80">
+                  <rect
+                    x="10"
+                    y="20"
+                    width="34"
+                    height="34"
+                    rx="3"
+                    fill="none"
+                    stroke="#7a8290"
+                    stroke-width="2"
+                  />
+                  <rect
+                    x="15"
+                    y="25"
+                    width="24"
+                    height="24"
+                    rx="2"
+                    fill="none"
+                    stroke="#7a8290"
+                    stroke-width="1.5"
+                  />
+                  <line x1="10" y1="30" x2="6" y2="30" stroke="#7a8290" stroke-width="2" />
+                  <line x1="10" y1="37" x2="6" y2="37" stroke="#7a8290" stroke-width="2" />
+                  <line x1="10" y1="44" x2="6" y2="44" stroke="#7a8290" stroke-width="2" />
+                  <line x1="44" y1="30" x2="48" y2="30" stroke="#7a8290" stroke-width="2" />
+                  <line x1="44" y1="37" x2="48" y2="37" stroke="#7a8290" stroke-width="2" />
+                  <line x1="44" y1="44" x2="48" y2="44" stroke="#7a8290" stroke-width="2" />
+                  <rect
+                    x="46"
+                    y="32"
+                    width="24"
+                    height="30"
+                    rx="2"
+                    fill="none"
+                    stroke="#7a8290"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M52 42 L58 42 M56 39 L58 42 L56 45"
+                    stroke="#7a8290"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M64 50 L58 50 M60 47 L58 50 L60 53"
+                    stroke="#7a8290"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="drop-text" data-i18n="skinner.drop_text">
+                  DRAG &amp; DROP RAW ECU FILES HERE
+                </div>
+                <button id="scan-btn" class="btn-secondary" data-i18n="skinner.scan_button">
+                  SCAN FOR METADATA
+                </button>
+                <div id="file-tray" class="file-tray"></div>
+              </div>
+            </div>
+
+            <div class="right-column">
+              <div class="card card-metadata">
+                <div class="card-header">
+                  <span class="card-title">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                      <path fill="currentColor" d="M3 6h18M3 12h18M3 18h18" />
+                    </svg>
+                    <span data-i18n="skinner.metadata_title">METADATA PREVIEW</span>
+                  </span>
+                  <div class="card-header-right">
+                    <span class="bars"
+                      ><svg viewBox="0 0 60 18" width="60" height="18">
+                        <g fill="#5fc8e8">
+                          <rect x="0" y="10" width="2" height="6" />
+                          <rect x="4" y="6" width="2" height="10" />
+                          <rect x="8" y="2" width="2" height="14" />
+                          <rect x="12" y="8" width="2" height="8" />
+                          <rect x="16" y="4" width="2" height="12" />
+                          <rect x="20" y="9" width="2" height="7" />
+                          <rect x="24" y="5" width="2" height="11" />
+                          <rect x="28" y="11" width="2" height="5" />
+                          <rect x="32" y="3" width="2" height="13" />
+                          <rect x="36" y="7" width="2" height="9" />
+                        </g></svg
+                    ></span>
+                    <span class="bars"
+                      ><svg viewBox="0 0 60 18" width="60" height="18">
+                        <g fill="#7eea7e">
+                          <rect x="0" y="9" width="2" height="7" />
+                          <rect x="4" y="5" width="2" height="11" />
+                          <rect x="8" y="11" width="2" height="5" />
+                          <rect x="12" y="7" width="2" height="9" />
+                          <rect x="16" y="3" width="2" height="13" />
+                          <rect x="20" y="8" width="2" height="8" />
+                          <rect x="24" y="4" width="2" height="12" />
+                          <rect x="28" y="10" width="2" height="6" />
+                        </g></svg
+                    ></span>
+                    <button class="more-btn">⋯</button>
+                  </div>
+                </div>
+                <div class="metadata-table">
+                  <div class="metadata-row metadata-head">
+                    <div data-i18n="skinner.field_header">FIELD</div>
+                    <div data-i18n="skinner.detected_header">DETECTED VALUE</div>
+                    <div data-i18n="skinner.confidence_header">CONFIDENCE</div>
+                  </div>
+                  <div class="metadata-row">
+                    <div data-i18n="skinner.brand">Brand</div>
+                    <input class="meta-input" data-field="brand" placeholder="—" disabled />
+                    <div class="meta-protocols" data-field="brand-protocols"></div>
+                  </div>
+                  <div class="metadata-row">
+                    <div data-i18n="skinner.model">Model</div>
+                    <input class="meta-input" data-field="model" placeholder="—" disabled />
+                    <div class="meta-confidence" data-field="confidence">—</div>
+                  </div>
+                  <div class="metadata-row">
+                    <div data-i18n="skinner.ecu_type">ECU Type</div>
+                    <input class="meta-input" data-field="ecuType" placeholder="—" disabled />
+                    <div class="meta-protocols" data-field="ecu-protocols"></div>
+                  </div>
+                  <div class="metadata-row">
+                    <div data-i18n="skinner.hw_id">HW ID</div>
+                    <input class="meta-input" data-field="hwId" placeholder="—" disabled />
+                    <div class="meta-protocols" data-field="hwsw-protocols"></div>
+                  </div>
+                  <div class="metadata-row">
+                    <div data-i18n="skinner.sw_id">SW ID</div>
+                    <input class="meta-input" data-field="swId" placeholder="—" disabled />
+                    <div></div>
+                  </div>
+                  <div class="metadata-row">
+                    <div data-i18n="skinner.stage">Stage</div>
+                    <input class="meta-input" data-field="stage" placeholder="STOCK" disabled />
+                    <div></div>
+                  </div>
+                </div>
+                <div class="meta-hint" data-i18n="skinner.meta_hint">
+                  Click any value to edit before organizing.
+                </div>
+              </div>
+
+              <div class="card card-kind">
+                <div class="card-header">
+                  <span class="card-title">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                      <path
+                        d="M12 2 2 7l10 5 10-5z M2 17l10 5 10-5 M2 12l10 5 10-5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span data-i18n="skinner.kind_title">KIND</span>
+                  </span>
+                  <button class="more-btn">⋯</button>
+                </div>
+
+                <div id="kind-suggestion" class="kind-suggestion" hidden>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M12 8v4M12 16h.01"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <div class="kind-suggestion-text" id="kind-suggestion-text"></div>
+                  <div class="kind-suggestion-actions">
+                    <button
+                      id="kind-suggestion-accept"
+                      class="btn-secondary small"
+                      data-i18n="skinner.link_as_solution"
+                    >
+                      Link as solution
+                    </button>
+                    <button
+                      id="kind-suggestion-dismiss"
+                      class="btn-secondary small"
+                      data-i18n="skinner.keep_as_original"
+                    >
+                      Keep as original
+                    </button>
+                  </div>
+                </div>
+
+                <div class="kind-toggle-row">
+                  <label class="kind-radio">
+                    <input type="radio" name="kind-radio" value="original" checked disabled />
+                    <span class="kind-radio-pill kind-orig" data-i18n="skinner.kind_original_label"
+                      >ORIGINAL</span
+                    >
+                    <span class="kind-radio-hint" data-i18n="skinner.kind_original_hint"
+                      >stock dump from car</span
+                    >
+                  </label>
+                  <label class="kind-radio">
+                    <input type="radio" name="kind-radio" value="solution" disabled />
+                    <span class="kind-radio-pill kind-sol" data-i18n="skinner.kind_solution_label"
+                      >SOLUTION</span
+                    >
+                    <span class="kind-radio-hint" data-i18n="skinner.kind_solution_hint"
+                      >modified / tuned file</span
+                    >
+                  </label>
+                </div>
+
+                <div id="kind-solution-fields" class="kind-solution-fields" hidden>
+                  <div class="form-row">
+                    <label data-i18n="skinner.parent_original">Parent original</label>
+                    <select id="kind-parent-select" disabled>
+                      <option value="" data-i18n="skinner.no_matching_original">
+                        No matching original found
+                      </option>
+                    </select>
+                    <div class="hint" id="kind-parent-hint" data-i18n="skinner.parent_hint">
+                      Filtered by Brand · Model · ECU · HW.
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <label data-i18n="skinner.solution_label_field">Solution label</label>
+                    <input
+                      id="kind-solution-label"
+                      type="text"
+                      data-i18n-placeholder="skinner.solution_label_placeholder"
+                      placeholder="Stage 1, DPF-off, Pop&amp;Bang..."
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-tags">
+                <div class="card-header">
+                  <span class="card-title">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                      <path
+                        d="M20.6 13.4 12 22l-9-9V3h10z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <circle cx="7.5" cy="7.5" r="1.5" fill="currentColor" />
+                    </svg>
+                    <span data-i18n="skinner.tags_notes_title">TAGS &amp; NOTES</span>
+                  </span>
+                  <button class="more-btn">⋯</button>
+                </div>
+                <div class="tag-area">
+                  <div id="tag-list" class="tag-list"></div>
+                  <div class="tag-input-row">
+                    <input
+                      id="tag-input"
+                      type="text"
+                      data-i18n-placeholder="skinner.tag_input_placeholder"
+                      placeholder="Add tag and press Enter (e.g. Stage1, DPF-off, Customer:Smith)"
+                      disabled
+                    />
+                    <button
+                      id="tag-add-btn"
+                      class="btn-secondary small"
+                      disabled
+                      data-i18n="skinner.tag_add_button"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+                <div class="form-row" style="margin-top: 10px">
+                  <label data-i18n="skinner.notes_label">Notes</label>
+                  <textarea
+                    id="notes-input"
+                    rows="3"
+                    data-i18n-placeholder="skinner.notes_placeholder"
+                    placeholder="Free-text notes (customer name, what was modified, dyno results...)"
+                    disabled
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="card card-rename">
+                <div class="card-header">
+                  <span class="card-title">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                      <path
+                        d="M11 4H4v16h16v-7M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                    <span data-i18n="skinner.rename_title">RENAME &amp; ORGANIZE</span>
+                  </span>
+                  <div class="card-header-right">
+                    <span class="bars"
+                      ><svg viewBox="0 0 60 18" width="60" height="18">
+                        <g fill="#5fc8e8">
+                          <rect x="0" y="8" width="2" height="8" />
+                          <rect x="4" y="4" width="2" height="12" />
+                          <rect x="8" y="10" width="2" height="6" />
+                          <rect x="12" y="6" width="2" height="10" />
+                          <rect x="16" y="2" width="2" height="14" />
+                          <rect x="20" y="9" width="2" height="7" />
+                        </g></svg
+                    ></span>
+                    <span class="bars"
+                      ><svg viewBox="0 0 60 18" width="60" height="18">
+                        <g fill="#5fc8e8">
+                          <rect x="0" y="6" width="2" height="10" />
+                          <rect x="4" y="3" width="2" height="13" />
+                          <rect x="8" y="8" width="2" height="8" />
+                          <rect x="12" y="5" width="2" height="11" />
+                          <rect x="16" y="10" width="2" height="6" />
+                        </g></svg
+                    ></span>
+                    <button class="more-btn">⋯</button>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <label data-i18n="skinner.format_mask_label">Format Mask</label>
+                  <input
+                    id="format-mask"
+                    type="text"
+                    list="format-mask-presets"
+                    value="[BRAND]_[MODEL]_[HW]_[STAGE].bin"
+                    placeholder="[BRAND]_[MODEL]_[HW]_[STAGE].bin"
+                  />
+                  <datalist id="format-mask-presets">
+                    <option value="[BRAND]_[MODEL]_[HW]_[STAGE].bin"></option>
+                    <option value="[BRAND]_[MODEL]_[ECU]_[HW]_[SW].bin"></option>
+                    <option value="[BRAND]_[MODEL]_[ECU]_[HW]_[STAGE]_[DATE].bin"></option>
+                    <option value="[ORIG]_[HW]_[STAGE].bin"></option>
+                    <option value="[BRAND]_[MODEL]_[PROTOCOL]_[HW].bin"></option>
+                  </datalist>
+                  <div class="mask-preview-row">
+                    <span class="mask-preview-label" data-i18n="skinner.preview_label"
+                      >Preview:</span
+                    >
+                    <span class="mask-preview" id="mask-preview">—</span>
+                  </div>
+                </div>
+                <button
+                  id="organize-btn"
+                  class="btn-primary"
+                  disabled
+                  data-i18n="skinner.organize_button"
+                >
+                  ORGANIZE TO ARCHIVE
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-log">
+            <div class="card-header">
+              <span class="card-title">
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                  <path fill="currentColor" d="M3 6h18M3 12h18M3 18h12" />
+                </svg>
+                <span data-i18n="skinner.activity_log_title">SYSTEM ACTIVITY LOG</span>
+              </span>
+              <div class="card-header-right">
+                <span class="bars"
+                  ><svg viewBox="0 0 80 18" width="80" height="18">
+                    <g fill="#5fc8e8">
+                      <rect x="0" y="9" width="2" height="7" />
+                      <rect x="4" y="4" width="2" height="12" />
+                      <rect x="8" y="11" width="2" height="5" />
+                      <rect x="12" y="6" width="2" height="10" />
+                      <rect x="16" y="2" width="2" height="14" />
+                      <rect x="20" y="8" width="2" height="8" />
+                      <rect x="24" y="5" width="2" height="11" />
+                      <rect x="28" y="10" width="2" height="6" />
+                      <rect x="32" y="3" width="2" height="13" />
+                      <rect x="36" y="7" width="2" height="9" />
+                      <rect x="40" y="9" width="2" height="7" />
+                      <rect x="44" y="5" width="2" height="11" />
+                    </g></svg
+                ></span>
+                <span class="bars"
+                  ><svg viewBox="0 0 80 18" width="80" height="18">
+                    <g fill="#7eea7e">
+                      <rect x="0" y="6" width="2" height="10" />
+                      <rect x="4" y="10" width="2" height="6" />
+                      <rect x="8" y="3" width="2" height="13" />
+                      <rect x="12" y="8" width="2" height="8" />
+                      <rect x="16" y="5" width="2" height="11" />
+                      <rect x="20" y="9" width="2" height="7" />
+                      <rect x="24" y="4" width="2" height="12" />
+                      <rect x="28" y="11" width="2" height="5" />
+                    </g></svg
+                ></span>
+                <button class="more-btn">⋯</button>
+              </div>
+            </div>
+            <div id="log" class="log"></div>
+            <div class="sparkle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <path
+                  fill="#5fc8e8"
+                  d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z"
+                />
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <section class="view view-dashboard" data-view="dashboard">
+          <div class="dashboard-grid">
+            <div class="card stat-card">
+              <div class="stat-label" data-i18n="dashboard.stat_total">Total Files Organized</div>
+              <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-label" data-i18n="dashboard.stat_kind_split">
+                Originals / Solutions
+              </div>
+              <div class="stat-value" id="stat-kind-split">0 / 0</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-label" data-i18n="dashboard.stat_size">Total Archive Size</div>
+              <div class="stat-value" id="stat-size">0 B</div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-label" data-i18n="dashboard.stat_confidence">Avg. Confidence</div>
+              <div class="stat-value" id="stat-confidence">0%</div>
+            </div>
+          </div>
+          <div class="dashboard-grid two-col">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title" data-i18n="dashboard.top_brands">TOP BRANDS</span>
+              </div>
+              <div id="brand-list" class="bar-list"></div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title" data-i18n="dashboard.top_ecu_types">TOP ECU TYPES</span>
+              </div>
+              <div id="ecu-list" class="bar-list"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="dashboard.most_tuned_originals"
+                >MOST-TUNED ORIGINALS</span
+              >
+            </div>
+            <div id="top-originals-list" class="bar-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="dashboard.recent_files">RECENT FILES</span>
+            </div>
+            <div id="recent-list" class="recent-list"></div>
+          </div>
+        </section>
+
+        <section class="view view-database" data-view="database">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="database.title">FILE DATABASE</span>
+              <div class="card-header-right">
+                <div
+                  class="db-view-mode-group"
+                  role="group"
+                  data-i18n-aria-label="database.view_mode_aria"
+                  aria-label="View mode"
+                >
+                  <button
+                    id="db-view-mode-table"
+                    class="db-view-mode-btn active"
+                    data-mode="table"
+                    type="button"
+                    data-i18n-title="database.view_mode_table_title"
+                    title="Table view"
+                  >
+                    <span class="db-view-icon" aria-hidden="true">&#9638;</span>
+                    <span data-i18n="database.view_mode_table">Table</span>
+                  </button>
+                  <button
+                    id="db-view-mode-grid"
+                    class="db-view-mode-btn"
+                    data-mode="grid"
+                    type="button"
+                    data-i18n-title="database.view_mode_grid_title"
+                    title="Grid view"
+                  >
+                    <span class="db-view-icon" aria-hidden="true">&#9636;</span>
+                    <span data-i18n="database.view_mode_grid">Grid</span>
+                  </button>
+                </div>
+                <select
+                  id="db-group-by"
+                  class="text-input"
+                  style="width: auto"
+                  data-i18n-title="database.group_by_title"
+                  title="Group rows by a field"
+                >
+                  <option value="" data-i18n="database.group_by_none">Group by: None</option>
+                  <option value="brand" data-i18n="database.group_by_brand">Group: Brand</option>
+                  <option value="model" data-i18n="database.group_by_model">Group: Model</option>
+                  <option value="ecu_type" data-i18n="database.group_by_ecu_type">
+                    Group: ECU Type
+                  </option>
+                  <option value="kind" data-i18n="database.group_by_kind">Group: Kind</option>
+                  <option value="tag" data-i18n="database.group_by_tag">Group: Tag (any)</option>
+                  <option value="day" data-i18n="database.group_by_day">Group: Date (day)</option>
+                  <option value="conf" data-i18n="database.group_by_conf">
+                    Group: Confidence bucket
+                  </option>
+                </select>
+                <div
+                  class="db-density-group"
+                  role="group"
+                  data-i18n-aria-label="database.density_aria"
+                  aria-label="Density"
+                >
+                  <button
+                    class="db-density-btn"
+                    data-density="compact"
+                    type="button"
+                    data-i18n-title="database.density_compact"
+                    title="Compact rows"
+                  >
+                    &#8801;
+                  </button>
+                  <button
+                    class="db-density-btn active"
+                    data-density="comfortable"
+                    type="button"
+                    data-i18n-title="database.density_comfortable"
+                    title="Comfortable rows"
+                  >
+                    &#8803;
+                  </button>
+                  <button
+                    class="db-density-btn"
+                    data-density="spacious"
+                    type="button"
+                    data-i18n-title="database.density_spacious"
+                    title="Spacious rows"
+                  >
+                    &#9776;
+                  </button>
+                </div>
+                <select id="db-kind-filter" class="text-input" style="width: auto">
+                  <option value="" data-i18n="database.kind_filter_all">All kinds</option>
+                  <option value="original" data-i18n="database.kind_filter_originals">
+                    Originals only
+                  </option>
+                  <option value="solution" data-i18n="database.kind_filter_solutions">
+                    Solutions only
+                  </option>
+                  <option value="orphan" data-i18n="database.kind_filter_orphans">
+                    Orphan solutions
+                  </option>
+                </select>
+                <input
+                  id="db-search"
+                  class="text-input"
+                  type="text"
+                  data-i18n-placeholder="database.search_placeholder"
+                  placeholder="Filter by name, HW, SW, brand, tag..."
+                />
+                <button id="db-refresh" class="btn-secondary small" data-i18n="database.refresh">
+                  Refresh
+                </button>
+                <button
+                  id="db-save-smart-folder"
+                  class="btn-secondary small"
+                  type="button"
+                  data-i18n-title="database.save_smart_folder_title"
+                  title="Save the current search and filters as a Smart Folder"
+                  data-i18n="database.save_smart_folder"
+                >
+                  &#9733; Save as Smart Folder
+                </button>
+              </div>
+            </div>
+            <div class="db-layout">
+              <aside
+                class="db-tree"
+                id="db-tree"
+                data-i18n-aria-label="database.tree_aria"
+                aria-label="Archive folder tree"
+              ></aside>
+              <div class="db-content">
+                <div id="db-table-host" class="db-table-host">
+                  <div class="table-wrap">
+                    <table class="data-table db-table" id="db-table">
+                      <thead id="db-thead"></thead>
+                      <tbody id="db-tbody"></tbody>
+                    </table>
+                  </div>
+                </div>
+                <div id="db-grid-host" class="db-grid-host" hidden>
+                  <div id="db-grid" class="db-grid"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside id="db-detail-panel" class="db-detail-panel" hidden aria-hidden="true">
+            <header class="db-detail-header">
+              <span class="db-detail-title">
+                <span class="db-detail-kicker" data-i18n="database.detail_kicker">DETAIL</span>
+                <span id="db-detail-id" class="db-detail-id"></span>
+              </span>
+              <button
+                id="db-detail-close"
+                class="db-detail-close"
+                type="button"
+                data-i18n-aria-label="database.detail_close_aria"
+                aria-label="Close detail panel"
+              >
+                &times;
+              </button>
+            </header>
+            <div id="db-detail-body" class="db-detail-body"></div>
+          </aside>
+
+          <div id="db-action-bar" class="db-action-bar" hidden>
+            <span class="db-action-count" id="db-action-count">0 selected</span>
+            <div class="db-action-buttons">
+              <div class="db-popover-wrap">
+                <button
+                  id="db-bulk-add-tag"
+                  class="btn-secondary small"
+                  type="button"
+                  data-i18n="database.action_add_tag"
+                >
+                  Add tag…
+                </button>
+                <div id="db-add-tag-popover" class="db-popover" hidden>
+                  <input
+                    id="db-add-tag-input"
+                    type="text"
+                    data-i18n-placeholder="database.action_add_tag_placeholder"
+                    placeholder="Tag name, then Enter"
+                  />
+                  <div class="hint" data-i18n="database.action_add_tag_hint">
+                    Applies to all selected files.
+                  </div>
+                </div>
+              </div>
+              <div class="db-popover-wrap">
+                <button
+                  id="db-bulk-remove-tag"
+                  class="btn-secondary small"
+                  type="button"
+                  data-i18n="database.action_remove_tag"
+                >
+                  Remove tag…
+                </button>
+                <div id="db-remove-tag-popover" class="db-popover" hidden>
+                  <select id="db-remove-tag-select"></select>
+                  <button
+                    id="db-remove-tag-confirm"
+                    class="btn-secondary small"
+                    type="button"
+                    data-i18n="database.action_remove_tag_confirm"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <button
+                id="db-bulk-open-folder"
+                class="btn-secondary small"
+                type="button"
+                data-i18n="database.action_open_folder"
+              >
+                Open Folder
+              </button>
+              <button id="db-bulk-delete" class="btn-secondary small destructive" type="button">
+                <span data-i18n="database.action_delete">Delete</span> (<span
+                  id="db-bulk-delete-count"
+                  >0</span
+                >)
+              </button>
+              <button
+                id="db-bulk-clear"
+                class="btn-secondary small"
+                type="button"
+                data-i18n="database.action_clear"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view view-tag-management" data-view="tag-management">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="tag_management.title">TAG MANAGEMENT</span>
+              <div class="card-header-right">
+                <button
+                  class="tm-tab active"
+                  data-tab="tags"
+                  type="button"
+                  data-i18n="tag_management.tab_tags"
+                >
+                  Tags
+                </button>
+                <button
+                  class="tm-tab"
+                  data-tab="rules"
+                  type="button"
+                  data-i18n="tag_management.tab_rules"
+                >
+                  Smart Rules
+                </button>
+              </div>
+            </div>
+
+            <div class="tm-panel tm-panel-tags" data-tab="tags">
+              <div class="tm-toolbar">
+                <input
+                  id="tm-search"
+                  type="text"
+                  data-i18n-placeholder="tag_management.search_placeholder"
+                  placeholder="Search tags..."
+                  autocomplete="off"
+                  class="text-input"
+                />
+                <div class="tm-toolbar-actions">
+                  <input
+                    id="tm-new-tag-name"
+                    type="text"
+                    data-i18n-placeholder="tag_management.new_tag_placeholder"
+                    placeholder="New tag name"
+                    autocomplete="off"
+                    class="text-input"
+                  />
+                  <button
+                    id="tm-new-tag-btn"
+                    class="btn-secondary small"
+                    type="button"
+                    data-i18n="tag_management.new_tag_button"
+                  >
+                    + New Tag
+                  </button>
+                </div>
+              </div>
+              <div class="tm-table-wrap">
+                <table class="data-table tm-table">
+                  <thead>
+                    <tr>
+                      <th class="tm-col-color" data-i18n="tag_management.col_color">Color</th>
+                      <th class="tm-col-name" data-i18n="tag_management.col_name">Name</th>
+                      <th class="tm-col-count" data-i18n="tag_management.col_files">Files</th>
+                      <th class="tm-col-desc" data-i18n="tag_management.col_description">
+                        Description
+                      </th>
+                      <th class="tm-col-actions"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tm-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tm-panel tm-panel-rules" data-tab="rules" hidden>
+              <div class="tm-toolbar">
+                <span class="hint" data-i18n="tag_management.rules_hint">
+                  Smart rules auto-suggest tags when files are scanned. Suggestions appear in the
+                  Skinner view; the user accepts or rejects them before organizing.
+                </span>
+                <button
+                  id="tm-new-rule-btn"
+                  class="btn-secondary small"
+                  type="button"
+                  data-i18n="tag_management.add_rule"
+                >
+                  + Add Rule
+                </button>
+              </div>
+              <div id="tm-rules-list" class="tm-rules-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view view-duplicates" data-view="duplicates">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="duplicates.title"
+                >DUPLICATES &amp; SIMILAR FILES</span
+              >
+              <div class="card-header-right">
+                <button
+                  id="dupes-refresh"
+                  class="btn-secondary small"
+                  type="button"
+                  data-i18n="duplicates.scan_button"
+                >
+                  Scan
+                </button>
+              </div>
+            </div>
+            <div class="dupes-tabs">
+              <button
+                class="dupes-tab active"
+                data-mode="exact"
+                type="button"
+                data-i18n="duplicates.tab_exact"
+              >
+                Exact duplicates (MD5)
+              </button>
+              <button
+                class="dupes-tab"
+                data-mode="similar"
+                type="button"
+                data-i18n="duplicates.tab_similar"
+              >
+                Near-duplicates (TLSH &le; 30)
+              </button>
+            </div>
+            <div id="dupes-results" class="dupes-results">
+              <div class="empty-state-cta">
+                <div class="empty-state-cta-icon">⎘</div>
+                <div class="empty-state-cta-title" data-i18n="duplicates.empty_intro_title">
+                  Find duplicates in your archive
+                </div>
+                <div class="empty-state-cta-sub">
+                  Choose <strong>Exact</strong> for byte-perfect copies, or
+                  <strong>Near-duplicates</strong> for TLSH-similar files.
+                </div>
+                <div class="empty-state-cta-actions">
+                  <button id="dupes-empty-scan" class="btn-primary" data-i18n="duplicates.scan_now">
+                    Scan Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view view-checksum" data-view="checksum">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="checksum.title">CHECKSUM &amp; HEX PEEK</span>
+            </div>
+            <div class="checksum-body">
+              <div class="checksum-actions">
+                <button
+                  id="checksum-pick"
+                  class="btn-secondary"
+                  data-i18n="checksum.select_for_checksum"
+                >
+                  Select File for Checksum
+                </button>
+                <button
+                  id="hex-peek-pick"
+                  class="btn-secondary"
+                  data-i18n="checksum.select_for_hex"
+                >
+                  Select File for Hex Peek
+                </button>
+                <label class="inline-label"
+                  ><span data-i18n="checksum.bytes_label">Bytes:</span>
+                  <input
+                    id="hex-peek-bytes"
+                    type="number"
+                    min="16"
+                    max="65536"
+                    step="16"
+                    value="512"
+                  />
+                </label>
+              </div>
+              <div id="checksum-results" class="checksum-results"></div>
+              <div id="hex-peek-results" class="hex-peek"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view view-compare" data-view="compare">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path
+                    d="M9 3v18M15 3v18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M4 7h5M4 12h5M4 17h5M15 7h5M15 12h5M15 17h5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span data-i18n="compare.title">COMPARE FILES</span>
+              </span>
+              <div class="card-header-right">
+                <span class="cmp-elapsed" id="cmp-elapsed"></span>
+                <button class="more-btn" type="button">⋯</button>
+              </div>
+            </div>
+
+            <div class="cmp-pickers">
+              <div class="cmp-slot" id="cmp-slot-a" data-slot="a">
+                <div class="cmp-slot-label">
+                  <span class="cmp-slot-letter" data-i18n="compare.slot_a_letter">A</span>
+                  <span class="cmp-slot-title" data-i18n="compare.slot_a_label"
+                    >FILE A · Original / Stock</span
+                  >
+                </div>
+                <div
+                  class="cmp-dropzone"
+                  data-slot="a"
+                  tabindex="0"
+                  role="button"
+                  data-i18n-aria-label="compare.choose_a_aria"
+                  aria-label="Choose file A"
+                >
+                  <div class="cmp-empty">
+                    <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+                      <rect
+                        x="10"
+                        y="6"
+                        width="28"
+                        height="36"
+                        rx="3"
+                        fill="none"
+                        stroke="#5fc8e8"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M14 16h20M14 22h20M14 28h14"
+                        stroke="#5fc8e8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <div class="cmp-empty-text" data-i18n="compare.drop_text">
+                      Drop a .bin file here<br />or click to choose
+                    </div>
+                  </div>
+                  <div class="cmp-file-card" hidden>
+                    <div class="cmp-file-name" data-role="name">—</div>
+                    <div class="cmp-file-meta">
+                      <span class="cmp-meta-row"
+                        ><span class="cmp-k" data-i18n="compare.size_label">Size</span
+                        ><span class="cmp-v" data-role="size">—</span></span
+                      >
+                      <span class="cmp-meta-row"
+                        ><span class="cmp-k" data-i18n="compare.md5_label">MD5</span
+                        ><span class="cmp-v cmp-mono" data-role="md5">computing…</span></span
+                      >
+                    </div>
+                    <div class="cmp-recognized" data-role="recognized" hidden></div>
+                    <button
+                      type="button"
+                      class="cmp-clear-slot"
+                      data-slot="a"
+                      data-i18n-title="compare.remove_a_title"
+                      title="Remove file A"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cmp-slot" id="cmp-slot-b" data-slot="b">
+                <div class="cmp-slot-label">
+                  <span class="cmp-slot-letter cmp-letter-b" data-i18n="compare.slot_b_letter"
+                    >B</span
+                  >
+                  <span class="cmp-slot-title" data-i18n="compare.slot_b_label"
+                    >FILE B · Modified / Tuned</span
+                  >
+                </div>
+                <div
+                  class="cmp-dropzone"
+                  data-slot="b"
+                  tabindex="0"
+                  role="button"
+                  data-i18n-aria-label="compare.choose_b_aria"
+                  aria-label="Choose file B"
+                >
+                  <div class="cmp-empty">
+                    <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+                      <rect
+                        x="10"
+                        y="6"
+                        width="28"
+                        height="36"
+                        rx="3"
+                        fill="none"
+                        stroke="#7eea7e"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M14 16h20M14 22h20M14 28h14"
+                        stroke="#7eea7e"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <div class="cmp-empty-text" data-i18n="compare.drop_text">
+                      Drop a .bin file here<br />or click to choose
+                    </div>
+                  </div>
+                  <div class="cmp-file-card" hidden>
+                    <div class="cmp-file-name" data-role="name">—</div>
+                    <div class="cmp-file-meta">
+                      <span class="cmp-meta-row"
+                        ><span class="cmp-k" data-i18n="compare.size_label">Size</span
+                        ><span class="cmp-v" data-role="size">—</span></span
+                      >
+                      <span class="cmp-meta-row"
+                        ><span class="cmp-k" data-i18n="compare.md5_label">MD5</span
+                        ><span class="cmp-v cmp-mono" data-role="md5">computing…</span></span
+                      >
+                    </div>
+                    <div class="cmp-recognized" data-role="recognized" hidden></div>
+                    <button
+                      type="button"
+                      class="cmp-clear-slot"
+                      data-slot="b"
+                      data-i18n-title="compare.remove_b_title"
+                      title="Remove file B"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cmp-actions">
+              <button
+                id="cmp-pick-a"
+                class="btn-secondary small"
+                type="button"
+                data-i18n-title="compare.pick_a_title"
+                title="Pick file A from archive"
+              >
+                <span class="cmp-slot-letter" data-i18n="compare.slot_a_letter">A</span>
+                <span data-i18n="compare.pick_a_button">FROM ARCHIVE</span>
+              </button>
+              <button
+                id="cmp-pick-b"
+                class="btn-secondary small"
+                type="button"
+                data-i18n-title="compare.pick_b_title"
+                title="Pick file B from archive"
+              >
+                <span class="cmp-slot-letter cmp-letter-b" data-i18n="compare.slot_b_letter"
+                  >B</span
+                >
+                <span data-i18n="compare.pick_b_button">FROM ARCHIVE</span>
+              </button>
+              <button
+                id="cmp-swap"
+                class="btn-secondary small"
+                type="button"
+                disabled
+                data-i18n-title="compare.swap_title"
+                title="Swap A and B (Ctrl+S)"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  aria-hidden="true"
+                  style="vertical-align: middle; margin-right: 4px"
+                >
+                  <path
+                    d="M7 4l-4 4 4 4M3 8h13M17 12l4 4-4 4M21 16H8"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span data-i18n="compare.swap">SWAP A↔B</span>
+              </button>
+              <button
+                id="cmp-clear"
+                class="btn-secondary small"
+                type="button"
+                disabled
+                data-i18n-title="compare.clear_title"
+                title="Clear both (Esc)"
+                data-i18n="compare.clear"
+              >
+                CLEAR
+              </button>
+              <button
+                id="cmp-run"
+                class="btn-primary cmp-run-btn"
+                type="button"
+                disabled
+                data-i18n-title="compare.run_title"
+                title="Compare (Ctrl+Enter)"
+                data-i18n="compare.run"
+              >
+                COMPARE
+              </button>
+            </div>
+          </div>
+
+          <div class="card" id="cmp-recent-card" hidden>
+            <div class="card-header">
+              <span class="card-title">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M12 7v5l3 2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span data-i18n="compare.recent_title">RECENT COMPARISONS</span>
+              </span>
+            </div>
+            <div id="cmp-recent-list" class="cmp-recent-list"></div>
+          </div>
+
+          <div class="cmp-result-area" id="cmp-result-area" hidden>
+            <div class="card" id="cmp-summary-card">
+              <div class="card-header">
+                <span class="card-title" data-i18n="compare.summary_title">SUMMARY</span>
+                <span class="cmp-md5-badge" id="cmp-md5-badge"></span>
+              </div>
+              <div class="cmp-summary-grid">
+                <div class="cmp-stat" id="cmp-stat-similarity">
+                  <div class="cmp-stat-value">—</div>
+                  <div class="cmp-stat-label" data-i18n="compare.summary_similarity">
+                    Similarity
+                  </div>
+                </div>
+                <div class="cmp-stat" id="cmp-stat-differ">
+                  <div class="cmp-stat-value">—</div>
+                  <div class="cmp-stat-label" data-i18n="compare.summary_bytes_differ">
+                    Bytes differ
+                  </div>
+                </div>
+                <div class="cmp-stat" id="cmp-stat-regions">
+                  <div class="cmp-stat-value">—</div>
+                  <div class="cmp-stat-label" data-i18n="compare.summary_regions">
+                    Regions changed
+                  </div>
+                </div>
+                <div class="cmp-stat" id="cmp-stat-sizes">
+                  <div class="cmp-stat-value">—</div>
+                  <div class="cmp-stat-label" data-i18n="compare.summary_sizes">Sizes</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="cmp-insights-card" hidden>
+              <div class="card-header">
+                <span class="card-title">
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <path
+                      d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M5.6 18.4l2.1-2.1M12 18v3M16.3 16.3l2.1 2.1M18 12h3M16.3 7.7l2.1-2.1"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                  </svg>
+                  <span data-i18n="compare.insights_title">INSIGHTS</span>
+                </span>
+                <button
+                  id="cmp-export-btn"
+                  class="btn-secondary small"
+                  data-i18n-title="compare.export_title"
+                  title="Export diff report (Ctrl+E)"
+                  data-i18n="compare.export"
+                >
+                  EXPORT
+                </button>
+              </div>
+              <div id="cmp-insights-body" class="cmp-insights"></div>
+            </div>
+
+            <div class="card" id="cmp-identical-banner" hidden>
+              <div class="cmp-identical">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="m7 12 3.5 3.5L17 9"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div>
+                  <div class="cmp-identical-title" data-i18n="compare.identical_title">
+                    Files are identical
+                  </div>
+                  <div class="cmp-identical-sub" data-i18n="compare.identical_sub">
+                    MD5 match, byte-perfect.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="cmp-heatmap-card">
+              <div class="card-header">
+                <span class="card-title" data-i18n="compare.heatmap_title">DIFFERENCE MAP</span>
+                <span class="cmp-heat-legend">
+                  <span class="cmp-heat-dot cmp-heat-dot-empty"></span
+                  ><span data-i18n="compare.heatmap_legend_identical">identical</span>
+                  <span class="cmp-heat-dot cmp-heat-dot-low"></span
+                  ><span data-i18n="compare.heatmap_legend_some">some</span>
+                  <span class="cmp-heat-dot cmp-heat-dot-high"></span
+                  ><span data-i18n="compare.heatmap_legend_heavy">heavy</span>
+                </span>
+              </div>
+              <div
+                class="cmp-heatmap"
+                id="cmp-heatmap"
+                role="img"
+                data-i18n-aria-label="compare.heatmap_aria"
+                aria-label="Difference heatmap"
+              ></div>
+              <div class="cmp-heatmap-axis">
+                <span id="cmp-heat-min">0x0</span>
+                <span class="cmp-heat-hover" id="cmp-heat-hover"></span>
+                <span id="cmp-heat-max">0x0</span>
+              </div>
+            </div>
+
+            <div class="card" id="cmp-regions-card">
+              <div class="card-header">
+                <span class="card-title">
+                  <span data-i18n="compare.regions_title">CHANGED REGIONS</span>
+                  <span class="cmp-region-count" id="cmp-region-count"></span>
+                </span>
+                <div class="card-header-right cmp-region-tools">
+                  <label class="inline-label">
+                    <span data-i18n="compare.regions_min_size">Min size:</span>
+                    <select id="cmp-min-size">
+                      <option value="1" data-i18n="compare.regions_min_1">≥ 1 byte</option>
+                      <option value="2" data-i18n="compare.regions_min_2">≥ 2 bytes</option>
+                      <option value="4" data-i18n="compare.regions_min_4">≥ 4 bytes</option>
+                      <option value="8" data-i18n="compare.regions_min_8">≥ 8 bytes</option>
+                      <option value="16" data-i18n="compare.regions_min_16">≥ 16 bytes</option>
+                    </select>
+                  </label>
+                  <input
+                    id="cmp-jump-offset"
+                    type="text"
+                    data-i18n-placeholder="compare.regions_jump_placeholder"
+                    placeholder="Jump to 0x..."
+                    data-i18n-title="compare.regions_jump_title"
+                    title="Type offset and press Enter"
+                  />
+                  <label class="cmp-toggle">
+                    <input type="checkbox" id="cmp-toggle-ascii" checked />
+                    <span data-i18n="compare.regions_ascii">ASCII</span>
+                  </label>
+                </div>
+              </div>
+              <div class="cmp-regions" id="cmp-regions"></div>
+              <div class="cmp-region-cap" id="cmp-region-cap" hidden></div>
+            </div>
+          </div>
+
+          <div class="cmp-spinner-overlay" id="cmp-spinner" hidden>
+            <div class="cmp-spinner"></div>
+            <div class="cmp-spinner-text" data-i18n="compare.spinner_text">Comparing files…</div>
+          </div>
+        </section>
+
+        <section class="view view-settings" data-view="settings">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="settings.title">SETTINGS</span>
+            </div>
+            <div class="settings-body">
+              <div class="form-row">
+                <label data-i18n="settings.language_label">Language</label>
+                <select id="locale-select">
+                  <option value="en">English</option>
+                  <option value="fr">Français</option>
+                </select>
+                <div class="hint" data-i18n="settings.language_hint">
+                  Changes apply immediately. The app remembers your choice.
+                </div>
+              </div>
+              <div class="form-row">
+                <label data-i18n="settings.archive_root">Archive Root Folder</label>
+                <div class="path-row">
+                  <input id="archive-root" type="text" readonly />
+                  <button
+                    id="pick-archive"
+                    class="btn-secondary small"
+                    data-i18n="settings.archive_choose"
+                  >
+                    Choose Folder
+                  </button>
+                  <button
+                    id="open-archive"
+                    class="btn-secondary small"
+                    data-i18n="settings.archive_open"
+                  >
+                    Open
+                  </button>
+                </div>
+                <div class="hint" data-i18n="settings.archive_hint_html">
+                  All organized files are placed under this folder using the structure:
+                  <code>/Brand/Model/ECU/file.bin</code>
+                </div>
+              </div>
+              <div class="form-row">
+                <label data-i18n="settings.default_mask">Default Format Mask</label>
+                <input id="default-mask" type="text" value="[BRAND]_[MODEL]_[HW]_[STAGE].bin" />
+                <div class="hint" data-i18n="settings.mask_tokens_hint">
+                  Tokens: [BRAND] [MODEL] [ECU] [HW] [SW] [STAGE] [ORIG] [DATE] [PROTOCOL]
+                </div>
+              </div>
+              <div class="form-row">
+                <label class="checkbox-label">
+                  <input id="online-vin-lookup" type="checkbox" />
+                  <span data-i18n="settings.online_vin"
+                    >Enable online VIN lookup (NHTSA vPIC, US gov, free)</span
+                  >
+                </label>
+                <div class="hint" data-i18n="settings.online_vin_hint">
+                  When a file contains a VIN, the app will query NHTSA to enrich metadata
+                  (Make/Model/Plant). Data leaves your machine only when this is enabled. Cached
+                  forever per VIN.
+                </div>
+              </div>
+              <div class="form-row">
+                <label class="checkbox-label">
+                  <input id="auto-organize-enabled" type="checkbox" />
+                  <span data-i18n="settings.auto_organize"
+                    >Auto-organize on drop when confidence is high</span
+                  >
+                </label>
+                <div class="threshold-row">
+                  <span class="hint" data-i18n="settings.threshold">Threshold</span>
+                  <input
+                    id="auto-organize-threshold"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value="85"
+                  />
+                  <span class="hint">%</span>
+                </div>
+                <div class="hint" data-i18n="settings.auto_organize_hint">
+                  If a scanned file's confidence is at or above this value, it will be organized to
+                  the archive immediately without manual review.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="settings.app_updates_title">APP UPDATES</span>
+            </div>
+            <div class="settings-body">
+              <div class="path-row">
+                <span class="hint" data-i18n="settings.current_version">Current version:</span>
+                <strong id="app-version">—</strong>
+                <button
+                  id="app-update-check"
+                  class="btn-secondary small"
+                  data-i18n="settings.check_for_update"
+                >
+                  Check for Update
+                </button>
+              </div>
+              <div id="app-update-status" class="hint" style="margin-top: 8px"></div>
+              <div class="path-row" id="app-update-actions" hidden>
+                <button
+                  id="app-update-download"
+                  class="btn-secondary small"
+                  hidden
+                  data-i18n="settings.download"
+                >
+                  Download
+                </button>
+                <button
+                  id="app-update-install"
+                  class="btn-secondary small"
+                  hidden
+                  data-i18n="settings.install_and_restart"
+                >
+                  Install &amp; Restart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="settings.data_updates_title">DATA UPDATES</span>
+            </div>
+            <div class="settings-body">
+              <div class="form-row">
+                <label class="checkbox-label">
+                  <input id="data-auto-update" type="checkbox" />
+                  <span data-i18n="settings.data_auto_update"
+                    >Check for ECU database updates monthly</span
+                  >
+                </label>
+                <div class="hint" data-i18n="settings.data_auto_update_hint">
+                  When enabled, fetches a manifest from the URL below and downloads newer
+                  Bosch/VAG/DTC database files into an overlay folder.
+                </div>
+              </div>
+              <div class="form-row">
+                <label data-i18n="settings.data_manifest_url">Update manifest URL</label>
+                <input
+                  id="data-update-url"
+                  type="text"
+                  data-i18n-placeholder="settings.data_manifest_url_placeholder"
+                  placeholder="https://example.com/ecu-skinner/manifest.json"
+                />
+              </div>
+              <div class="path-row">
+                <button
+                  id="data-check-now"
+                  class="btn-secondary small"
+                  data-i18n="settings.data_check_now"
+                >
+                  Check Now
+                </button>
+                <span id="data-update-status" class="hint" style="margin-left: 10px"></span>
+              </div>
+              <div class="hint" id="data-manifest-info"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="settings.db_backup_title">DATABASE BACKUP</span>
+            </div>
+            <div class="settings-body">
+              <div class="path-row">
+                <button id="db-export" class="btn-secondary" data-i18n="settings.db_export">
+                  Export Database (JSON)
+                </button>
+                <button
+                  id="db-import-append"
+                  class="btn-secondary"
+                  data-i18n="settings.db_import_append"
+                >
+                  Import (append)
+                </button>
+                <button
+                  id="db-import-replace"
+                  class="btn-secondary"
+                  data-i18n="settings.db_import_replace"
+                >
+                  Import (replace all)
+                </button>
+              </div>
+              <div class="hint" data-i18n="settings.db_backup_hint">
+                The backup contains the file index + settings, not the binary files themselves.
+                Files in your archive folder stay untouched.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title" data-i18n="settings.integrity_title">ARCHIVE INTEGRITY</span>
+            </div>
+            <div class="settings-body">
+              <p class="hint" data-i18n="settings.integrity_hint">
+                Scan the database for entries whose underlying archive file is missing.
+              </p>
+              <div class="path-row">
+                <button
+                  id="integrity-scan"
+                  class="btn-secondary small"
+                  type="button"
+                  data-i18n="settings.integrity_scan"
+                >
+                  Scan Archive
+                </button>
+              </div>
+              <div id="integrity-result" class="hint" style="margin-top: 12px"></div>
+              <div id="integrity-missing-list" class="integrity-missing-list"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="archive-picker-overlay" class="archive-picker-overlay" hidden>
+      <div
+        class="archive-picker-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="picker-title"
+      >
+        <div class="picker-header">
+          <span id="picker-title" class="card-title">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path
+                d="M21 8v13H3V8M1 3h22v5H1z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+            </svg>
+            <span data-i18n="picker.title">PICK FROM ARCHIVE</span>
+            <span id="picker-slot-tag" class="picker-slot-tag"></span>
+          </span>
+          <button
+            id="picker-close"
+            class="more-btn"
+            type="button"
+            data-i18n-title="picker.close_title"
+            title="Close (Esc)"
+          >
+            ×
+          </button>
+        </div>
+        <div class="picker-search-row">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+            <path
+              d="m21 21-4.3-4.3"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <input
+            id="picker-search"
+            type="text"
+            data-i18n-placeholder="picker.search_placeholder"
+            placeholder="Search by name, HW, SW, brand, tag..."
+            autofocus
+          />
+          <span id="picker-result-count" class="picker-result-count"></span>
+        </div>
+        <div id="picker-list" class="picker-list"></div>
+      </div>
+    </div>
+
+    <div id="app-modal-overlay" class="app-modal-overlay" hidden>
+      <div
+        id="app-modal"
+        class="app-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="app-modal-title"
+      >
+        <div class="app-modal-header">
+          <span id="app-modal-title" class="card-title" data-i18n="modal.dialog_title">DIALOG</span>
+          <button
+            id="app-modal-close"
+            class="more-btn"
+            type="button"
+            data-i18n-aria-label="modal.close_aria"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <div id="app-modal-body" class="app-modal-body"></div>
+        <div id="app-modal-buttons" class="app-modal-buttons"></div>
+      </div>
+    </div>
+
+    <!-- Command palette overlay (Ctrl+K / Cmd+K) -->
+    <div id="cmd-palette-overlay" class="cmd-palette-overlay" hidden>
+      <div
+        id="cmd-palette"
+        class="cmd-palette"
+        role="dialog"
+        aria-modal="true"
+        data-i18n-aria-label="command_palette.aria_label"
+        aria-label="Command palette"
+      >
+        <div class="cmd-palette-input-row">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+            <path
+              d="m21 21-4.3-4.3"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <input
+            id="cmd-palette-input"
+            type="text"
+            data-i18n-placeholder="command_palette.input_placeholder"
+            placeholder="Type a command or search…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <kbd class="cmd-palette-esc" data-i18n="command_palette.esc">Esc</kbd>
+        </div>
+        <div id="cmd-palette-results" class="cmd-palette-results" role="listbox"></div>
+        <div class="cmd-palette-footer">
+          <span><kbd>↑↓</kbd> <span data-i18n="command_palette.navigate_hint">navigate</span></span>
+          <span><kbd>↵</kbd> <span data-i18n="command_palette.select_hint">select</span></span>
+          <span><kbd>Esc</kbd> <span data-i18n="command_palette.close_hint">close</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast notifications container -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+    <!-- Full-window drop overlay -->
+    <div id="global-drop-overlay" class="global-drop-overlay" hidden>
+      <div class="global-drop-card">
+        <svg viewBox="0 0 80 80" width="72" height="72" aria-hidden="true">
+          <rect
+            x="10"
+            y="20"
+            width="34"
+            height="34"
+            rx="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+          <rect
+            x="15"
+            y="25"
+            width="24"
+            height="24"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <rect
+            x="46"
+            y="32"
+            width="24"
+            height="30"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+          <path
+            d="M52 42 L58 42 M56 39 L58 42 L56 45"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <div class="global-drop-title" data-i18n="global_drop.title">Drop ECU file to scan</div>
+        <div class="global-drop-subtitle" data-i18n="global_drop.subtitle">
+          .bin .ori .mod .frf .sgo .kp
+        </div>
+      </div>
+    </div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/log.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/context-menu.js"></script>
+    <script src="js/global-drop.js"></script>
+    <script src="js/cmd-palette.js"></script>
+    <script src="js/setup-nav.js"></script>
+    <script src="js/search-parser.js"></script>
+    <script src="js/global-search.js"></script>
+    <script src="js/views/skinner.js"></script>
+    <script src="js/views/compare.js"></script>
+    <script src="js/views/database/view-state.js"></script>
+    <script src="js/views/database/columns.js"></script>
+    <script src="js/views/database/density.js"></script>
+    <script src="js/views/database/groups.js"></script>
+    <script src="js/views/database/grid.js"></script>
+    <script src="js/views/database/detail-panel.js"></script>
+    <script src="js/views/database.js"></script>
+    <script src="js/views/dashboard.js"></script>
+    <script src="js/views/checksum.js"></script>
+    <script src="js/views/settings.js"></script>
+    <script src="js/views/duplicates.js"></script>
+    <script src="js/views/tag-management.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

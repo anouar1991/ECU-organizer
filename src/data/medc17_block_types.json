@@ -1,0 +1,45 @@
+{
+  "source": "ConnorHowell/medc17-checksum-tool",
+  "source_url": "https://github.com/ConnorHowell/medc17-checksum-tool",
+  "source_license": "MIT",
+  "source_file": "main.py",
+  "source_lines": "162-179",
+  "description": "Bosch MED17 / EDC17 / MEDC17 block descriptor type IDs. The low byte of the 32-bit block_identifier dword at offset +0x00 of each block header identifies the block type. The block ends with the marker 0xDEADBEEF.",
+  "block_header_layout": {
+    "endianness": "little",
+    "fields": {
+      "0x00": "block_identifier (dword) - low byte = type id",
+      "0x04": "size (dword) - total block size in bytes",
+      "0x0C": "block_end (dword) - TriCore flash address, expected in 0x80000000..0x8FFFFFFF",
+      "0x1A": "sw_identifier (10 bytes ASCII)",
+      "0x2C": "num_checksum_structures (dword)",
+      "0x30": "checksum_adjust (dword)",
+      "0x34": "checksum_structures (32 bytes each)",
+      "size-4": "trailing marker 0xDEADBEEF (little-endian)"
+    },
+    "flash_addr_range": ["0x80000000", "0x8FFFFFFF"],
+    "min_block_size": "0x40",
+    "trailing_marker": "0xDEADBEEF"
+  },
+  "block_types": {
+    "0x10": { "name": "STARTUP", "description": "Startup / boot block" },
+    "0x20": { "name": "TUNING_PROT", "description": "Tuning protection" },
+    "0x30": { "name": "CUSTOMER", "description": "Customer / dealer data block" },
+    "0x40": { "name": "ASW", "description": "Application software #0" },
+    "0x50": { "name": "ASW1", "description": "Application software #1" },
+    "0x60": { "name": "DATASET", "description": "Dataset #0 (calibration maps + flags)" },
+    "0x70": { "name": "DATASET1", "description": "Dataset #1" },
+    "0x80": { "name": "VARIANT_DS", "description": "Variant dataset (persistent variant block)" },
+    "0x90": { "name": "CUST_TUNING_PROT", "description": "Customer tuning protection" },
+    "0xA0": {
+      "name": "ASW2",
+      "description": "Application software #2 (diag / EOL slot in some maps)"
+    },
+    "0xB0": { "name": "ASW3", "description": "Application software #3" },
+    "0xC0": { "name": "CONSTANTS", "description": "Absolute constants #0" },
+    "0xD0": { "name": "EMU_EXT", "description": "Emulation extension chip block" },
+    "0xE0": { "name": "CUSTOMER_SPEC", "description": "Customer-specific data" },
+    "0xF0": { "name": "RAMLOADER", "description": "Ramloader" },
+    "0xF1": { "name": "APP_ATTEST", "description": "Application attestation" }
+  }
+}

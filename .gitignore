@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+
+# Electron-builder cache
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Env files
+.env
+.env.*
+
+# Test artifacts
+playwright-report/
+test-results/
+.playwright-mcp/
+coverage/
+
+# Screenshots dropped at the repo root by manual MCP runs
+mcp-*.png
+page-*.png
+
+# Locally-generated databases / archives
+*.sqlite
+*.sqlite-journal
+ECU_Archive/

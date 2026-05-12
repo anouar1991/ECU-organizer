@@ -1,0 +1,726 @@
+wmi,country,manufacturer,brand
+# Source: https://en.wikipedia.org/wiki/World_Manufacturer_Identifier and https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers
+# First character = country/region; chars 2-3 = manufacturer code
+# === SOUTH AFRICA (A) ===
+AAV,South Africa,Volkswagen of South Africa,Volkswagen
+AHT,South Africa,Toyota South Africa,Toyota
+ADM,South Africa,General Motors South Africa,General Motors
+AC5,South Africa,Hyundai South Africa,Hyundai
+AFA,South Africa,Ford South Africa,Ford
+# === IVORY COAST / KENYA / NIGERIA (B) ===
+BF9,Kenya,Kenya Vehicle Manufacturers,KVM
+# === EGYPT / MOROCCO / TUNISIA (J-letters not used here, see L for Morocco) ===
+# === JAPAN (J) ===
+JA3,Japan,Mitsubishi,Mitsubishi
+JA4,Japan,Mitsubishi Motors,Mitsubishi
+JA7,Japan,Mitsubishi,Mitsubishi
+JAA,Japan,Isuzu,Isuzu
+JAB,Japan,Isuzu,Isuzu
+JAC,Japan,Isuzu,Isuzu
+JAE,Japan,Acura,Acura
+JALC,Japan,Isuzu,Isuzu
+JF1,Japan,Subaru (Fuji Heavy Industries),Subaru
+JF2,Japan,Subaru,Subaru
+JF3,Japan,Subaru,Subaru
+JF4,Japan,Subaru,Subaru
+JF5,Japan,Subaru,Subaru
+JF6,Japan,Subaru,Subaru
+JFE,Japan,Hino,Hino
+JH1,Japan,Honda,Honda
+JH2,Japan,Honda Motorcycle,Honda
+JH3,Japan,Honda Acty,Honda
+JH4,Japan,Honda (Acura),Acura
+JH5,Japan,Honda,Honda
+JHG,Japan,Honda,Honda
+JHL,Japan,Honda (HR-V CR-V),Honda
+JHM,Japan,Honda,Honda
+JHN,Japan,Honda,Honda
+JHZ,Japan,Honda,Honda
+JK,Japan,Kawasaki Heavy Industries,Kawasaki
+JKA,Japan,Kawasaki,Kawasaki
+JKB,Japan,Kawasaki,Kawasaki
+JL5,Japan,Mitsubishi Fuso,Mitsubishi Fuso
+JLA,Japan,Daihatsu,Daihatsu
+JM1,Japan,Mazda,Mazda
+JM3,Japan,Mazda,Mazda
+JM6,Japan,Mazda,Mazda
+JM7,Japan,Mazda,Mazda
+JMA,Japan,Mitsubishi,Mitsubishi
+JMB,Japan,Mitsubishi,Mitsubishi
+JMY,Japan,Mitsubishi,Mitsubishi
+JMZ,Japan,Mazda,Mazda
+JN1,Japan,Nissan (Datsun),Nissan
+JN3,Japan,Nissan,Nissan
+JN6,Japan,Nissan,Nissan
+JN8,Japan,Nissan,Nissan
+JNA,Japan,Nissan Diesel,Nissan
+JNK,Japan,Infiniti,Infiniti
+JNR,Japan,Infiniti,Infiniti
+JNX,Japan,Infiniti,Infiniti
+JS2,Japan,Suzuki,Suzuki
+JS3,Japan,Suzuki,Suzuki
+JS4,Japan,Suzuki,Suzuki
+JSA,Japan,Suzuki,Suzuki
+JSL,Japan,Suzuki,Suzuki
+JT1,Japan,Toyota,Toyota
+JT2,Japan,Toyota,Toyota
+JT3,Japan,Toyota,Toyota
+JT4,Japan,Toyota,Toyota
+JT5,Japan,Toyota,Toyota
+JT6,Japan,Toyota,Toyota
+JT7,Japan,Toyota,Toyota
+JT8,Japan,Lexus,Lexus
+JTD,Japan,Toyota,Toyota
+JTE,Japan,Toyota,Toyota
+JTG,Japan,Toyota,Toyota
+JTH,Japan,Lexus,Lexus
+JTJ,Japan,Lexus,Lexus
+JTK,Japan,Scion,Scion
+JTL,Japan,Toyota,Toyota
+JTM,Japan,Toyota,Toyota
+JTN,Japan,Toyota,Toyota
+JY3,Japan,Yamaha,Yamaha
+JYA,Japan,Yamaha,Yamaha
+# === SRI LANKA (K) ===
+# === SOUTH KOREA (K) ===
+KL,South Korea,GM Korea (Daewoo),Daewoo
+KLA,South Korea,Daewoo,Daewoo
+KLU,South Korea,Daewoo Bus,Daewoo
+KLY,South Korea,Daewoo Heavy,Daewoo
+KM1,South Korea,Hyosung,Hyosung
+KM4,South Korea,Hyundai,Hyundai
+KM8,South Korea,Hyundai,Hyundai
+KMC,South Korea,Hyundai,Hyundai
+KMF,South Korea,Hyundai,Hyundai
+KMH,South Korea,Hyundai,Hyundai
+KMJ,South Korea,Hyundai,Hyundai
+KMT,South Korea,Genesis,Genesis
+KMU,South Korea,Genesis,Genesis
+KMX,South Korea,Hyundai,Hyundai
+KMY,South Korea,Daelim Motor,Daelim
+KN,South Korea,Kia,Kia
+KNA,South Korea,Kia,Kia
+KNC,South Korea,Kia,Kia
+KND,South Korea,Kia,Kia
+KNE,South Korea,Kia,Kia
+KNF,South Korea,Kia,Kia
+KNH,South Korea,Kia,Kia
+KNJ,South Korea,Ford Korea,Ford
+KNM,South Korea,Renault Samsung,Renault
+KPA,South Korea,SsangYong,SsangYong
+KPB,South Korea,SsangYong,SsangYong
+KPH,South Korea,Mitsubishi Precis,Mitsubishi
+KPT,South Korea,SsangYong,SsangYong
+# === CHINA (L) ===
+L4A,China,FAW,FAW
+LAE,China,Jonway,Jonway
+LB1,China,Beijing Hyundai,Hyundai
+LB2,China,Geely,Geely
+LB3,China,Geely,Geely
+LBE,China,Beijing Hyundai,Hyundai
+LBP,China,QinGQI,QinGQI
+LBV,China,BMW Brilliance,BMW
+LCO,China,Chery,Chery
+LDC,China,Dongfeng Peugeot Citroen,Dongfeng
+LDD,China,Dandong Huanghai,Huanghai
+LDN,China,SouEast Motors,SouEast
+LDY,China,Zhongtong Bus,Zhongtong
+LE4,China,Beijing Benz,Mercedes-Benz
+LEW,China,FAW-VW,Volkswagen
+LFB,China,FAW,FAW
+LFG,China,Brilliance,Brilliance
+LFM,China,FAW Toyota,Toyota
+LFP,China,FAW Car Co,FAW
+LFT,China,FAW,FAW
+LFV,China,FAW-Volkswagen,Volkswagen
+LFW,China,FAW Jiefang,FAW
+LGB,China,Dong Feng Nissan,Nissan
+LGH,China,Qoros,Qoros
+LGW,China,Great Wall,Great Wall
+LGX,China,BYD,BYD
+LH1,China,FAW Haima,Haima
+LHB,China,Beijing Automotive Industry,BAIC
+LHG,China,GAC Honda,Honda
+LJC,China,JAC,JAC
+LJD,China,Dongfeng Yueda Kia,Kia
+LJM,China,Sunwin Bus,Sunwin
+LJR,China,Fujian Benz,Mercedes-Benz
+LJS,China,Yaxing Bus,Yaxing
+LJU,China,Shanghai Sunwin,Sunwin
+LJV,China,Sinotruk Chongqing,Sinotruk
+LJX,China,JMC (Jiangling Motors),JMC
+LJY,China,Yancheng Yueda,Yueda
+LK2,China,Anhui Ankai Automobile,Ankai
+LKG,China,Higer Bus,Higer
+LKH,China,Hafei,Hafei
+LKL,China,Suzhou King Long,King Long
+LL3,China,Lifan,Lifan
+LL6,China,Mitsubishi Soueast,Mitsubishi
+LL8,China,Lifan,Lifan
+LMC,China,SAIC-GM-Wuling,Wuling
+LMW,China,Wuling,Wuling
+LNB,China,BAIC,BAIC
+LND,China,JMC,JMC
+LPS,China,Polestar,Polestar
+LRB,China,Buick (SAIC-GM),Buick
+LRW,China,Tesla Shanghai,Tesla
+LSG,China,Shanghai GM,Buick
+LSH,China,SAIC-GM Wuling,Wuling
+LSJ,China,SAIC MG,MG
+LSV,China,SAIC Volkswagen,Volkswagen
+LSY,China,Brilliance Zhonghua,Brilliance
+LTV,China,FAW Toyota,Toyota
+LUC,China,Honda Auto China,Honda
+LUW,China,Shanghai Volkswagen,Volkswagen
+LV3,China,Ford China,Ford
+LV7,China,Roewe,Roewe
+LVA,China,Foton,Foton
+LVB,China,Foton,Foton
+LVC,China,Changan,Changan
+LVG,China,GAC,GAC
+LVH,China,Dongfeng Honda,Honda
+LVR,China,Volvo Cars China,Volvo
+LVS,China,Ford Changan,Ford
+LVV,China,Chery,Chery
+LVY,China,Volvo Cars China,Volvo
+LVZ,China,Dongfeng Sokon,DFSK
+LWV,China,GAC Toyota,Toyota
+LZG,China,Shaanxi Auto,Shacman
+LZM,China,MAN China,MAN
+LZP,China,Zhongshan Guochi,Guochi
+LZW,China,SAIC-GM Wuling,Wuling
+LZY,China,Yutong Bus,Yutong
+LZZ,China,Sinotruk,Sinotruk
+# === INDIA (M) ===
+MA1,India,Mahindra,Mahindra
+MA3,India,Maruti Suzuki,Maruti Suzuki
+MA6,India,GM India,Chevrolet
+MA7,India,Mitsubishi India,Mitsubishi
+MAB,India,Fiat India,Fiat
+MAC,India,Mahindra,Mahindra
+MAJ,India,Ford India,Ford
+MAK,India,Honda Cars India,Honda
+MAL,India,Hyundai India,Hyundai
+MAT,India,Tata Motors,Tata
+MB1,India,Ashok Leyland,Ashok Leyland
+MB8,India,Suzuki India,Suzuki
+MBH,India,Maruti Suzuki,Maruti Suzuki
+MBJ,India,Toyota Kirloskar,Toyota
+MBK,India,Volkswagen India,Volkswagen
+MBL,India,Hero MotoCorp,Hero
+MBR,India,Mercedes-Benz India,Mercedes-Benz
+MBV,India,Premier,Premier
+MBY,India,Asia Motor Works,AMW
+MC2,India,Volvo Eicher,Eicher
+MCA,India,Fiat India,Fiat
+MCB,India,GM India,GM
+MD2,India,Bajaj Auto,Bajaj
+MD9,India,Shuttle Cars,Shuttle
+MDH,India,Nissan India,Nissan
+MDT,India,Kerala Auto,Kerala
+MEE,India,Renault India,Renault
+MEX,India,Volkswagen India,Volkswagen
+MHF,India,Toyota Kirloskar,Toyota
+MHR,India,Honda Siel,Honda
+MHY,India,Daewoo Motors India,Daewoo
+# === INDONESIA (M) ===
+MHF,Indonesia,Toyota Astra,Toyota
+MHK,Indonesia,Daihatsu Astra,Daihatsu
+MHR,Indonesia,Honda Prospect,Honda
+MHY,Indonesia,Suzuki Indomobil,Suzuki
+MR0,Thailand,Toyota Thailand,Toyota
+MRH,Thailand,Honda Thailand,Honda
+MMA,Thailand,Mitsubishi Thailand,Mitsubishi
+MMB,Thailand,Mitsubishi Thailand,Mitsubishi
+MMC,Thailand,Mitsubishi Thailand,Mitsubishi
+MMM,Thailand,Chevrolet Thailand,Chevrolet
+MMS,Thailand,Suzuki Thailand,Suzuki
+MMT,Thailand,Mitsubishi Thailand,Mitsubishi
+MNB,Thailand,Ford Thailand,Ford
+MNT,Thailand,Nissan Thailand,Nissan
+MPA,Indonesia,Isuzu Indonesia,Isuzu
+MPB,Indonesia,Mazda Indonesia,Mazda
+MP1,Indonesia,Mitsubishi Indonesia,Mitsubishi
+MR0,Thailand,Toyota Motor Thailand,Toyota
+MS0,Myanmar,Myanmar Automobile,Various
+# === VIETNAM (R) ===
+RL0,Vietnam,Mekong Auto,Mekong
+RLU,Vietnam,Vinfast,Vinfast
+# === MALAYSIA (P) ===
+PE1,Philippines,Ford Philippines,Ford
+PE3,Philippines,Mazda Philippines,Mazda
+PK1,Malaysia,Naza,Naza
+PL1,Malaysia,Proton,Proton
+PM4,Malaysia,Perodua,Perodua
+PN1,Malaysia,Honda Malaysia,Honda
+PN4,Malaysia,Mitsubishi Malaysia,Mitsubishi
+# === UK (S) ===
+SAA,United Kingdom,Honda UK,Honda
+SAB,United Kingdom,Optare,Optare
+SAD,United Kingdom,Jaguar,Jaguar
+SAJ,United Kingdom,Jaguar,Jaguar
+SAL,United Kingdom,Land Rover,Land Rover
+SAR,United Kingdom,Rover Group,Rover
+SAT,United Kingdom,Triumph,Triumph
+SAV,United Kingdom,Vauxhall,Vauxhall
+SAX,United Kingdom,Austin Rover,Austin
+SB1,United Kingdom,Toyota UK,Toyota
+SBM,United Kingdom,McLaren,McLaren
+SCA,United Kingdom,Rolls-Royce,Rolls-Royce
+SCB,United Kingdom,Bentley,Bentley
+SCC,United Kingdom,Lotus,Lotus
+SCE,United Kingdom,DeLorean,DeLorean
+SCF,United Kingdom,Aston Martin,Aston Martin
+SCK,United Kingdom,iFor Williams,iFor Williams
+SDB,United Kingdom,Peugeot UK,Peugeot
+SFA,United Kingdom,Ford UK,Ford
+SFD,United Kingdom,Alexander Dennis,Alexander Dennis
+SHH,United Kingdom,Honda UK,Honda
+SHS,United Kingdom,Honda UK,Honda
+SJN,United Kingdom,Nissan UK,Nissan
+SUF,United Kingdom,Suzuki UK,Suzuki
+SUL,United Kingdom,LDV,LDV
+# === GERMANY (W) ===
+W04,Germany,Pontiac (GM Germany),Pontiac
+W09,Germany,RUF Automobile,RUF
+W0L,Germany,Opel,Opel
+W0S,Germany,Opel,Opel
+W0V,Germany,Opel,Opel
+W19,Germany,RUF Automobile,RUF
+W1K,Germany,Mercedes-Benz,Mercedes-Benz
+W1N,Germany,Mercedes-Benz (SUV),Mercedes-Benz
+W1V,Germany,Mercedes-Benz Vans,Mercedes-Benz
+W1X,Germany,Mercedes-Benz,Mercedes-Benz
+W1Y,Germany,Mercedes-Benz,Mercedes-Benz
+WA1,Germany,Audi (SUV),Audi
+WAU,Germany,Audi,Audi
+WAUZZZ,Germany,Audi,Audi
+WBA,Germany,BMW,BMW
+WBS,Germany,BMW M,BMW
+WBW,Germany,BMW,BMW
+WBX,Germany,BMW (SUV X-models US),BMW
+WBY,Germany,BMW i,BMW
+WDA,Germany,Daimler,Mercedes-Benz
+WDB,Germany,Mercedes-Benz,Mercedes-Benz
+WDC,Germany,Mercedes-Benz (SUV),Mercedes-Benz
+WDD,Germany,Mercedes-Benz,Mercedes-Benz
+WDF,Germany,Mercedes-Benz Vans,Mercedes-Benz
+WDR,Germany,Mercedes-Benz Truck,Mercedes-Benz
+WDX,Germany,Mercedes-Benz,Mercedes-Benz
+WDY,Germany,Mercedes-Benz,Mercedes-Benz
+WEB,Germany,EvoBus (Setra/Mercedes Bus),Mercedes-Benz
+WF0,Germany,Ford Germany,Ford
+WF1,Germany,Ford Germany,Ford
+WJM,Germany,Iveco Magirus,Iveco
+WJR,Germany,Smart,Smart
+WKE,Germany,Fendt,Fendt
+WKK,Germany,Kassbohrer,Setra
+WMA,Germany,MAN,MAN
+WME,Germany,Smart,Smart
+WMM,Germany,Mini (BMW),Mini
+WMW,Germany,Mini (BMW),Mini
+WMX,Germany,Mercedes-AMG,Mercedes-AMG
+WMZ,Germany,Mini,Mini
+WP0,Germany,Porsche,Porsche
+WP1,Germany,Porsche (SUV),Porsche
+WP2,Germany,Porsche,Porsche
+WSM,Germany,SMS-Demag,SMS
+WUA,Germany,Audi Sport (quattro GmbH),Audi
+WV1,Germany,Volkswagen Commercial,Volkswagen
+WV2,Germany,Volkswagen Bus/Van,Volkswagen
+WV3,Germany,Volkswagen Truck,Volkswagen
+WVG,Germany,Volkswagen (SUV),Volkswagen
+WVW,Germany,Volkswagen,Volkswagen
+WVZ,Germany,Volkswagen,Volkswagen
+# === LITHUANIA (X) ===
+XL9,Lithuania,Spyker,Spyker
+# === LUXEMBOURG (W/V) ===
+# === NETHERLANDS (X) ===
+XL9,Netherlands,Spyker,Spyker
+XLB,Netherlands,Volvo Cars Netherlands,Volvo
+XLE,Netherlands,Scania Netherlands,Scania
+XLR,Netherlands,DAF,DAF
+XMC,Netherlands,Mitsubishi Netherlands,Mitsubishi
+# === BELARUS (Y) ===
+Y3M,Belarus,MAZ,MAZ
+# === FINLAND (Y) ===
+YB1,Finland,Valmet,Valmet
+YH2,Finland,Sisu,Sisu
+# === MALTA (Y) ===
+# === SWEDEN (Y) ===
+YK1,Sweden,Saab,Saab
+YS2,Sweden,Scania,Scania
+YS3,Sweden,Saab,Saab
+YS4,Sweden,Saab,Saab
+YT9,Sweden,Koenigsegg,Koenigsegg
+YV1,Sweden,Volvo Cars,Volvo
+YV2,Sweden,Volvo Trucks,Volvo
+YV3,Sweden,Volvo Bus,Volvo
+YV4,Sweden,Volvo (XC US),Volvo
+# === NORWAY (Y) ===
+YU7,Norway,Think Nordic,Think
+# === BELGIUM (Y) ===
+YE2,Belgium,Van Hool,Van Hool
+# === BULGARIA (V) ===
+VBK,Bulgaria,Bulgar-Renault,Renault
+# === FRANCE (V) ===
+VF1,France,Renault,Renault
+VF2,France,Renault,Renault
+VF3,France,Peugeot,Peugeot
+VF4,France,Talbot,Talbot
+VF5,France,Iveco France,Iveco
+VF6,France,Renault Trucks,Renault
+VF7,France,Citroen,Citroen
+VF8,France,Matra,Matra
+VF9,France,Bugatti,Bugatti
+VFA,France,Alpine,Alpine
+VFE,France,Iveco Magirus France,Iveco
+VFK,France,Renault,Renault
+VG7,France,Panhard,Panhard
+VLU,France,Renault Trucks,Renault
+VN1,France,Mega,Mega
+VNE,France,Irisbus,Irisbus
+VNK,France,Toyota France,Toyota
+VNV,France,Renault-Nissan,Renault
+VR1,France,Renault Sport,Renault
+VR3,France,DS Automobiles,DS
+VR7,France,Citroen,Citroen
+VS5,Spain,Renault Spain,Renault
+VS6,Spain,Ford Spain,Ford
+VS7,Spain,Citroen Spain,Citroen
+VS9,Spain,Carrocerias Ayats,Ayats
+VSA,Spain,Mercedes-Benz Spain,Mercedes-Benz
+VSE,Spain,SEAT,SEAT
+VSK,Spain,Nissan Spain,Nissan
+VSS,Spain,SEAT,SEAT
+VSX,Spain,Opel Spain,Opel
+VSZ,Spain,Suzuki Santana,Santana
+VWA,Spain,Nissan Spain,Nissan
+VWV,Spain,Volkswagen Navarra,Volkswagen
+# === SWITZERLAND (V) ===
+VBH,Switzerland,Hess,Hess
+# === CZECH REPUBLIC (T) ===
+TMA,Czech Republic,Hyundai Czech,Hyundai
+TMB,Czech Republic,Skoda,Skoda
+TMK,Czech Republic,Karosa (Iveco Bus),Iveco
+TMP,Czech Republic,Skoda,Skoda
+TMT,Czech Republic,Tatra,Tatra
+TMV,Czech Republic,Skoda,Skoda
+TM9,Czech Republic,Skoda,Skoda
+TNE,Czech Republic,Avia,Avia
+# === HUNGARY (T) ===
+TRA,Hungary,Ikarus,Ikarus
+TRB,Hungary,Audi Hungaria (engines and some models),Audi
+TRU,Hungary,Audi Hungaria,Audi
+TSM,Hungary,Suzuki Hungary,Suzuki
+# === POLAND (S/T) ===
+SUL,Poland,FSO,FSO
+SUP,Poland,FSO Polonez,FSO
+SUS,Poland,FSO,FSO
+SUU,Poland,FSC Lublin,FSC
+SUX,Poland,Lublin,Lublin
+TF8,Slovakia,PSA Trnava,Peugeot
+TJB,Slovakia,Volkswagen Slovakia,Volkswagen
+TMP,Slovakia,Kia Motors Slovakia,Kia
+TMS,Slovakia,Tatra,Tatra
+TSE,Slovakia,Volkswagen Slovakia,Volkswagen
+# === ROMANIA (U) ===
+UU1,Romania,Dacia (Renault),Dacia
+UU3,Romania,ARO,ARO
+UU6,Romania,Daewoo Romania,Daewoo
+UU7,Romania,Ford Romania,Ford
+# === SLOVENIA (V) ===
+VV9,Slovenia,Revoz (Renault),Renault
+# === ESTONIA (Z) ===
+# === RUSSIA (X) ===
+X4X,Russia,BMW Russia (Avtotor),BMW
+X7L,Russia,Renault Russia (Avtoframos),Renault
+X7M,Russia,Hyundai Russia,Hyundai
+X9A,Russia,Avtotor,Avtotor
+X9F,Russia,Ford Russia,Ford
+X9L,Russia,Chevrolet Niva,Chevrolet
+XTA,Russia,Lada (AvtoVAZ),Lada
+XTC,Russia,KAMAZ,KAMAZ
+XTH,Russia,GAZ,GAZ
+XTT,Russia,UAZ,UAZ
+XTU,Russia,UAZ,UAZ
+XTY,Russia,GAZ-Volga,GAZ
+XU1,Russia,Avtoframos,Renault
+XUF,Russia,GM AvtoVAZ,Chevrolet
+XW0,Russia,Toyota Russia (St. Petersburg),Toyota
+XW7,Russia,Toyota Russia,Toyota
+XW8,Russia,Volkswagen Russia,Volkswagen
+XWB,Russia,Daewoo Uz,Daewoo
+XWE,Russia,Hyundai Russia,Hyundai
+XWF,Russia,GM Uz,Chevrolet
+# === TURKEY (N) ===
+NLA,Turkey,Honda Turkey,Honda
+NLE,Turkey,Mercedes-Benz Turkey,Mercedes-Benz
+NLH,Turkey,Hyundai Assan,Hyundai
+NLN,Turkey,Karsan,Karsan
+NLR,Turkey,Otoyol (Iveco),Iveco
+NLT,Turkey,Temsa,Temsa
+NM0,Turkey,Ford Otosan,Ford
+NM4,Turkey,Tofas (Fiat),Fiat
+NMB,Turkey,Mercedes-Benz Turk,Mercedes-Benz
+NMC,Turkey,BMC,BMC
+NMT,Turkey,Toyota Turkey,Toyota
+NNA,Turkey,Tofas-Fiat,Fiat
+# === ITALY (Z) ===
+ZA9,Italy,Lamborghini,Lamborghini
+ZAA,Italy,Autobianchi,Autobianchi
+ZAM,Italy,Maserati,Maserati
+ZAP,Italy,Piaggio,Piaggio
+ZAR,Italy,Alfa Romeo,Alfa Romeo
+ZBN,Italy,Innocenti,Innocenti
+ZCF,Italy,Iveco,Iveco
+ZCG,Italy,Cagiva,Cagiva
+ZD0,Italy,Yamaha Italy,Yamaha
+ZD3,Italy,Beta Motor,Beta
+ZD4,Italy,Aprilia,Aprilia
+ZDC,Italy,Honda Italy,Honda
+ZDF,Italy,Ferrari Dino,Ferrari
+ZDM,Italy,Ducati,Ducati
+ZDS,Italy,Beneli,Beneli
+ZDT,Italy,Husqvarna Italy,Husqvarna
+ZDU,Italy,Ducati,Ducati
+ZD3,Italy,Bertone,Bertone
+ZD4,Italy,Aprilia,Aprilia
+ZD7,Italy,Iveco-Magirus,Iveco
+ZEK,Italy,Lancia,Lancia
+ZFA,Italy,Fiat,Fiat
+ZFC,Italy,Fiat Commercial,Fiat
+ZFF,Italy,Ferrari,Ferrari
+ZGA,Italy,Iveco-Fiat,Iveco
+ZHW,Italy,Lamborghini,Lamborghini
+ZLA,Italy,Lancia,Lancia
+ZN6,Italy,Toyota (GR86 / Italy),Toyota
+# === MEXICO (3) ===
+3AK,Mexico,Freightliner Mexico,Freightliner
+3C4,Mexico,Chrysler Mexico,Chrysler
+3C6,Mexico,Ram Mexico,Ram
+3C8,Mexico,Chrysler Mexico,Chrysler
+3D3,Mexico,Dodge Mexico,Dodge
+3D4,Mexico,Dodge Mexico,Dodge
+3D7,Mexico,Dodge Mexico,Dodge
+3FA,Mexico,Ford Mexico,Ford
+3FE,Mexico,Ford Mexico,Ford
+3FN,Mexico,Ford Mexico,Ford
+3FR,Mexico,Ford Mexico,Ford
+3FT,Mexico,Ford Trucks Mexico,Ford
+3G,Mexico,General Motors Mexico,GM
+3G1,Mexico,Chevrolet Mexico,Chevrolet
+3G3,Mexico,Pontiac Mexico,Pontiac
+3G4,Mexico,Buick Mexico,Buick
+3G5,Mexico,Buick Mexico,Buick
+3G6,Mexico,Cadillac Mexico,Cadillac
+3G7,Mexico,Pontiac Mexico,Pontiac
+3GA,Mexico,Chevrolet Mexico,Chevrolet
+3GB,Mexico,GMC Mexico,GMC
+3GC,Mexico,Chevrolet Trucks Mexico,Chevrolet
+3GK,Mexico,GMC SUV Mexico,GMC
+3GN,Mexico,Chevrolet SUV Mexico,Chevrolet
+3GT,Mexico,GMC Trucks Mexico,GMC
+3GY,Mexico,Cadillac Mexico,Cadillac
+3HG,Mexico,Honda Mexico,Honda
+3HM,Mexico,Honda Mexico,Honda
+3KP,Mexico,Kia Mexico,Kia
+3MV,Mexico,Mazda Mexico,Mazda
+3MZ,Mexico,Mazda Mexico,Mazda
+3N1,Mexico,Nissan Mexico,Nissan
+3N6,Mexico,Nissan Mexico,Nissan
+3N8,Mexico,Nissan Mexico,Nissan
+3VV,Mexico,Volkswagen Mexico,Volkswagen
+3VW,Mexico,Volkswagen Mexico,Volkswagen
+# === COSTA RICA / GUATEMALA / HONDURAS / EL SALVADOR (4-9 various) ===
+# === USA (1, 4, 5) ===
+1B3,USA,Dodge,Dodge
+1B4,USA,Dodge,Dodge
+1B7,USA,Dodge Truck,Dodge
+1C3,USA,Chrysler,Chrysler
+1C4,USA,Chrysler/Jeep,Jeep
+1C6,USA,Ram Truck,Ram
+1C8,USA,Chrysler,Chrysler
+1D3,USA,Dodge,Dodge
+1D4,USA,Dodge,Dodge
+1D7,USA,Dodge,Dodge
+1D8,USA,Dodge,Dodge
+1F0,USA,Ford,Ford
+1F1,USA,Ford,Ford
+1F2,USA,Ford,Ford
+1FA,USA,Ford,Ford
+1FB,USA,Ford,Ford
+1FC,USA,Ford,Ford
+1FD,USA,Ford Trucks,Ford
+1FM,USA,Ford SUV,Ford
+1FN,USA,Ford,Ford
+1FT,USA,Ford Trucks,Ford
+1FU,USA,Freightliner,Freightliner
+1FV,USA,Freightliner,Freightliner
+1G,USA,General Motors,GM
+1G1,USA,Chevrolet,Chevrolet
+1G2,USA,Pontiac,Pontiac
+1G3,USA,Oldsmobile,Oldsmobile
+1G4,USA,Buick,Buick
+1G6,USA,Cadillac,Cadillac
+1G8,USA,Saturn,Saturn
+1GB,USA,Chevrolet Trucks,Chevrolet
+1GC,USA,Chevrolet Trucks,Chevrolet
+1GD,USA,GMC Trucks,GMC
+1GG,USA,Pontiac (Mid-size),Pontiac
+1GJ,USA,Chevrolet,Chevrolet
+1GK,USA,GMC SUV,GMC
+1GM,USA,Pontiac,Pontiac
+1GN,USA,Chevrolet SUV,Chevrolet
+1GP,USA,Plymouth,Plymouth
+1GT,USA,GMC Trucks,GMC
+1GY,USA,Cadillac SUV,Cadillac
+1H,USA,Honda USA,Honda
+1HD,USA,Harley-Davidson,Harley-Davidson
+1HG,USA,Honda USA,Honda
+1J4,USA,Jeep,Jeep
+1J8,USA,Jeep,Jeep
+1L,USA,Lincoln,Lincoln
+1LJ,USA,Lincoln,Lincoln
+1LN,USA,Lincoln,Lincoln
+1M,USA,Mercury,Mercury
+1ME,USA,Mercury,Mercury
+1N,USA,Nissan USA,Nissan
+1N4,USA,Nissan USA,Nissan
+1N6,USA,Nissan USA,Nissan
+1NX,USA,NUMMI (Toyota/GM),Toyota
+1P3,USA,Plymouth,Plymouth
+1R9,USA,Roush Performance,Roush
+1RL,USA,Roush,Roush
+1VW,USA,Volkswagen Chattanooga,Volkswagen
+1XK,USA,Kenworth,Kenworth
+1XP,USA,Peterbilt,Peterbilt
+1YV,USA,Mazda (AutoAlliance USA),Mazda
+1ZV,USA,Mercury (AutoAlliance/Mustang),Mercury
+2B3,Canada,Dodge Canada,Dodge
+2B4,Canada,Dodge Canada,Dodge
+2B7,Canada,Dodge Canada,Dodge
+2C3,Canada,Chrysler Canada,Chrysler
+2C4,Canada,Chrysler/Dodge Canada,Chrysler
+2CN,Canada,CAMI (GM-Suzuki),CAMI
+2D3,Canada,Dodge Canada,Dodge
+2D4,Canada,Dodge Canada,Dodge
+2D7,Canada,Dodge Canada,Dodge
+2D8,Canada,Dodge Canada,Dodge
+2FA,Canada,Ford Canada,Ford
+2FM,Canada,Ford Canada SUV,Ford
+2FT,Canada,Ford Canada Trucks,Ford
+2G,Canada,General Motors Canada,GM
+2G1,Canada,Chevrolet Canada,Chevrolet
+2G2,Canada,Pontiac Canada,Pontiac
+2G3,Canada,Oldsmobile Canada,Oldsmobile
+2G4,Canada,Buick Canada,Buick
+2G6,Canada,Cadillac Canada,Cadillac
+2HG,Canada,Honda Canada,Honda
+2HH,Canada,Acura Canada,Acura
+2HJ,Canada,Honda Canada Trucks,Honda
+2HK,Canada,Honda Canada,Honda
+2HM,Canada,Hyundai Canada,Hyundai
+2HN,Canada,Acura Canada,Acura
+2T,Canada,Toyota Canada,Toyota
+2T1,Canada,Toyota Canada,Toyota
+2T2,Canada,Lexus Canada,Lexus
+2T3,Canada,Toyota Canada,Toyota
+2V4,Canada,Volkswagen Canada,Volkswagen
+2V8,Canada,Volkswagen Canada,Volkswagen
+2WK,Canada,Western Star,Western Star
+2WL,Canada,Western Star,Western Star
+4F,USA,Mazda USA,Mazda
+4F2,USA,Mazda USA,Mazda
+4F4,USA,Mazda USA,Mazda
+4JG,USA,Mercedes-Benz USA (Tuscaloosa),Mercedes-Benz
+4M,USA,Mercury,Mercury
+4S,USA,Subaru-Isuzu (SIA),Subaru
+4S2,USA,Isuzu USA,Isuzu
+4S3,USA,Subaru USA,Subaru
+4S4,USA,Subaru USA,Subaru
+4S6,USA,Honda USA,Honda
+4T,USA,Toyota USA,Toyota
+4T1,USA,Toyota USA,Toyota
+4T3,USA,Toyota USA,Toyota
+4T4,USA,Toyota USA,Toyota
+4US,USA,BMW USA (Spartanburg),BMW
+4UZ,USA,Frt-Sterling,Sterling
+4V,USA,Volvo Trucks USA,Volvo
+4V1,USA,Volvo Bus USA,Volvo
+4V2,USA,Volvo Trucks USA,Volvo
+4V4,USA,Volvo Trucks USA,Volvo
+4V5,USA,Volvo Trucks USA,Volvo
+55,USA,Toyota USA,Toyota
+5F,USA,Honda USA,Honda
+5FN,USA,Honda USA (Pilot/Odyssey),Honda
+5FP,USA,Honda USA,Honda
+5J6,USA,Honda USA,Honda
+5J8,USA,Acura USA,Acura
+5L,USA,Lincoln,Lincoln
+5LM,USA,Lincoln (SUV),Lincoln
+5LT,USA,Lincoln Trucks,Lincoln
+5N1,USA,Nissan USA,Nissan
+5N3,USA,Infiniti USA,Infiniti
+5NM,USA,Hyundai USA,Hyundai
+5NP,USA,Hyundai USA,Hyundai
+5T,USA,Toyota USA,Toyota
+5TB,USA,Toyota USA,Toyota
+5TD,USA,Toyota USA,Toyota
+5TE,USA,Toyota USA,Toyota
+5TF,USA,Toyota USA (Tacoma/Tundra),Toyota
+5UM,USA,BMW USA,BMW
+5UX,USA,BMW USA (X-models),BMW
+5XX,USA,Kia USA,Kia
+5XY,USA,Hyundai USA SUV,Hyundai
+5YJ,USA,Tesla,Tesla
+# === BRAZIL (9) ===
+8AC,Argentina,Mercedes-Benz Argentina,Mercedes-Benz
+8AD,Argentina,Peugeot Argentina,Peugeot
+8AF,Argentina,Ford Argentina,Ford
+8AG,Argentina,Chevrolet Argentina,Chevrolet
+8AJ,Argentina,Toyota Argentina,Toyota
+8AK,Argentina,Suzuki Argentina,Suzuki
+8AP,Argentina,Fiat Argentina,Fiat
+8AW,Argentina,Volkswagen Argentina,Volkswagen
+8GG,Chile,Chevrolet Chile,Chevrolet
+8LD,Chile,Renault Chile,Renault
+93H,Brazil,Honda Brazil,Honda
+93R,Brazil,Toyota Brazil,Toyota
+93U,Brazil,Audi Brazil,Audi
+93V,Brazil,Audi Brazil,Audi
+93W,Brazil,Audi Brazil,Audi
+93X,Brazil,Mitsubishi Brazil,Mitsubishi
+93Y,Brazil,Renault Brazil,Renault
+93Z,Brazil,Fiat Brazil,Fiat
+935,Brazil,Volkswagen Trucks Brazil,Volkswagen
+936,Brazil,Peugeot Brazil,Peugeot
+937,Brazil,Citroen Brazil,Citroen
+94D,Brazil,Nissan Brazil,Nissan
+953,Brazil,Iveco Brazil,Iveco
+9BD,Brazil,Fiat Brazil,Fiat
+9BF,Brazil,Ford Brazil,Ford
+9BG,Brazil,General Motors Brazil,Chevrolet
+9BH,Brazil,Hyundai Brazil,Hyundai
+9BM,Brazil,Mercedes-Benz Brazil,Mercedes-Benz
+9BR,Brazil,Toyota Brazil,Toyota
+9BS,Brazil,Scania Brazil,Scania
+9BV,Brazil,Volvo Brazil,Volvo
+9BW,Brazil,Volkswagen Brazil,Volkswagen
+9C2,Brazil,Honda Motorcycle Brazil,Honda
+9C6,Brazil,Yamaha Motorcycle Brazil,Yamaha
+9FB,Brazil,Renault Brazil,Renault
+# === AUSTRALIA (6) ===
+6F4,Australia,Nissan Motors Australia,Nissan
+6F5,Australia,Ford Australia,Ford
+6FP,Australia,Ford Australia,Ford
+6G1,Australia,Holden,Holden
+6G2,Australia,Pontiac/HSV Australia,HSV
+6H8,Australia,Holden,Holden
+6MM,Australia,Mitsubishi Motors Australia,Mitsubishi
+6T1,Australia,Toyota Australia,Toyota
+# === NEW ZEALAND (7) ===
+7A0,New Zealand,Toyota New Zealand,Toyota
+7A3,New Zealand,Honda New Zealand,Honda
+7A4,New Zealand,Mitsubishi New Zealand,Mitsubishi
+7A8,New Zealand,Nissan New Zealand,Nissan

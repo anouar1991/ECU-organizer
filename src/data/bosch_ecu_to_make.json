@@ -1,0 +1,777 @@
+{
+  "source": "typhoniks/Bosch-ECU-Pinout",
+  "scrapedAt": "2026-05-11T13:04:12.187Z",
+  "count": 110,
+  "ecus": [
+    {
+      "family": "EDC17",
+      "variant": "C06",
+      "model": "EDC17C06",
+      "makes": ["BMW"],
+      "source_dir": "Bosch EDC 17C06 - DDE 70 (BMW)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C08",
+      "model": "EDC17C08",
+      "makes": ["Hyundai"],
+      "source_dir": "Bosch EDC 17C08 (Hyundai)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C08",
+      "model": "EDC17C08",
+      "makes": ["Kia"],
+      "source_dir": "Bosch EDC 17C08 (Kia)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C10",
+      "model": "EDC17C10",
+      "makes": ["Citroen"],
+      "source_dir": "Bosch EDC 17C10 (Citroen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C11",
+      "model": "EDC17C11",
+      "makes": ["Renault"],
+      "source_dir": "Bosch EDC 17C11 (Renault)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C18",
+      "model": "EDC17C18",
+      "makes": ["Chevrolet"],
+      "source_dir": "Bosch EDC 17C18 (Chevrolet)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C18",
+      "model": "EDC17C18",
+      "makes": ["Holden"],
+      "source_dir": "Bosch EDC 17C18 (Holden)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C18",
+      "model": "EDC17C18",
+      "makes": ["Opel"],
+      "source_dir": "Bosch EDC 17C18 (Opel)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C18",
+      "model": "EDC17C18",
+      "makes": ["Vauxhall"],
+      "source_dir": "Bosch EDC 17C18 (Vauxhall)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C19",
+      "model": "EDC17C19",
+      "makes": ["Holden"],
+      "source_dir": "Bosch EDC 17C19 (Holden)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C19",
+      "model": "EDC17C19",
+      "makes": ["Opel"],
+      "source_dir": "Bosch EDC 17C19 (Opel)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C19",
+      "model": "EDC17C19",
+      "makes": ["Vauxhall"],
+      "source_dir": "Bosch EDC 17C19 (Vauxhall)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C41",
+      "model": "EDC17C41",
+      "makes": ["BMW"],
+      "source_dir": "Bosch EDC 17C41 - DDE 721 (BMW)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C41",
+      "model": "EDC17C41",
+      "makes": ["Mini"],
+      "source_dir": "Bosch EDC 17C41 - DDE 721 (Mini)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C42",
+      "model": "EDC17C42",
+      "makes": ["Holden"],
+      "source_dir": "Bosch EDC 17C42 (Holden)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C42",
+      "model": "EDC17C42",
+      "makes": ["Opel"],
+      "source_dir": "Bosch EDC 17C42 (Opel)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C42",
+      "model": "EDC17C42",
+      "makes": ["Vauxhall"],
+      "source_dir": "Bosch EDC 17C42 (Vauxhall)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C46",
+      "model": "EDC17C46",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17C46 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C46",
+      "model": "EDC17C46",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17C46 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C46",
+      "model": "EDC17C46",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17C46 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C46",
+      "model": "EDC17C46",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17C46 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C49",
+      "model": "EDC17C49",
+      "makes": ["Alfa Romeo"],
+      "source_dir": "Bosch EDC 17C49 (Alfa Romeo)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C49",
+      "model": "EDC17C49",
+      "makes": ["Fiat"],
+      "source_dir": "Bosch EDC 17C49 (Fiat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C49",
+      "model": "EDC17C49",
+      "makes": ["Lancia"],
+      "source_dir": "Bosch EDC 17C49 (Lancia)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C54",
+      "model": "EDC17C54",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17C54 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C54",
+      "model": "EDC17C54",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17C54 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C54",
+      "model": "EDC17C54",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17C54 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C54",
+      "model": "EDC17C54",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17C54 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "C59",
+      "model": "EDC17C59",
+      "makes": ["Opel"],
+      "source_dir": "Bosch EDC 17C59 (Opel)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP01",
+      "model": "EDC17CP01",
+      "makes": ["AMG"],
+      "source_dir": "Bosch EDC 17CP01 (AMG)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP01",
+      "model": "EDC17CP01",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch EDC 17CP01 (Mercedes Benz)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP02",
+      "model": "EDC17CP02",
+      "makes": ["BMW"],
+      "source_dir": "Bosch EDC 17CP02 - DDE 71 (BMW)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP04",
+      "model": "EDC17CP04",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17CP04 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP04",
+      "model": "EDC17CP04",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17CP04 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP04",
+      "model": "EDC17CP04",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17CP04 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP04",
+      "model": "EDC17CP04",
+      "makes": ["Vokswagen"],
+      "source_dir": "Bosch EDC 17CP04 (Vokswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP06",
+      "model": "EDC17CP06",
+      "makes": ["Honda"],
+      "source_dir": "Bosch EDC 17CP06 (Honda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP07",
+      "model": "EDC17CP07",
+      "makes": ["Toyota"],
+      "source_dir": "Bosch EDC 17CP07 (Toyota)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP09",
+      "model": "EDC17CP09",
+      "makes": ["BMW"],
+      "source_dir": "Bosch EDC 17CP09 - DDE 73 (BMW)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP10",
+      "model": "EDC17CP10",
+      "makes": ["AMG"],
+      "source_dir": "Bosch EDC 17CP10 (AMG)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP10",
+      "model": "EDC17CP10",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch EDC 17CP10 (Mercedes Benz)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP11",
+      "model": "EDC17CP11",
+      "makes": ["Citroen"],
+      "source_dir": "Bosch EDC 17CP11 (Citroen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP11",
+      "model": "EDC17CP11",
+      "makes": ["Range Rover"],
+      "source_dir": "Bosch EDC 17CP11 (Range Rover)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17CP14 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Hyundai"],
+      "source_dir": "Bosch EDC 17CP14 (Hyundai)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Kia"],
+      "source_dir": "Bosch EDC 17CP14 (Kia)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Porsche"],
+      "source_dir": "Bosch EDC 17CP14 (Porsche)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17CP14 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17CP14 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP14",
+      "model": "EDC17CP14",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17CP14 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP16",
+      "model": "EDC17CP16",
+      "makes": ["Honda"],
+      "source_dir": "Bosch EDC 17CP16 (Honda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP20",
+      "model": "EDC17CP20",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17CP20 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP20",
+      "model": "EDC17CP20",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17CP20 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP20",
+      "model": "EDC17CP20",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17CP20 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP20",
+      "model": "EDC17CP20",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17CP20 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP22",
+      "model": "EDC17CP22",
+      "makes": ["Volvo"],
+      "source_dir": "Bosch EDC 17CP22 (Volvo)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP24",
+      "model": "EDC17CP24",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17CP24 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP24",
+      "model": "EDC17CP24",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17CP24 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP24",
+      "model": "EDC17CP24",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17CP24 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP24",
+      "model": "EDC17CP24",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17CP24 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP27",
+      "model": "EDC17CP27",
+      "makes": ["Jeep"],
+      "source_dir": "Bosch EDC 17CP27 (Jeep)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP42",
+      "model": "EDC17CP42",
+      "makes": ["Range Rover"],
+      "source_dir": "Bosch EDC 17CP42 (Range Rover)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP44",
+      "model": "EDC17CP44",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17CP44 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP44",
+      "model": "EDC17CP44",
+      "makes": ["Porsche"],
+      "source_dir": "Bosch EDC 17CP44 (Porsche)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP44",
+      "model": "EDC17CP44",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17CP44 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP44",
+      "model": "EDC17CP44",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17CP44 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP44",
+      "model": "EDC17CP44",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17CP44 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP45",
+      "model": "EDC17CP45",
+      "makes": ["Mini"],
+      "source_dir": "Bosch EDC 17CP45 - DDE 731 (Mini)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP46",
+      "model": "EDC17CP46",
+      "makes": ["AMG"],
+      "source_dir": "Bosch EDC 17CP46 (AMG)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP46",
+      "model": "EDC17CP46",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch EDC 17CP46 (Mercedes Benz)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP48",
+      "model": "EDC17CP48",
+      "makes": ["Volvo"],
+      "source_dir": "Bosch EDC 17CP48 (Volvo)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP50",
+      "model": "EDC17CP50",
+      "makes": ["Honda"],
+      "source_dir": "Bosch EDC 17CP50 (Honda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "CP52",
+      "model": "EDC17CP52",
+      "makes": ["Iveco"],
+      "source_dir": "Bosch EDC 17CP52 (Iveco)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U01",
+      "model": "EDC17U01",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17U01 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U01",
+      "model": "EDC17U01",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17U01 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U01",
+      "model": "EDC17U01",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17U01 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U01",
+      "model": "EDC17U01",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17U01 (Volkswagen)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U05",
+      "model": "EDC17U05",
+      "makes": ["Audi"],
+      "source_dir": "Bosch EDC 17U05 (Audi)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U05",
+      "model": "EDC17U05",
+      "makes": ["Seat"],
+      "source_dir": "Bosch EDC 17U05 (Seat)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U05",
+      "model": "EDC17U05",
+      "makes": ["Skoda"],
+      "source_dir": "Bosch EDC 17U05 (Skoda)"
+    },
+    {
+      "family": "EDC17",
+      "variant": "U05",
+      "model": "EDC17U05",
+      "makes": ["Volkswagen"],
+      "source_dir": "Bosch EDC 17U05 (Volkswagen)"
+    },
+    {
+      "family": "EDC7",
+      "variant": "",
+      "model": "EDC7",
+      "makes": ["DAF Truck"],
+      "source_dir": "Bosch EDC 7 (DAF Truck)"
+    },
+    {
+      "family": "EDC7",
+      "variant": "",
+      "model": "EDC7",
+      "makes": ["Iveco Truck"],
+      "source_dir": "Bosch EDC 7 (Iveco Truck)"
+    },
+    {
+      "family": "EDC7",
+      "variant": "",
+      "model": "EDC7",
+      "makes": ["MAN Truck"],
+      "source_dir": "Bosch EDC 7 (MAN Truck)"
+    },
+    {
+      "family": "EDC7",
+      "variant": "C1",
+      "model": "EDC7C1",
+      "makes": ["Volvo Penta"],
+      "source_dir": "Bosch EDC 7C1 (Volvo Penta)"
+    },
+    {
+      "family": "M",
+      "variant": "1.5.5",
+      "model": "M1.5.5",
+      "makes": ["Alfa Romeo"],
+      "source_dir": "Bosch M 1.5.5 (Alfa Romeo)"
+    },
+    {
+      "family": "M",
+      "variant": "5.2",
+      "model": "M5.2",
+      "makes": ["BMW"],
+      "source_dir": "Bosch M 5.2 (BMW)"
+    },
+    {
+      "family": "M",
+      "variant": "5.2.1",
+      "model": "M5.2.1",
+      "makes": ["BMW"],
+      "source_dir": "Bosch M 5.2.1 (BMW)"
+    },
+    {
+      "family": "ME",
+      "variant": "1.5.5",
+      "model": "ME1.5.5",
+      "makes": ["Holden"],
+      "source_dir": "Bosch ME 1.5.5 (Holden)"
+    },
+    {
+      "family": "ME",
+      "variant": "1.5.5",
+      "model": "ME1.5.5",
+      "makes": ["Opel"],
+      "source_dir": "Bosch ME 1.5.5 (Opel)"
+    },
+    {
+      "family": "ME",
+      "variant": "1.5.5",
+      "model": "ME1.5.5",
+      "makes": ["Vauxhall"],
+      "source_dir": "Bosch ME 1.5.5 (Vauxhall)"
+    },
+    {
+      "family": "ME",
+      "variant": "17.8.42",
+      "model": "ME17.8.42",
+      "makes": ["KTM"],
+      "source_dir": "Bosch ME 17.8.42 (KTM)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.0",
+      "model": "ME2.0",
+      "makes": ["AMG"],
+      "source_dir": "Bosch ME 2.0 (AMG)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.0",
+      "model": "ME2.0",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch ME 2.0 (Mercedes Benz)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.1",
+      "model": "ME2.1",
+      "makes": ["AMG"],
+      "source_dir": "Bosch ME 2.1 (AMG)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.1",
+      "model": "ME2.1",
+      "makes": ["Alfa Romeo"],
+      "source_dir": "Bosch ME 2.1 (Alfa Romeo)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.1",
+      "model": "ME2.1",
+      "makes": ["Fiat"],
+      "source_dir": "Bosch ME 2.1 (Fiat)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.1",
+      "model": "ME2.1",
+      "makes": ["Lancia"],
+      "source_dir": "Bosch ME 2.1 (Lancia)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.1",
+      "model": "ME2.1",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch ME 2.1 (Mercedes Benz)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.7",
+      "model": "ME2.7",
+      "makes": ["Maybach"],
+      "source_dir": "Bosch ME 2.7 (Maybach)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.7",
+      "model": "ME2.7",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch ME 2.7 (Mercedes Benz)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.7.1",
+      "model": "ME2.7.1",
+      "makes": ["AMG"],
+      "source_dir": "Bosch ME 2.7.1 (AMG)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.7.1",
+      "model": "ME2.7.1",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch ME 2.7.1 (Mercedes Benz)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.7.2",
+      "model": "ME2.7.2",
+      "makes": ["AMG"],
+      "source_dir": "Bosch ME 2.7.2 (AMG)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.7.2",
+      "model": "ME2.7.2",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch ME 2.7.2 (Mercedes Benz)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.8",
+      "model": "ME2.8",
+      "makes": ["AMG"],
+      "source_dir": "Bosch ME 2.8 (AMG)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.8",
+      "model": "ME2.8",
+      "makes": ["Mc Laren"],
+      "source_dir": "Bosch ME 2.8 (Mc Laren)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.8",
+      "model": "ME2.8",
+      "makes": ["Mercedes Benz"],
+      "source_dir": "Bosch ME 2.8 (Mercedes Benz)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.8.1",
+      "model": "ME2.8.1",
+      "makes": ["Chrysler"],
+      "source_dir": "Bosch ME 2.8.1 (Chrysler)"
+    },
+    {
+      "family": "ME",
+      "variant": "2.8.1",
+      "model": "ME2.8.1",
+      "makes": ["Jeep"],
+      "source_dir": "Bosch ME 2.8.1 (Jeep)"
+    }
+  ]
+}

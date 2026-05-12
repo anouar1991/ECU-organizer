@@ -1,0 +1,14 @@
+{
+  "manifest_version": 1,
+  "generated_at": "2026-05-11T00:00:00Z",
+  "files": {
+    "bosch_ecu_to_make.json": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "vag_prefix.json": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "bosch_prefix.json": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "wmi.csv": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "medc17_block_types.json": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "me7_regions.json": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "vag_edc_signatures.json": { "version": "2026-05-11.1", "sha256": null, "url": null },
+    "dtc.db": { "version": "2026-05-11.1", "sha256": null, "url": null }
+  }
+}

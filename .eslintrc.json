@@ -1,0 +1,40 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2022": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "script"
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "warn",
+    "no-console": "off",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "no-empty": ["warn", { "allowEmptyCatch": true }],
+    "no-useless-escape": "warn",
+    "no-control-regex": "off",
+    "semi": ["error", "always"],
+    "quotes": ["warn", "single", { "avoidEscape": true, "allowTemplateLiterals": true }]
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.js", "vitest.config.js"],
+      "globals": {
+        "describe": "readonly",
+        "it": "readonly",
+        "expect": "readonly",
+        "beforeAll": "readonly",
+        "afterAll": "readonly",
+        "beforeEach": "readonly",
+        "afterEach": "readonly",
+        "vi": "readonly",
+        "test": "readonly"
+      }
+    }
+  ]
+}

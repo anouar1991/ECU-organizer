@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
+    "esModuleInterop": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["src/main/**/*.js"],
+  "exclude": ["node_modules", "dist", "src/renderer", "tests"]
+}
