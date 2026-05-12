@@ -30,7 +30,10 @@
     "binary",
     "electron"
   ],
-  "author": "ECU File Skinner Pro",
+  "author": {
+    "name": "anouar1991",
+    "email": "anouar1991@users.noreply.github.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@electron/rebuild": "^4.0.4",
