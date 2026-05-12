@@ -161,6 +161,34 @@ npm run build:win     # installateur NSIS dans dist/ (nécessite wine sous Linux
 npm run build:mac     # DMG dans dist/ (uniquement sur Mac)
 ```
 
+#### Compilation croisée Windows depuis Linux
+
+`electron-builder` recompile `better-sqlite3` pour la **plateforme hôte**,
+pas pour la cible. Compiler `--win` depuis Linux embarque donc une
+bibliothèque `.so` Linux dans l'installateur Windows et l'application ne
+s'ouvre jamais (le processus principal jette une erreur win32 au chargement
+du module natif).
+
+Pour produire un installateur Windows fonctionnel depuis Linux :
+
+```bash
+# 1) Récupérer le binaire Windows pré-compilé de better-sqlite3
+cd node_modules/better-sqlite3
+npx prebuild-install --runtime=electron --target=33.4.11 \
+                     --platform=win32 --arch=x64 --tag-prefix=v
+cd ../..
+
+# 2) Compiler en désactivant la recompilation des dépendances
+npx electron-builder --win --config.npmRebuild=false --publish never
+
+# 3) Vérifier que le binaire embarqué est bien un PE Windows
+file dist/win-unpacked/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/better_sqlite3.node
+# attendu : PE32+ executable (DLL) (GUI) x86-64, for MS Windows
+
+# 4) Restaurer le binaire Linux pour continuer à travailler localement
+npm rebuild better-sqlite3        # ou : npx electron-rebuild -f -w better-sqlite3
+```
+
 ---
 
 ## Tests
