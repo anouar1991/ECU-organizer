@@ -325,6 +325,18 @@ window.App = window.App || {};
 
   /* ---------- open / close ---------- */
 
+  // Document-level capture handler so Escape always closes the palette while
+  // it's open, even if focus has drifted off the input (a previous spec
+  // intermittently failed because Ctrl+K opened the palette but focus didn't
+  // make it back to the input before Escape was pressed).
+  function onDocEscape(e) {
+    if (e.key === 'Escape' && isOpen) {
+      e.preventDefault();
+      e.stopPropagation();
+      close();
+    }
+  }
+
   async function open() {
     if (!overlay) overlay = document.getElementById('cmd-palette-overlay');
     if (!overlay) return;
@@ -347,6 +359,7 @@ window.App = window.App || {};
     isOpen = true;
     inputEl.value = '';
     renderResults('');
+    document.addEventListener('keydown', onDocEscape, true);
     setTimeout(() => inputEl.focus(), 20);
   }
 
@@ -354,6 +367,7 @@ window.App = window.App || {};
     if (!overlay) return;
     overlay.classList.remove('is-visible');
     isOpen = false;
+    document.removeEventListener('keydown', onDocEscape, true);
     setTimeout(() => {
       overlay.hidden = true;
     }, 160);

@@ -164,4 +164,41 @@ describe('ecu-parser', () => {
     expect(isNoisePatternLocal('1111111111')).toBe(true);
     expect(isNoisePatternLocal('1037537721')).toBe(false);
   });
+
+  // Regression: a binary that matches NONE of the known manufacturer / brand /
+  // ECU signatures must still produce a complete record. The renderer relies
+  // on this — it can then surface a "couldn't auto-detect, fill in below"
+  // toast and let the user organize the file manually. Previously testers
+  // reported that some files (e.g. certain Hyundai dumps) appeared to "do
+  // nothing" — root cause was the renderer treating a 0%-confidence success
+  // as a silent failure, not the parser refusing to scan.
+  it('parseFile() returns a usable fallback record for an unrecognized binary', async () => {
+    // 1 MB of bytes all >= 0x80 so scanAscii (which only keeps 0x20..0x7E)
+    // sees a buffer of spaces — no manufacturer / brand / ECU pattern can
+    // possibly match. We deliberately avoid `crypto.randomBytes` (produces
+    // false-positive ASCII matches by sheer chance over 1 MB) and avoid an
+    // all-0xFF buffer (insufficient entropy for TLSH). The (i*7+131)|0x80
+    // pattern cycles through 128 distinct non-printable byte values which
+    // is plenty of entropy for TLSH.
+    const noisyPath = path.join(tmpDir, 'no-signatures.dat');
+    const noisy = Buffer.alloc(1024 * 1024);
+    for (let i = 0; i < noisy.length; i++) noisy[i] = ((i * 7 + 131) & 0x7f) | 0x80;
+    fs.writeFileSync(noisyPath, noisy);
+
+    const result = await parser.parseFile(noisyPath);
+
+    // Always returns a record, never throws / returns null.
+    expect(result).toBeTruthy();
+    expect(result.fileSize).toBe(1024 * 1024);
+    // Fallback values when no signature matched.
+    expect(result.brand).toBe('Unknown');
+    expect(result.model).toBe('Unknown');
+    expect(result.ecuType).toBe('Unknown');
+    expect(result.confidence).toBeLessThan(30);
+    // File-level metadata still useful for tagging / dedup / manual organizing.
+    expect(typeof result.md5).toBe('string');
+    expect(result.md5).toMatch(/^[0-9a-f]{32}$/);
+    expect(Array.isArray(result.protocol)).toBe(true);
+    expect(result.detectionMethod).toBe('heuristic');
+  });
 });

@@ -343,7 +343,9 @@ function listFiles({
   tag,
   kind,
   parentId,
-  includeSolutions = true,
+  // kept for API stability: callers may pass `includeSolutions` but the
+  // current query joins both kinds unconditionally — strip in next major.
+  includeSolutions: _includeSolutions = true,
   limit = 1000
 } = {}) {
   const where = [];

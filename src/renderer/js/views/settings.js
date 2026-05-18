@@ -463,6 +463,20 @@ window.App = window.App || {};
       parsedQueryString: parsedQueryString || ''
     };
 
+    // Refuse to save an empty-query Smart Folder — it would just be a "show
+    // everything" shortcut, which is what the Database view already does. The
+    // tester flagged the feature as opaque; this guard makes it clearer that
+    // a Smart Folder = "the current query, saved".
+    const isEmptyQuery =
+      !current.search && !current.kind && !current.dbTreeFilter && !current.parsedQueryString;
+    if (isEmptyQuery) {
+      if (App.toast) App.toast.info(App.t('toasts.smart_folder_query_empty'));
+      // Focus the global search bar so the next keystroke goes somewhere useful.
+      const inp = $('#global-search') || $('#db-search');
+      if (inp) inp.focus();
+      return;
+    }
+
     // Prompt for a name via the app modal
     const overlay = $('#app-modal-overlay');
     if (!overlay) return;
@@ -486,7 +500,14 @@ window.App = window.App || {};
     const inputId = 'smart-folder-name-input-' + Date.now();
     const nameLabel = App.t('modal.save_smart_folder_name_label');
     const placeholder = App.t('modal.save_smart_folder_placeholder');
+    // One-line "what this does" header above the name input — addresses the
+    // tester's "I don't understand what this feature does" feedback.
+    const intro =
+      `<div class="hint" style="margin-bottom:10px;line-height:1.5">` +
+      App.t('smart_folder_help.p1_html') +
+      `</div>`;
     const body =
+      intro +
       `<label for="${inputId}">${App.escapeHtml(nameLabel)}</label>` +
       `<input id="${inputId}" type="text" placeholder="${App.escapeHtml(placeholder)}" ` +
       'style="width:100%;padding:8px;background:var(--bg-input);border:1px solid var(--border);' +
@@ -544,5 +565,27 @@ window.App = window.App || {};
     if (addBtn) addBtn.addEventListener('click', App.saveCurrentAsSmartFolder);
     const saveBtn = $('#db-save-smart-folder');
     if (saveBtn) saveBtn.addEventListener('click', App.saveCurrentAsSmartFolder);
+    const helpBtn = $('#smart-folder-help-btn');
+    if (helpBtn) helpBtn.addEventListener('click', App.showSmartFolderHelp);
+  };
+
+  /**
+   * Show a small explainer modal describing what Smart Folders are for. Triggered
+   * by the (?) icon in the sidebar header. The tester flagged the feature as
+   * opaque on first encounter; this is the discoverability surface that closes
+   * the loop without forcing them to read documentation.
+   */
+  App.showSmartFolderHelp = async function showSmartFolderHelp() {
+    await App.appModal({
+      title: App.t('smart_folder_help.modal_title'),
+      body:
+        `<div style="display:flex;flex-direction:column;gap:10px;line-height:1.5">` +
+        `<div>${App.t('smart_folder_help.p1_html')}</div>` +
+        `<div>${App.t('smart_folder_help.p2_html')}</div>` +
+        `<div>${App.t('smart_folder_help.p3_html')}</div>` +
+        `</div>`,
+      variant: 'choice',
+      buttons: [{ label: App.t('smart_folder_help.close'), value: true, primary: true }]
+    });
   };
 })();

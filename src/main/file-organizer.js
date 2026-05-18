@@ -88,7 +88,9 @@ function applyMask(mask, metadata, fileName, kind, solutionLabel) {
 async function organize({
   filePath,
   fileName,
-  fileSize,
+  // kept in the payload shape for backwards compat — the actual on-disk
+  // size is re-read from stats inside this function, so this arg is unused.
+  fileSize: _fileSize,
   metadata,
   formatMask,
   kind,

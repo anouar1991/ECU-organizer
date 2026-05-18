@@ -9,13 +9,6 @@ function isValidVin(vin) {
   return /^[A-HJ-NPR-Z0-9]{17}$/.test(vin.toUpperCase());
 }
 
-function ensureCacheTable() {
-  db.init && db.init();
-  const dbInstance = require('better-sqlite3');
-  // Use the same DB connection — call a method we expose on db module
-  // Since database.js doesn't export the raw db, we add a small helper
-}
-
 function fetchJson(path, timeoutMs = 8000) {
   return new Promise((resolve, reject) => {
     const req = https.get(

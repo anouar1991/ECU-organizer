@@ -368,21 +368,79 @@ window.App.state.lastClickedRowId = window.App.state.lastClickedRowId || null;
     return idx > 0 ? s.slice(0, idx) : s;
   }
 
+  // Opens the archive folder of EACH selected row. Previously this only
+  // opened the folder of the first id in `selectedIds` — when a user had rows
+  // from two brands checked (e.g. Fiat + Hyundai), the action would silently
+  // pick whichever id was inserted first, opening the wrong folder. Tester
+  // feedback flagged this as confusing (video 1). The new behavior is:
+  //
+  //   - 1 row selected → opens that folder
+  //   - 2-5 distinct folders → opens each (deduplicated)
+  //   - 6+ distinct folders → confirmation modal before opening
+  //
+  // We dedupe by parent directory so checking many siblings under the same
+  // ECU folder doesn't spawn N duplicate shell windows.
+  const BULK_OPEN_AUTO_LIMIT = 5;
+
   async function bulkOpenFolder() {
     const ids = Array.from(App.state.selectedIds);
     if (ids.length === 0) return;
     const all = App._dbAllRowsCache || [];
-    const first = all.find((r) => r.id === ids[0]);
-    if (!first || !first.archive_path) {
+    const rowsById = new Map(all.map((r) => [r.id, r]));
+
+    const dirs = [];
+    const seen = new Set();
+    const missingPath = [];
+    for (const id of ids) {
+      const row = rowsById.get(id);
+      if (!row || !row.archive_path) {
+        missingPath.push(id);
+        continue;
+      }
+      const dir = archiveParentDir(row.archive_path);
+      if (!dir) {
+        missingPath.push(id);
+        continue;
+      }
+      if (!seen.has(dir)) {
+        seen.add(dir);
+        dirs.push(dir);
+      }
+    }
+
+    if (dirs.length === 0) {
       App.logLine('err', App.t('log.selected_no_archive'));
+      if (App.toast) App.toast.warn(App.t('toasts.open_folder_no_path'));
       return;
     }
-    const dir = archiveParentDir(first.archive_path);
-    if (!dir) {
-      App.logLine('err', App.t('log.no_folder_from_path'));
-      return;
+
+    if (dirs.length > BULK_OPEN_AUTO_LIMIT) {
+      const proceed = await App.appModal({
+        title: App.t('database.open_folder_too_many_title'),
+        body: App.t('database.open_folder_too_many_body_html', { n: dirs.length }),
+        variant: 'choice',
+        buttons: [
+          { label: App.t('modal.cancel'), value: false },
+          {
+            label: App.t('database.open_folder_too_many_confirm', { n: dirs.length }),
+            value: true,
+            primary: true
+          }
+        ]
+      });
+      if (!proceed) return;
     }
-    window.api.openFolder(dir);
+
+    for (const dir of dirs) window.api.openFolder(dir);
+
+    if (App.toast) {
+      const tk = dirs.length === 1 ? 'toasts.open_folder_done_one' : 'toasts.open_folder_done_many';
+      App.toast.success(App.t(tk, { n: dirs.length }));
+    }
+
+    if (missingPath.length > 0) {
+      App.logLine('warn', App.t('log.no_folder_from_path') + ' (' + missingPath.length + ')');
+    }
   }
 
   async function bulkDelete() {

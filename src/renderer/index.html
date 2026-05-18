@@ -188,8 +188,21 @@
         </nav>
 
         <div class="sidebar-section">
-          <div class="sidebar-section-label" data-i18n="sidebar.smart_folders_label">
-            SMART FOLDERS
+          <div class="sidebar-section-header">
+            <span class="sidebar-section-label" data-i18n="sidebar.smart_folders_label">
+              SMART FOLDERS
+            </span>
+            <button
+              id="smart-folder-help-btn"
+              class="sidebar-help-btn"
+              type="button"
+              data-i18n-title="sidebar.smart_folders_help_title"
+              data-i18n-aria-label="sidebar.smart_folders_help_aria"
+              aria-label="What are Smart Folders?"
+              title="What are Smart Folders?"
+            >
+              ?
+            </button>
           </div>
           <div id="smart-folders-list" class="smart-folders-list"></div>
           <button
@@ -995,6 +1008,7 @@
                 class="btn-secondary small"
                 type="button"
                 data-i18n="database.action_open_folder"
+                data-i18n-title="database.action_open_folder_title"
               >
                 Open Folder
               </button>

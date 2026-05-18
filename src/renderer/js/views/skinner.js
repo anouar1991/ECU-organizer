@@ -42,6 +42,12 @@ window.App = window.App || {};
     });
   };
 
+  // Threshold below which we treat a scan as "couldn't auto-detect" and surface
+  // a clear toast steering the user to fill in Brand/Model/ECU by hand. Tuned
+  // to match the parser's scoring weights — a file with neither a known ECU
+  // family nor a brand match lands well below 30.
+  const LOW_CONFIDENCE_THRESHOLD = 30;
+
   App.ingestFiles = async function ingestFiles(paths) {
     const state = App.state;
     App.logLine('info', App.t('log.scanning_n', { n: paths.length }));
@@ -51,9 +57,25 @@ window.App = window.App || {};
     const autoThreshold = parseInt(state.settings.auto_organize_threshold || '85', 10);
     const autoBatch = [];
 
+    // Track ingestion outcomes so we can show one summary toast at the end.
+    // Per-file toasts are reserved for cases where the user MUST act
+    // (duplicate, low-confidence first file). Scan failures get their own toast
+    // since they're always actionable.
+    const summary = {
+      added: 0,
+      duplicates: [],
+      lowConfidence: [],
+      failed: []
+    };
+    const firstLowConfBeforeIngest = state.files.length;
+
     for (const r of results) {
       if (!r.success) {
+        const fileName = r.filePath ? r.filePath.split(/[\\/]/).pop() : '?';
         App.logLine('err', App.t('log.scan_failed', { path: r.filePath, err: r.error }));
+        summary.failed.push({ fileName, err: r.error });
+        if (App.toast)
+          App.toast.error(App.t('toasts.scan_failed_toast', { name: fileName, err: r.error }));
         continue;
       }
       r.tags = '';
@@ -77,6 +99,18 @@ window.App = window.App || {};
             'warn',
             App.t('log.duplicate_skipped', { name: r.fileName, id: d.id, newName: d.new_name })
           );
+          summary.duplicates.push({ fileName: r.fileName, existing: d });
+          // Per-file toast for the FIRST duplicate only — subsequent ones are
+          // rolled into the summary toast so a bulk drop doesn't spam the
+          // notification stack. Previously every duplicate was silent (only
+          // a log line), which the tester reported as "the app dropped my
+          // file" (video 2).
+          if (App.toast && summary.duplicates.length === 1) {
+            App.toast.warn(App.t('toasts.duplicate_found_body', { name: r.fileName, id: d.id }), {
+              title: App.t('toasts.duplicate_found_title'),
+              duration: 6000
+            });
+          }
           continue;
         }
       }
@@ -110,11 +144,33 @@ window.App = window.App || {};
         continue;
       }
       state.files.push(r);
-      if (meta.confidence < 50)
+      summary.added++;
+
+      if (meta.confidence < LOW_CONFIDENCE_THRESHOLD) {
+        // Couldn't auto-detect anything meaningful — flag for the summary toast
+        // and (for the FIRST such file) raise a per-file toast that points
+        // explicitly at the brand input. This makes the manual-entry path
+        // discoverable instead of leaving the user staring at "Unknown" fields.
+        summary.lowConfidence.push(r);
         App.logLine(
           'warn',
           App.t('log.low_confidence', { conf: meta.confidence, name: r.fileName })
         );
+        if (App.toast && summary.lowConfidence.length === 1) {
+          App.toast.warn(
+            App.t('toasts.low_confidence_body', {
+              name: r.fileName,
+              conf: meta.confidence
+            }),
+            { title: App.t('toasts.low_confidence_title'), duration: 7000 }
+          );
+        }
+      } else if (meta.confidence < 50) {
+        App.logLine(
+          'warn',
+          App.t('log.low_confidence', { conf: meta.confidence, name: r.fileName })
+        );
+      }
       if (r._suggestedParent) {
         App.logLine(
           'info',
@@ -152,6 +208,51 @@ window.App = window.App || {};
     App.renderFileTray();
     App.renderMetadata();
     App.$('#organize-btn').disabled = state.files.length === 0;
+
+    // Summary toast: one consolidated message at the end. Keeps the UX from
+    // becoming a wall of stacked toasts on a bulk drop while still ensuring
+    // the user gets visible feedback for every drop. The rules:
+    //   - all-success, no issues → green "N added" toast (count adapts to 1/many)
+    //   - 2+ duplicates → yellow rollup so the per-file toast (which only fired
+    //     for the first) gets reinforced by a count
+    //   - 2+ low-confidence → yellow rollup ditto
+    if (App.toast) {
+      const cleanRun =
+        summary.added > 0 &&
+        summary.duplicates.length === 0 &&
+        summary.lowConfidence.length === 0 &&
+        autoBatch.length === 0;
+      if (cleanRun) {
+        const tk =
+          summary.added === 1
+            ? 'toasts.ingest_summary_added_one'
+            : 'toasts.ingest_summary_added_many';
+        App.toast.success(App.t(tk, { n: summary.added }));
+      }
+      if (summary.duplicates.length >= 2) {
+        const tk =
+          summary.duplicates.length === 1
+            ? 'toasts.ingest_summary_skipped_dupes_one'
+            : 'toasts.ingest_summary_skipped_dupes_many';
+        App.toast.warn(App.t(tk, { n: summary.duplicates.length }));
+      }
+      if (summary.lowConfidence.length >= 2) {
+        const tk =
+          summary.lowConfidence.length === 1
+            ? 'toasts.ingest_summary_low_conf_one'
+            : 'toasts.ingest_summary_low_conf_many';
+        App.toast.warn(App.t(tk, { n: summary.lowConfidence.length }));
+      }
+    }
+
+    // Auto-focus the Brand field when the first added file is low-confidence,
+    // so the user lands on the right input without having to hunt for it.
+    if (summary.lowConfidence.length > 0 && state.activeFileIndex >= firstLowConfBeforeIngest) {
+      setTimeout(() => {
+        const brandInp = App.$('.meta-input[data-field="brand"]');
+        if (brandInp && !brandInp.disabled) brandInp.focus();
+      }, 50);
+    }
   };
 
   App.renderFileTray = function renderFileTray() {

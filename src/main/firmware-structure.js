@@ -156,7 +156,7 @@ function parseBoschBlock(buf, offset, knownIds) {
  * Returns the entry if it passes (type in known set, end>start,
  * both addresses < file size) — else null.
  */
-function parseDescriptorEntry(buf, offset, knownIds, fileSize) {
+function parseDescriptorEntry(buf, offset, knownIds, _fileSize) {
   if (offset + DESCRIPTOR_ENTRY_SIZE > buf.length) return null;
   const typeId = readU8(buf, offset);
   if (!knownIds.has(typeId)) return null;

@@ -1,6 +1,6 @@
 {
   "name": "ecu-file-skinner-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automated organization and archiving of raw ECU dump files",
   "main": "src/main/main.js",
   "scripts": {

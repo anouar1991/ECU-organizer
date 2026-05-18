@@ -496,7 +496,6 @@ async function parseFile(filePath) {
   const stats = await fs.promises.stat(filePath);
   const fileSize = stats.size;
 
-  const sampleSize = Math.min(fileSize, 256 * 1024);
   const fileHandle = await fs.promises.open(filePath, 'r');
   let headBuf,
     midBuf = Buffer.alloc(0),
