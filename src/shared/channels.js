@@ -99,5 +99,6 @@ module.exports = Object.freeze({
   PINOUT_SUGGEST_FOR_ECU: 'pinout:suggest-for-ecu',
   PINOUT_SEARCH: 'pinout:search',
   PINOUT_IMPORT_IMAGE: 'pinout:import-image',
-  PINOUT_GET_IMAGE_URL: 'pinout:get-image-url'
+  PINOUT_GET_IMAGE_URL: 'pinout:get-image-url',
+  PINOUT_LOAD_SAMPLES: 'pinout:load-samples'
 });

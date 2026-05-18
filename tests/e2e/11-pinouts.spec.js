@@ -140,6 +140,25 @@ test.describe('Pinouts — connection guides', () => {
     await expect(host.locator('.pinout-suggest-card, .pinout-suggest-empty').first()).toBeVisible();
   });
 
+  test('Load Samples seeds the bundled dataset idempotently', async () => {
+    // Run once — should add several entries (>= 5, since the dataset ships ~10).
+    const first = await ctx.win.evaluate(() => window.api.loadSamplePinouts());
+    expect(first.success).toBe(true);
+    expect(first.added).toBeGreaterThanOrEqual(5);
+    expect(first.total).toBeGreaterThanOrEqual(first.added);
+
+    // Run again — must skip everything (idempotent).
+    const second = await ctx.win.evaluate(() => window.api.loadSamplePinouts());
+    expect(second.success).toBe(true);
+    expect(second.added).toBe(0);
+    expect(second.skipped).toBe(first.added + first.skipped);
+
+    // Refresh list and verify a seeded entry is present.
+    await ctx.win.evaluate(() => window.App.refreshPinoutList());
+    const txt = await ctx.win.locator('#pinout-list').innerText();
+    expect(txt).toMatch(/MED17|EDC17|SIMOS|EDC15|EDC16/);
+  });
+
   test('no-match scan shows the "create one" CTA in the suggest card', async () => {
     // Fixture for a brand/family the DB has NO pinout for. Use a different
     // family token so suggest returns nothing.

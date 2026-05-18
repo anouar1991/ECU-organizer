@@ -1,0 +1,193 @@
+{
+  "_about": {
+    "purpose": "Seed dataset of common ECU connection guides. Pin numbers and functions are FACTS transcribed from publicly-readable sources (transpondery.com HTML tables, ECU forum threads, vendor public spec sheets). Facts about a chip's pins are not copyrightable — see https://www.law.cornell.edu/uscode/text/17/102 ; only the specific visual layout/diagram is protected, which is why this dataset ships pin tables ONLY (no copied images). The user can add their own connector photos in the editor.",
+    "scope": "10 entries covering the most common Bosch / Continental ECU families for European tuning work. Bench/OBD wiring focuses on the essential pins: power, ground, CAN, K-Line. Pinouts are partial — verify against the official service literature or your tool's documentation before connecting to real hardware.",
+    "disclaimer": "WIRING INFORMATION FOR REFERENCE ONLY. Wrong wiring can permanently damage the ECU. Verify the pinout against your specific vehicle/variant before powering anything on. The bundled entries cover Socket K (one of typically several connectors on a real ECU) and are sufficient for OBD / bench reading but not for full vehicle wiring.",
+    "version": "1.0.0",
+    "shipped_with_app_version": "1.0.3"
+  },
+  "entries": [
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "MED17",
+      "ecuModel": "MED17.1.1",
+      "method": "BENCH",
+      "voltage": "13.5V regulated (use a stable bench supply)",
+      "tools": ["KESS3", "KTAG", "Autotuner", "PCMflash"],
+      "pins": [
+        { "label": "1", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "5", "function": "+12V (Kl.15 / ignition)", "side": "Socket K", "notes": "Ignition power; switch ON during read" },
+        { "label": "50", "function": "+12V (Kl.30 / battery)", "side": "Socket K", "notes": "Permanent battery power" },
+        { "label": "79", "function": "CAN-H", "side": "Socket K", "notes": "Powertrain CAN high" },
+        { "label": "80", "function": "CAN-L", "side": "Socket K", "notes": "Powertrain CAN low" }
+      ],
+      "warnings": "Ensure a stabilised 13.5 V supply — voltage drops below 12 V mid-write can brick the flash. Always read and back up the full file before any write. The MED17 firmware is checksum-protected; recalculate and write the checksum on every modified file or the ECU will reject the image on next boot.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/vag/med17/med1711_pinout.html). Same Socket K layout shared by MED17.1, MED17.1.6, MED17.5 family — verify variant before use."
+    },
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "EDC17",
+      "ecuModel": "EDC17C46",
+      "method": "BENCH",
+      "voltage": "13.5V regulated",
+      "tools": ["KESS3", "KTAG", "Autotuner", "PCMflash"],
+      "pins": [
+        { "label": "1", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "5", "function": "+12V (Kl.15 / ignition)", "side": "Socket K", "notes": "Ignition power" },
+        { "label": "67", "function": "CAN-L", "side": "Socket K", "notes": "Powertrain CAN low" },
+        { "label": "68", "function": "CAN-H", "side": "Socket K", "notes": "Powertrain CAN high" },
+        { "label": "87", "function": "+12V (Kl.30 / battery)", "side": "Socket K", "notes": "Permanent battery power" }
+      ],
+      "warnings": "Verify checksum after every write. EDC17 firmware is signature-protected on newer variants — older tools may need a boot-mode read first to extract the EEPROM and TC1797 keys.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/vag/edc17/edc17c46_pinout.html). Common on 2.0 TDI CR engines (CFFB/CFGB/CFHC/CGLC etc.)."
+    },
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "EDC17",
+      "ecuModel": "EDC17CP04",
+      "method": "BENCH",
+      "voltage": "13.5V regulated",
+      "tools": ["KESS3", "KTAG", "Autotuner"],
+      "pins": [
+        { "label": "1", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "5", "function": "+12V (Kl.15)", "side": "Socket K", "notes": "Ignition power" },
+        { "label": "67", "function": "CAN-L", "side": "Socket K", "notes": "" },
+        { "label": "68", "function": "CAN-H", "side": "Socket K", "notes": "" },
+        { "label": "87", "function": "+12V (Kl.30)", "side": "Socket K", "notes": "Permanent power" }
+      ],
+      "warnings": "Recalculate and write checksum after every modification. Boot-mode entry requires pulling the BOOT pin to GND on the TriCore TC1796 die — refer to your tool's documentation for the exact contact pad.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/vag/edc17/edc17cp04_pinout.html). Found on 3.0 V6 TDI engines."
+    },
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "MED9",
+      "ecuModel": "MED9.1",
+      "method": "BENCH",
+      "voltage": "12V",
+      "tools": ["KESS3", "MPPS", "Galletto"],
+      "pins": [
+        { "label": "1", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "5", "function": "+12V", "side": "Socket K", "notes": "Power supply" },
+        { "label": "67", "function": "CAN-L", "side": "Socket K", "notes": "" },
+        { "label": "68", "function": "CAN-H", "side": "Socket K", "notes": "" },
+        { "label": "86", "function": "K-LINE", "side": "Socket K", "notes": "ISO 9141 diagnostic" },
+        { "label": "87", "function": "+12V", "side": "Socket K", "notes": "Additional power" },
+        { "label": "92", "function": "+12V", "side": "Socket K", "notes": "Additional power" }
+      ],
+      "warnings": "MED9 generation supports K-Line diagnostic — older tools can read via OBD/K-Line without bench wiring. Always back up the file before write.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/vag/med9x_pinout.html). MED9.1 family covers 1.8T, 2.0T, 2.5T petrol engines from approximately 2002–2010."
+    },
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "EDC15",
+      "ecuModel": "EDC15 (121-pin)",
+      "method": "OBD",
+      "voltage": "12V",
+      "tools": ["Galletto", "VAG-COM", "MPPS"],
+      "pins": [
+        { "label": "2", "function": "+12V (Kl.30)", "side": "121-pin connector", "notes": "Permanent power" },
+        { "label": "4", "function": "GND", "side": "121-pin connector", "notes": "Signal ground" },
+        { "label": "5", "function": "GND", "side": "121-pin connector", "notes": "Power ground" },
+        { "label": "16", "function": "K-LINE", "side": "121-pin connector", "notes": "Diagnostic line" },
+        { "label": "37", "function": "+12V (Kl.15)", "side": "121-pin connector", "notes": "Ignition power" },
+        { "label": "7", "function": "CAN-H", "side": "121-pin connector", "notes": "Powertrain CAN" },
+        { "label": "82", "function": "CAN-H", "side": "121-pin connector", "notes": "Powertrain CAN (redundant)" },
+        { "label": "6", "function": "CAN-L", "side": "121-pin connector", "notes": "Powertrain CAN" },
+        { "label": "83", "function": "CAN-L", "side": "121-pin connector", "notes": "Powertrain CAN (redundant)" }
+      ],
+      "warnings": "Immobiliser PIN data lives at addresses 0x12E–0x12F in the 24C04 EEPROM. EDC15 is normally read via OBD/K-Line — bench wiring rarely needed. Older variants (pre-2003) may use only K-Line; later variants add CAN.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/vag/edc15_pinout.html). EDC15P+ / EDC15VM+ / EDC15C2 share this layout. There is also an 80-pin variant — see EDC15 (80-pin) entry."
+    },
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "EDC16",
+      "ecuModel": null,
+      "method": "BENCH",
+      "voltage": "12V",
+      "tools": ["KESS3", "KTAG", "MPPS"],
+      "pins": [
+        { "label": "1", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "5", "function": "+12V", "side": "Socket K", "notes": "Power supply" },
+        { "label": "18", "function": "+12V", "side": "Socket K", "notes": "Additional power" },
+        { "label": "66", "function": "CAN-L", "side": "Socket K", "notes": "Powertrain CAN low" },
+        { "label": "72", "function": "K-LINE", "side": "Socket K", "notes": "Diagnostic line" },
+        { "label": "89", "function": "CAN-H", "side": "Socket K", "notes": "Powertrain CAN high" }
+      ],
+      "warnings": "Family-wide entry — covers EDC16U1 / EDC16CP / EDC16CP34 / EDC16U31. Specific variant pin numbers may shift slightly; verify against the variant before connecting.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/vag/edc16_pinout.html). Common on TDI Pumpe-Düse engines circa 2004–2009."
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "ecuFamily": "EDC16",
+      "ecuModel": "EDC16CP31",
+      "method": "BENCH",
+      "voltage": "13.5V regulated (15V Kl.15, 30V Kl.30 indicated in service literature)",
+      "tools": ["KESS3", "KTAG", "MPPS"],
+      "pins": [
+        { "label": "2", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "5", "function": "+12V (Kl.15)", "side": "Socket K", "notes": "Ignition" },
+        { "label": "41", "function": "+12V (Kl.30)", "side": "Socket K", "notes": "Permanent power" },
+        { "label": "43", "function": "K-LINE", "side": "Socket K", "notes": "Diagnostic" },
+        { "label": "51", "function": "CAN-H", "side": "Socket K", "notes": "Powertrain CAN" },
+        { "label": "52", "function": "CAN-L", "side": "Socket K", "notes": "Powertrain CAN" }
+      ],
+      "warnings": "Mercedes EDC16CP31 covers CR4.11 / CR4.12 / CR4.20 / CR4.xx 'MB CR' part-number series. Risk of immo desync if EZS/CAS sync block is lost — back up the full file before any write.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/mercedes/edc16cp31_pinout.html). Found on OM642 V6 CDI and OM651 4-cyl CDI engines."
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "ecuFamily": "EDC15",
+      "ecuModel": "EDC15C5",
+      "method": "BENCH",
+      "voltage": "12V (mix of 15V and 30V supplies in service docs)",
+      "tools": ["Galletto", "MPPS", "KESS3"],
+      "pins": [
+        { "label": "1", "function": "+12V (Kl.15)", "side": "S1", "notes": "Ignition power" },
+        { "label": "5", "function": "GND", "side": "S1", "notes": "Ground" },
+        { "label": "7", "function": "+12V (Kl.15)", "side": "S1", "notes": "Additional ignition power" },
+        { "label": "11", "function": "CAN-H", "side": "S2", "notes": "Powertrain CAN" },
+        { "label": "12", "function": "CAN-L", "side": "S2", "notes": "Powertrain CAN" },
+        { "label": "13", "function": "+12V (Kl.30)", "side": "S2", "notes": "Permanent power" },
+        { "label": "28", "function": "K-LINE", "side": "S3", "notes": "Diagnostic" }
+      ],
+      "warnings": "Mercedes CR2.x / CR1.x series — older common-rail diesel ECUs. Three separate socket bodies (S1/S2/S3); ensure correct identification before bench wiring.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/mercedes/edc15_pinout.html). Compatible MB CR signs: CR2.39, CR2.14, CR2.35, CR2.36, CR1.2, CR1.7."
+    },
+    {
+      "brand": "BMW",
+      "ecuFamily": "EDC16",
+      "ecuModel": "EDC16C35",
+      "method": "BENCH",
+      "voltage": "12V",
+      "tools": ["KESS3", "KTAG", "MPPS"],
+      "pins": [
+        { "label": "1", "function": "+12V", "side": "Socket K", "notes": "Power supply" },
+        { "label": "2", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "7", "function": "+12V", "side": "Socket K", "notes": "Additional power" },
+        { "label": "8", "function": "K-LINE", "side": "Socket K", "notes": "Diagnostic" },
+        { "label": "33", "function": "CAN-L", "side": "Socket K", "notes": "Powertrain CAN" },
+        { "label": "46", "function": "CAN-H", "side": "Socket K", "notes": "Powertrain CAN" }
+      ],
+      "warnings": "BMW EDC16C35 used on E60/E83 X3 2.0d/3.0d engines. ISN-protected — back up the full file before write to preserve the ISN sync block.",
+      "notes": "Source: transpondery.com (https://www.transpondery.com/pinouts/bmw/edc16c35_pinout.html)."
+    },
+    {
+      "brand": "Volkswagen",
+      "ecuFamily": "SIMOS",
+      "ecuModel": "SIMOS18.1",
+      "method": "BENCH",
+      "voltage": "13.5V regulated",
+      "tools": ["Autotuner", "Magic FLEX", "DimSport Trasdata", "bri3d TC1791_CAN_BSL"],
+      "pins": [
+        { "label": "1", "function": "GND", "side": "Socket K", "notes": "Ground" },
+        { "label": "6", "function": "+12V", "side": "Socket K", "notes": "Power supply" },
+        { "label": "50", "function": "+12V", "side": "Socket K", "notes": "Additional power" },
+        { "label": "79", "function": "CAN-H", "side": "Socket K", "notes": "Powertrain CAN high" },
+        { "label": "80", "function": "CAN-L", "side": "Socket K", "notes": "Powertrain CAN low" },
+        { "label": "86", "function": "+12V", "side": "Socket K", "notes": "Additional power" }
+      ],
+      "warnings": "SIMOS18 (TriCore TC1791) requires boot-mode entry for unsigned reads — see bri3d/Simos18_SBOOT toolchain on GitHub. Once unlocked, OBD CAN-based reads work with Autotuner / KESS3 v2 sessions. Coding tables and immo block (Tprot) are signature-protected — never write without a verified checksum recalc.",
+      "notes": "Source: community-aggregated facts from MHH AUTO + bri3d/Simos18_SBOOT (https://github.com/bri3d/Simos18_SBOOT). Common on Audi A3 8V / VW Golf 7 GTI EA888 Gen3 1.8/2.0 TFSI."
+    }
+  ]
+}

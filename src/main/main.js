@@ -785,3 +785,50 @@ ipcMain.handle(C.PINOUT_GET_IMAGE_URL, async (_event, relPath) => {
   // file:// URL with proper escaping. URL helps Windows path / spaces.
   return require('url').pathToFileURL(abs).toString();
 });
+
+ipcMain.handle(C.PINOUT_LOAD_SAMPLES, async () => {
+  // Idempotent seed of the curated sample dataset bundled with the app. Each
+  // (brand, ecu_family, ecu_model, method) tuple is inserted only if no row
+  // already exists for the same combination. Returns counts so the renderer
+  // can toast the result. Sources for the data: see _about block of
+  // src/data/sample_pinouts.json.
+  try {
+    const samplesPath = path.join(__dirname, '..', 'data', 'sample_pinouts.json');
+    if (!fs.existsSync(samplesPath)) {
+      return { success: false, error: 'sample_pinouts.json not found' };
+    }
+    const raw = fs.readFileSync(samplesPath, 'utf8');
+    const parsed = JSON.parse(raw);
+    const entries = Array.isArray(parsed.entries) ? parsed.entries : [];
+
+    let added = 0;
+    let skipped = 0;
+    const errors = [];
+    for (const entry of entries) {
+      try {
+        // Pre-check by listing the matching (family, method) combo and looking
+        // for a matching ecuModel — cheaper than catching the UNIQUE constraint.
+        const existing = db.listPinouts({ family: entry.ecuFamily, method: entry.method });
+        const dupe = existing.find(
+          (e) =>
+            (e.brand || '') === (entry.brand || '') &&
+            (e.ecuModel || null) === (entry.ecuModel || null)
+        );
+        if (dupe) {
+          skipped++;
+          continue;
+        }
+        db.createPinout(entry);
+        added++;
+      } catch (err) {
+        errors.push({
+          entry: `${entry.brand}/${entry.ecuFamily}/${entry.ecuModel}/${entry.method}`,
+          err: err.message
+        });
+      }
+    }
+    return { success: true, added, skipped, total: entries.length, errors };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+});

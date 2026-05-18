@@ -96,6 +96,7 @@ contextBridge.exposeInMainWorld('api', {
   searchPinouts: (q, limit) => ipcRenderer.invoke(C.PINOUT_SEARCH, q, limit),
   importPinoutImage: (sourcePath) => ipcRenderer.invoke(C.PINOUT_IMPORT_IMAGE, sourcePath),
   getPinoutImageUrl: (relPath) => ipcRenderer.invoke(C.PINOUT_GET_IMAGE_URL, relPath),
+  loadSamplePinouts: () => ipcRenderer.invoke(C.PINOUT_LOAD_SAMPLES),
 
   getPathForFile: (file) => {
     try {

@@ -382,6 +382,8 @@ window.App.state.pinoutSearch = window.App.state.pinoutSearch || '';
     $('#pinout-add-pin-btn').addEventListener('click', addEmptyPinRow);
     $('#pinout-upload-image-btn').addEventListener('click', uploadPinoutImage);
     $('#pinout-clear-image-btn').addEventListener('click', clearPinoutImage);
+    const loadSamplesBtn = $('#pinout-load-samples-btn');
+    if (loadSamplesBtn) loadSamplesBtn.addEventListener('click', loadSamplePinouts);
 
     const search = $('#pinout-search');
     if (search) {
@@ -402,4 +404,42 @@ window.App.state.pinoutSearch = window.App.state.pinoutSearch || '';
   App.onShowPinoutsView = function onShowPinoutsView() {
     App.refreshPinoutList();
   };
+
+  // ---------- sample seed ----------
+
+  async function loadSamplePinouts() {
+    // Two-step UX: confirm modal (because we're touching the user's DB),
+    // then run the seed. Result toast reports added vs. skipped so the user
+    // can re-click without surprise.
+    const ok = await App.appModal({
+      title: App.t('pinouts.load_samples_confirm_title'),
+      body: App.t('pinouts.load_samples_confirm_body_html'),
+      variant: 'choice',
+      buttons: [
+        { label: App.t('modal.cancel'), value: false },
+        { label: App.t('pinouts.load_samples_confirm_button'), value: true, primary: true }
+      ]
+    });
+    if (!ok) return;
+    const res = await window.api.loadSamplePinouts();
+    if (!res || !res.success) {
+      if (App.toast)
+        App.toast.error(
+          App.t('pinouts.load_samples_failed', { msg: (res && res.error) || 'unknown' })
+        );
+      return;
+    }
+    if (App.toast) {
+      if (res.added === 0) {
+        App.toast.info(
+          App.t('pinouts.load_samples_already_loaded', { skipped: res.skipped, total: res.total })
+        );
+      } else {
+        const tk =
+          res.added === 1 ? 'pinouts.load_samples_done_one' : 'pinouts.load_samples_done_many';
+        App.toast.success(App.t(tk, { n: res.added, skipped: res.skipped }));
+      }
+    }
+    await App.refreshPinoutList();
+  }
 })();
