@@ -35,4 +35,7 @@ window.App.switchView = function switchView(viewName) {
   if (viewName === 'tag-management' && typeof window.App.refreshTagManagement === 'function') {
     window.App.refreshTagManagement();
   }
+  if (viewName === 'pinouts' && typeof window.App.onShowPinoutsView === 'function') {
+    window.App.onShowPinoutsView();
+  }
 };

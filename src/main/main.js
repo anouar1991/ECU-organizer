@@ -658,3 +658,130 @@ ipcMain.handle(C.INTEGRITY_SCAN, async () => {
     return { error: err.message, total: 0, missing: [] };
   }
 });
+
+// --- Pinouts / connection guides ---
+
+// Images for pinouts live under userData/pinouts/<id>.<ext>. We keep the
+// store path private to main and expose two helpers:
+//   PINOUT_IMPORT_IMAGE — copy a source file into the store, return the
+//     RELATIVE path (`<id>.png`) for the DB.
+//   PINOUT_GET_IMAGE_URL — turn a relative path into a `file://` URL the
+//     renderer can drop into an <img>. The renderer NEVER sees the absolute
+//     path so users can't accidentally write outside the store.
+function pinoutImagesDir() {
+  const dir = path.join(app.getPath('userData'), 'pinouts');
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  return dir;
+}
+
+const ALLOWED_PINOUT_IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.webp', '.svg']);
+
+function safeBasename(p) {
+  // Strip any directory components — store is flat.
+  return path.basename(String(p || ''));
+}
+
+ipcMain.handle(C.PINOUT_LIST, async (_event, filters) => {
+  try {
+    return db.listPinouts(filters || {});
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_GET, async (_event, id) => {
+  try {
+    return db.getPinout(id);
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_CREATE, async (_event, payload) => {
+  try {
+    return db.createPinout(payload);
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_UPDATE, async (_event, id, updates) => {
+  try {
+    const updated = db.updatePinout(id, updates || {});
+    if (!updated) return { error: 'not found' };
+    return updated;
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_DELETE, async (_event, id) => {
+  try {
+    const res = db.deletePinout(id);
+    // Best-effort cleanup of the orphaned image file.
+    if (res && res.success && res.imagePath) {
+      const abs = path.join(pinoutImagesDir(), safeBasename(res.imagePath));
+      try {
+        if (fs.existsSync(abs)) fs.unlinkSync(abs);
+      } catch {
+        // ignore — DB row already gone, image cleanup is best-effort
+      }
+    }
+    return res;
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_SUGGEST_FOR_ECU, async (_event, ecu) => {
+  try {
+    return db.suggestPinoutsForEcu(ecu || {});
+  } catch (err) {
+    return { error: err.message, results: [] };
+  }
+});
+
+ipcMain.handle(C.PINOUT_SEARCH, async (_event, query, limit) => {
+  try {
+    return db.searchPinouts(query, limit || 100);
+  } catch (err) {
+    return { error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_IMPORT_IMAGE, async (_event, sourcePath) => {
+  try {
+    if (!sourcePath || typeof sourcePath !== 'string') {
+      return { success: false, error: 'sourcePath required' };
+    }
+    const src = path.resolve(sourcePath);
+    if (!fs.existsSync(src)) return { success: false, error: 'source not found' };
+    const ext = path.extname(src).toLowerCase();
+    if (!ALLOWED_PINOUT_IMAGE_EXT.has(ext)) {
+      return {
+        success: false,
+        error: `unsupported image type ${ext}. Allowed: ${[...ALLOWED_PINOUT_IMAGE_EXT].join(', ')}`
+      };
+    }
+    // Use a content-hash filename so identical images dedupe automatically.
+    const buf = fs.readFileSync(src);
+    const hash = require('crypto').createHash('md5').update(buf).digest('hex').slice(0, 16);
+    const filename = `${hash}${ext}`;
+    const dest = path.join(pinoutImagesDir(), filename);
+    if (!fs.existsSync(dest)) {
+      fs.writeFileSync(dest, buf);
+    }
+    return { success: true, imagePath: filename };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+});
+
+ipcMain.handle(C.PINOUT_GET_IMAGE_URL, async (_event, relPath) => {
+  if (!relPath) return null;
+  const safe = safeBasename(relPath);
+  const abs = path.join(pinoutImagesDir(), safe);
+  if (!fs.existsSync(abs)) return null;
+  // file:// URL with proper escaping. URL helps Windows path / spaces.
+  return require('url').pathToFileURL(abs).toString();
+});

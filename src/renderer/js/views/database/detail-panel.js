@@ -267,9 +267,33 @@ window.App = window.App || {};
         </div>
         <pre id="db-detail-hex" class="db-detail-hex" hidden></pre>
       </section>
+
+      <section class="db-detail-section">
+        <h4>${escapeHtml(App.t('pinouts.suggest_title'))}</h4>
+        <div id="db-detail-pinout-suggest" class="pinout-suggest-host"></div>
+      </section>
     `;
 
     wireBody(row);
+
+    // Populate the suggest card asynchronously — it queries IPC for matching
+    // pinouts and renders into the dedicated host below the actions block.
+    if (typeof App.renderPinoutSuggestCard === 'function') {
+      const host = body.querySelector('#db-detail-pinout-suggest');
+      const family = ecuFamilyFromLabel(row.ecu_type);
+      App.renderPinoutSuggestCard(host, {
+        brand: row.brand,
+        family,
+        model: row.ecu_type
+      });
+    }
+  }
+
+  function ecuFamilyFromLabel(label) {
+    if (!label) return '';
+    const s = String(label).trim();
+    const parts = s.split(/\s+/);
+    return parts.length > 1 ? parts.slice(1).join(' ') : s;
   }
 
   // ---------- helpers for KV blocks ----------

@@ -196,6 +196,55 @@ const MIGRATIONS = [
         CREATE INDEX IF NOT EXISTS idx_tag_rules_sort ON tag_rules(sort_order, id);
       `);
     }
+  },
+  {
+    version: 6,
+    description: 'pinouts / connection guides',
+    up: (db) => {
+      // One row per (ECU model × connection method). `ecu_model` is NULLABLE
+      // so an entry can apply to an entire family (e.g. all MED17 share the
+      // same OBD pinout). `pins` is a JSON array of {label, function, side,
+      // notes}. `annotations` is a JSON blob describing the SVG overlay
+      // (image-intrinsic coordinates of pin dots, label boxes, arrow polylines)
+      // — kept as opaque JSON because the renderer owns the schema and we
+      // want this future-proof for editor revisions without DB migrations.
+      // `image_path` is RELATIVE to userData/pinouts/ so the DB stays
+      // portable.
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS pinouts (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          brand TEXT NOT NULL DEFAULT '',
+          ecu_family TEXT NOT NULL,
+          ecu_model TEXT,
+          method TEXT NOT NULL,
+          voltage TEXT DEFAULT '',
+          pins TEXT NOT NULL DEFAULT '[]',
+          annotations TEXT NOT NULL DEFAULT '{}',
+          image_path TEXT DEFAULT '',
+          tools TEXT NOT NULL DEFAULT '[]',
+          warnings TEXT DEFAULT '',
+          notes TEXT DEFAULT '',
+          created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
+          updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_pinouts_family
+          ON pinouts(ecu_family, ecu_model, method);
+        CREATE INDEX IF NOT EXISTS idx_pinouts_brand
+          ON pinouts(brand);
+
+        -- Soft uniqueness via partial unique indexes: SQLite treats NULL as
+        -- distinct in UNIQUE, but for our purposes (ecu_model IS NULL) we
+        -- still want at most ONE family-wide row per (brand, family, method).
+        -- Split into two partial unique indexes to express that intent.
+        CREATE UNIQUE INDEX IF NOT EXISTS uq_pinouts_full
+          ON pinouts(brand, ecu_family, ecu_model, method)
+          WHERE ecu_model IS NOT NULL;
+        CREATE UNIQUE INDEX IF NOT EXISTS uq_pinouts_family_wide
+          ON pinouts(brand, ecu_family, method)
+          WHERE ecu_model IS NULL;
+      `);
+    }
   }
 ];
 
@@ -1211,6 +1260,236 @@ function listAllFilePaths() {
   return db.prepare('SELECT id, archive_path, new_name FROM files').all();
 }
 
+/* ============================================================
+ * Pinouts / connection guides (v6 schema)
+ * ============================================================ */
+
+const PINOUT_METHODS = new Set(['OBD', 'BENCH', 'BOOT', 'JTAG', 'BDM']);
+
+function normalizePinoutInput(input) {
+  if (!input) throw new Error('pinout payload required');
+  const method = String(input.method || '').toUpperCase();
+  if (!PINOUT_METHODS.has(method)) {
+    throw new Error(
+      `invalid method: ${input.method}. Expected one of ${[...PINOUT_METHODS].join(', ')}`
+    );
+  }
+  const family = String(input.ecuFamily || input.ecu_family || '').trim();
+  if (!family) throw new Error('ecuFamily is required');
+  return {
+    brand: String(input.brand || '').trim(),
+    ecu_family: family,
+    ecu_model: input.ecuModel || input.ecu_model || null,
+    method,
+    voltage: String(input.voltage || '').trim(),
+    pins: JSON.stringify(Array.isArray(input.pins) ? input.pins : []),
+    annotations: JSON.stringify(input.annotations || {}),
+    image_path: String(input.imagePath || input.image_path || '').trim(),
+    tools: JSON.stringify(Array.isArray(input.tools) ? input.tools : []),
+    warnings: String(input.warnings || ''),
+    notes: String(input.notes || '')
+  };
+}
+
+function deserializePinoutRow(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    brand: row.brand || '',
+    ecuFamily: row.ecu_family,
+    ecuModel: row.ecu_model,
+    method: row.method,
+    voltage: row.voltage || '',
+    pins: safeJsonParse(row.pins, []),
+    annotations: safeJsonParse(row.annotations, {}),
+    imagePath: row.image_path || '',
+    tools: safeJsonParse(row.tools, []),
+    warnings: row.warnings || '',
+    notes: row.notes || '',
+    createdAt: row.created_at,
+    updatedAt: row.updated_at
+  };
+}
+
+function safeJsonParse(s, fallback) {
+  if (s == null) return fallback;
+  try {
+    return JSON.parse(s);
+  } catch {
+    return fallback;
+  }
+}
+
+function createPinout(input) {
+  const data = normalizePinoutInput(input);
+  const stmt = db.prepare(`
+    INSERT INTO pinouts
+      (brand, ecu_family, ecu_model, method, voltage, pins, annotations,
+       image_path, tools, warnings, notes)
+    VALUES
+      (@brand, @ecu_family, @ecu_model, @method, @voltage, @pins, @annotations,
+       @image_path, @tools, @warnings, @notes)
+  `);
+  const info = stmt.run(data);
+  return getPinout(info.lastInsertRowid);
+}
+
+function updatePinout(id, updates) {
+  const existing = getPinoutRow(id);
+  if (!existing) return null;
+  // Merge old + new so partial updates work; revalidate the result.
+  const merged = normalizePinoutInput({
+    brand: 'brand' in updates ? updates.brand : existing.brand,
+    ecuFamily: 'ecuFamily' in updates ? updates.ecuFamily : existing.ecu_family,
+    ecuModel: 'ecuModel' in updates ? updates.ecuModel : existing.ecu_model,
+    method: 'method' in updates ? updates.method : existing.method,
+    voltage: 'voltage' in updates ? updates.voltage : existing.voltage,
+    pins: 'pins' in updates ? updates.pins : safeJsonParse(existing.pins, []),
+    annotations:
+      'annotations' in updates ? updates.annotations : safeJsonParse(existing.annotations, {}),
+    imagePath: 'imagePath' in updates ? updates.imagePath : existing.image_path,
+    tools: 'tools' in updates ? updates.tools : safeJsonParse(existing.tools, []),
+    warnings: 'warnings' in updates ? updates.warnings : existing.warnings,
+    notes: 'notes' in updates ? updates.notes : existing.notes
+  });
+  db.prepare(
+    `UPDATE pinouts SET
+       brand=@brand, ecu_family=@ecu_family, ecu_model=@ecu_model,
+       method=@method, voltage=@voltage, pins=@pins, annotations=@annotations,
+       image_path=@image_path, tools=@tools, warnings=@warnings, notes=@notes,
+       updated_at = strftime('%s','now')
+     WHERE id = @id`
+  ).run({ ...merged, id });
+  return getPinout(id);
+}
+
+function getPinoutRow(id) {
+  return db.prepare('SELECT * FROM pinouts WHERE id = ?').get(id);
+}
+
+function getPinout(id) {
+  return deserializePinoutRow(getPinoutRow(id));
+}
+
+function deletePinout(id) {
+  const row = getPinoutRow(id);
+  if (!row) return { success: false, error: 'not found' };
+  db.prepare('DELETE FROM pinouts WHERE id = ?').run(id);
+  return { success: true, imagePath: row.image_path };
+}
+
+/**
+ * @param {{method?: string, brand?: string, family?: string, limit?: number}} [opts]
+ */
+function listPinouts({ method, brand, family, limit = 500 } = {}) {
+  const where = [];
+  const params = [];
+  if (method) {
+    where.push('method = ?');
+    params.push(String(method).toUpperCase());
+  }
+  if (brand) {
+    where.push('brand = ?');
+    params.push(brand);
+  }
+  if (family) {
+    where.push('ecu_family = ?');
+    params.push(family);
+  }
+  const sql =
+    `SELECT * FROM pinouts ${where.length ? 'WHERE ' + where.join(' AND ') : ''} ` +
+    `ORDER BY brand, ecu_family, ecu_model, method LIMIT ?`;
+  params.push(limit);
+  return db
+    .prepare(sql)
+    .all(...params)
+    .map(deserializePinoutRow);
+}
+
+/**
+ * Rank-ordered list of pinout entries that could apply to a scanned file's
+ * detected ECU. Match score:
+ *   exact brand+family+model     +100
+ *   exact family+model (any brand) +60
+ *   family-wide (model IS NULL)   +40
+ *   family-only fallback (no model match) +20
+ *
+ * Returns deduplicated entries sorted by score desc, then method order
+ * (OBD → BENCH → BOOT → JTAG → BDM).
+ *
+ * @param {{brand?: string, family?: string, model?: string}} [opts]
+ */
+function suggestPinoutsForEcu({ brand, family, model } = {}) {
+  if (!family) return [];
+  const rows = db
+    .prepare(
+      `SELECT * FROM pinouts
+        WHERE ecu_family = @family
+          OR (ecu_family = @family AND ecu_model = @model)
+       ORDER BY method`
+    )
+    .all({ family, model: model || null });
+
+  const methodOrder = { OBD: 0, BENCH: 1, BOOT: 2, JTAG: 3, BDM: 4 };
+  const scored = rows.map((row) => {
+    let score = 0;
+    if (brand && row.brand && row.brand.toLowerCase() === String(brand).toLowerCase()) {
+      score += 20;
+    }
+    if (model && row.ecu_model && row.ecu_model === model) {
+      score += 80;
+    } else if (model && !row.ecu_model) {
+      score += 40; // family-wide entry
+    } else if (!model && !row.ecu_model) {
+      score += 30;
+    } else if (model && row.ecu_model && row.ecu_model !== model) {
+      score += 10; // other model under same family
+    }
+    return { entry: deserializePinoutRow(row), score };
+  });
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return (methodOrder[a.entry.method] ?? 99) - (methodOrder[b.entry.method] ?? 99);
+  });
+  return scored.map((s) => ({ ...s.entry, _matchScore: s.score }));
+}
+
+/**
+ * Free-text search across brand / family / model / pin function / notes /
+ * warnings. Case-insensitive substring match in JavaScript (the dataset is
+ * small enough that SQLite LIKE is overkill and we want to search inside the
+ * JSON `pins` blob).
+ */
+function searchPinouts(query, limit = 100) {
+  const q = String(query || '')
+    .trim()
+    .toLowerCase();
+  if (!q) return [];
+  const all = db.prepare('SELECT * FROM pinouts').all();
+  const hits = [];
+  for (const row of all) {
+    const haystack = [
+      row.brand,
+      row.ecu_family,
+      row.ecu_model,
+      row.method,
+      row.voltage,
+      row.warnings,
+      row.notes,
+      row.pins,
+      row.tools
+    ]
+      .filter(Boolean)
+      .join('  ')
+      .toLowerCase();
+    if (haystack.includes(q)) {
+      hits.push(deserializePinoutRow(row));
+      if (hits.length >= limit) break;
+    }
+  }
+  return hits;
+}
+
 module.exports = {
   init,
   close,
@@ -1255,7 +1534,15 @@ module.exports = {
   listTagRules,
   createTagRule,
   updateTagRule,
-  deleteTagRule
+  deleteTagRule,
+  createPinout,
+  updatePinout,
+  getPinout,
+  deletePinout,
+  listPinouts,
+  suggestPinoutsForEcu,
+  searchPinouts,
+  PINOUT_METHODS: Array.from(PINOUT_METHODS)
 };
 
 // MIGRATIONS APPLIED:

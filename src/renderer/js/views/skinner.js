@@ -332,6 +332,12 @@ window.App = window.App || {};
       App.renderTagList([]);
       App.renderKindCard();
       App.updateMaskPreview();
+      // Hide the suggest card too — no file = no ECU to match against.
+      const suggestHost = $('#skinner-pinout-suggest');
+      if (suggestHost) {
+        suggestHost.hidden = true;
+        suggestHost.innerHTML = '';
+      }
       return;
     }
 
@@ -359,7 +365,30 @@ window.App = window.App || {};
 
     App.renderKindCard();
     App.updateMaskPreview();
+
+    // Auto-suggest pinouts based on the active file's detected ECU. The card
+    // hides itself when there's nothing useful to show (no parser match yet
+    // or no entry in the DB) — see suggest-card.js.
+    const suggestHost = App.$('#skinner-pinout-suggest');
+    if (suggestHost && typeof App.renderPinoutSuggestCard === 'function') {
+      App.renderPinoutSuggestCard(suggestHost, {
+        brand: m.brand,
+        family: m.ecuFamily || ecuFamilyFromLabel(m.ecuType),
+        model: m.ecuType
+      });
+    }
   };
+
+  // The parser exposes `ecuType` as a label like "Bosch MED17.5"; we want the
+  // family token alone ("MED17") for pinout lookup keying. Strip any leading
+  // manufacturer word and trailing variant.
+  function ecuFamilyFromLabel(label) {
+    if (!label) return '';
+    const s = String(label).trim();
+    // Drop a leading manufacturer (single word), keep the rest.
+    const parts = s.split(/\s+/);
+    return parts.length > 1 ? parts.slice(1).join(' ') : s;
+  }
 
   App.setMetaInput = function setMetaInput(field, value) {
     const el = App.$(`.meta-input[data-field="${field}"]`);

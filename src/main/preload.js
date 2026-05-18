@@ -86,6 +86,17 @@ contextBridge.exposeInMainWorld('api', {
   updateTagRule: (id, updates) => ipcRenderer.invoke(C.TAG_RULES_UPDATE, id, updates),
   deleteTagRule: (id) => ipcRenderer.invoke(C.TAG_RULES_DELETE, id),
 
+  // Pinouts / connection guides
+  listPinouts: (filters) => ipcRenderer.invoke(C.PINOUT_LIST, filters),
+  getPinout: (id) => ipcRenderer.invoke(C.PINOUT_GET, id),
+  createPinout: (payload) => ipcRenderer.invoke(C.PINOUT_CREATE, payload),
+  updatePinout: (id, updates) => ipcRenderer.invoke(C.PINOUT_UPDATE, id, updates),
+  deletePinout: (id) => ipcRenderer.invoke(C.PINOUT_DELETE, id),
+  suggestPinoutsForEcu: (ecu) => ipcRenderer.invoke(C.PINOUT_SUGGEST_FOR_ECU, ecu),
+  searchPinouts: (q, limit) => ipcRenderer.invoke(C.PINOUT_SEARCH, q, limit),
+  importPinoutImage: (sourcePath) => ipcRenderer.invoke(C.PINOUT_IMPORT_IMAGE, sourcePath),
+  getPinoutImageUrl: (relPath) => ipcRenderer.invoke(C.PINOUT_GET_IMAGE_URL, relPath),
+
   getPathForFile: (file) => {
     try {
       return webUtils.getPathForFile(file);

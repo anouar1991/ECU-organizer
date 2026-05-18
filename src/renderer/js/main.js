@@ -81,6 +81,46 @@
         },
         { separator: true },
         {
+          label: App.t('context_menu.show_pinout'),
+          icon: '📍',
+          run: () => {
+            // Open the Pinouts view filtered for this row's ECU and pre-select
+            // the best match. If no match exists, the suggest card on the
+            // Pinouts view shows a "Create one for {ecu}" CTA.
+            App.switchView('pinouts');
+            setTimeout(async () => {
+              const family = (() => {
+                const s = String(row.ecu_type || '').trim();
+                const parts = s.split(/\s+/);
+                return parts.length > 1 ? parts.slice(1).join(' ') : s;
+              })();
+              const matches = await window.api.suggestPinoutsForEcu({
+                brand: row.brand,
+                family,
+                model: row.ecu_type
+              });
+              if (matches && matches.length > 0) {
+                App.openPinout(matches[0].id);
+              } else {
+                // No match — open a blank form prefilled with this ECU.
+                App.openPinout(null).then(() => {
+                  if (App.state.activePinout) {
+                    App.state.activePinout.brand = row.brand || '';
+                    App.state.activePinout.ecuFamily = family;
+                    App.state.activePinout.ecuModel = row.ecu_type || '';
+                    const b = document.querySelector('.pinout-input[data-field="brand"]');
+                    const f = document.querySelector('.pinout-input[data-field="ecuFamily"]');
+                    const m = document.querySelector('.pinout-input[data-field="ecuModel"]');
+                    if (b) b.value = row.brand || '';
+                    if (f) f.value = family;
+                    if (m) m.value = row.ecu_type || '';
+                  }
+                });
+              }
+            }, 80);
+          }
+        },
+        {
           label: App.t('context_menu.add_tag'),
           icon: '🏷',
           run: () => {
@@ -237,6 +277,7 @@
     if (typeof App.setupSmartFolders === 'function') App.setupSmartFolders();
     if (typeof App.setupDuplicatesView === 'function') App.setupDuplicatesView();
     if (typeof App.setupTagManagement === 'function') App.setupTagManagement();
+    if (typeof App.setupPinoutsView === 'function') App.setupPinoutsView();
 
     registerContextMenus();
 

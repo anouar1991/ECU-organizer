@@ -4715,3 +4715,443 @@ body.db-col-resizing * {
 .empty-state-cta.compact .empty-state-cta-title {
   font-size: 13px;
 }
+
+/* ===== Pinouts view ===== */
+
+.pinouts-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  min-height: 600px;
+}
+
+.pinouts-sidebar {
+  border-right: 1px solid var(--border);
+  padding-right: 12px;
+  overflow-y: auto;
+  max-height: calc(100vh - 220px);
+}
+
+.pinout-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pinout-list-item {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--bg-panel);
+  border: 1px solid transparent;
+  transition: background 120ms, border-color 120ms;
+}
+
+.pinout-list-item:hover {
+  background: var(--bg-input);
+}
+
+.pinout-list-item.active {
+  background: rgba(95, 200, 232, 0.1);
+  border-color: var(--accent);
+}
+
+.pinout-list-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pinout-list-item-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.pinouts-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pinout-empty-detail {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.pinout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pinout-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pinout-form-header h3 {
+  font-size: 14px;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.pinout-form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pinout-form-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px 1fr;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.pinout-form-grid > label {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: right;
+  padding-right: 4px;
+}
+
+.pinout-form-grid > input,
+.pinout-form-grid > select {
+  font-size: 13px;
+}
+
+.pinout-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.pinout-pins-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pinout-pins-table th,
+.pinout-pins-table td {
+  padding: 4px;
+  font-size: 12px;
+}
+
+.pinout-pins-table th {
+  color: var(--text-dim);
+  text-align: left;
+  font-weight: 500;
+}
+
+.pinout-pins-table .pin-cell {
+  width: 100%;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.pinout-pins-table .pin-cell-narrow {
+  max-width: 60px;
+}
+
+.pin-cell-remove {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.pin-cell-remove:hover {
+  background: var(--bg-input);
+  color: var(--danger, #ff5e5e);
+}
+
+.pinout-image-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== SVG annotation editor ===== */
+
+.pinout-svg-editor {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-panel);
+  min-height: 260px;
+  padding: 8px;
+}
+
+.pinout-svg-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.pinout-svg-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 900px;
+  user-select: none;
+}
+
+.pinout-svg-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.pinout-svg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pinout-svg-label {
+  background: rgba(11, 13, 16, 0.92);
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.pinout-svg-label.selected {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18);
+}
+
+.pinout-svg-label-input {
+  background: rgba(11, 13, 16, 0.95);
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--text);
+  width: 100%;
+  outline: none;
+}
+
+/* ===== Suggest card (Skinner / Detail panel / right-click target) ===== */
+
+.pinout-suggest-host {
+  margin-top: 14px;
+}
+
+.pinout-suggest-host.is-empty {
+  background: rgba(95, 200, 232, 0.04);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.pinout-suggest-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.pinout-suggest-empty-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pinout-suggest-empty-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.pinout-suggest-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pinout-suggest-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pinout-suggest-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.pinout-suggest-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.pinout-suggest-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+
+.pinout-suggest-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.pinout-suggest-tab.active {
+  color: var(--accent);
+  border-color: var(--border);
+  border-bottom: 1px solid var(--bg-panel);
+  background: var(--bg-panel);
+  position: relative;
+  top: 1px;
+}
+
+.pinout-suggest-variants {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pinout-suggest-variant {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.pinout-suggest-variant.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(95, 200, 232, 0.1);
+}
+
+.pinout-suggest-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pinout-suggest-chip {
+  background: var(--bg-input);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--text);
+}
+
+.pinout-suggest-chip b {
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.pinout-suggest-image {
+  max-width: 560px;
+}
+
+.pinout-suggest-pins {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.pinout-suggest-pins th,
+.pinout-suggest-pins td {
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.pinout-suggest-pins th {
+  color: var(--text-dim);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+}
+
+.pinout-suggest-pins .pin-chip {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--bg-input);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pinout-suggest-warnings {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: rgba(255, 94, 94, 0.08);
+  border: 1px solid rgba(255, 94, 94, 0.3);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.pinout-suggest-warnings-icon {
+  font-size: 18px;
+  color: #ff5e5e;
+  flex-shrink: 0;
+}
+
+.pinout-suggest-warnings-text {
+  font-size: 12px;
+  color: var(--text);
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.pinout-suggest-footer {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -88,5 +88,16 @@ module.exports = Object.freeze({
   TAG_RULES_LIST: 'tag-rules:list',
   TAG_RULES_CREATE: 'tag-rules:create',
   TAG_RULES_UPDATE: 'tag-rules:update',
-  TAG_RULES_DELETE: 'tag-rules:delete'
+  TAG_RULES_DELETE: 'tag-rules:delete',
+
+  // Pinouts / connection guides
+  PINOUT_LIST: 'pinout:list',
+  PINOUT_GET: 'pinout:get',
+  PINOUT_CREATE: 'pinout:create',
+  PINOUT_UPDATE: 'pinout:update',
+  PINOUT_DELETE: 'pinout:delete',
+  PINOUT_SUGGEST_FOR_ECU: 'pinout:suggest-for-ecu',
+  PINOUT_SEARCH: 'pinout:search',
+  PINOUT_IMPORT_IMAGE: 'pinout:import-image',
+  PINOUT_GET_IMAGE_URL: 'pinout:get-image-url'
 });
