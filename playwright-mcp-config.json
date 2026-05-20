@@ -1,0 +1,12 @@
+{
+  "browser": {
+    "userDataDir": "/home/noreddine/ECU-organizer/.playwright-profile",
+    "headless": false,
+    "launchOptions": {
+      "args": ["--ignore-certificate-errors", "--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
+    }
+  }
+}

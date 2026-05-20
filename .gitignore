@@ -31,6 +31,7 @@ Thumbs.db
 playwright-report/
 test-results/
 .playwright-mcp/
+.playwright-profile/
 coverage/
 
 # Screenshots dropped at the repo root by manual MCP runs
